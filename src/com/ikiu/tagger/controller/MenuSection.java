@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package com.ikiu.tagger.controller;
 
 import java.awt.event.*;
 import javax.swing.*;
@@ -11,7 +11,7 @@ import javax.swing.*;
  *
  * @author Emotion
  */
-class part1 implements ActionListener {
+class MenuSection implements ActionListener {
     JMenuBar menu1;
     private JMenuBar menu2;
     private JMenu File;
@@ -20,7 +20,7 @@ class part1 implements ActionListener {
     private JMenuItem GFproject;
     //private JFrame frame=new JFrame();
 
-    public part1(JFrame frame){
+    public MenuSection(JFrame frame){
 
         File= new JMenu("File");
         New = new JMenuItem("New");
