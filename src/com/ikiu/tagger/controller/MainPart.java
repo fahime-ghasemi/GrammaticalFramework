@@ -8,8 +8,15 @@ package com.ikiu.tagger.controller;
  * and open the template in the editor.
  */
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -31,9 +38,13 @@ public class MainPart extends JFrame {
         JPanel bottomBar=new JPanel(new BorderLayout());
         bottomBar.add(new JButton("bottomBar"));
 
+        //------------------------------
         JPanel projectExplorer=new JPanel(new BorderLayout());
-        projectExplorer.add(new JButton("projectExplorer"));
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Project", true);
+        ProjectTree tree=new ProjectTree(top);
+        projectExplorer.add(new JScrollPane((JTree) tree));
 
+        //-----------------------------------------------
         JSplitPane jSplitPane1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,mainContent,bottomBar);
         JSplitPane jSplitPane=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,projectExplorer,jSplitPane1);
 
