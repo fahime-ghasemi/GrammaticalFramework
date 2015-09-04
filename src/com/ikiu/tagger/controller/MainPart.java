@@ -10,7 +10,6 @@ package com.ikiu.tagger.controller;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,16 +32,18 @@ public class MainPart extends JFrame {
         MenuSection menuHandler = new MenuSection(mainFrame);
 
         JPanel mainContent=new JPanel(new BorderLayout());
-        mainContent.add(new JButton("mainContent"));
+        mainContent.add(new MainContent().getComponent());
 
         JPanel bottomBar=new JPanel(new BorderLayout());
-        bottomBar.add(new JButton("bottomBar"));
+        bottomBar.add(new BottomBar().getComponent());
 
         //------------------------------
         JPanel projectExplorer=new JPanel(new BorderLayout());
         DefaultMutableTreeNode top = new DefaultMutableTreeNode("Project", true);
         ProjectTree tree=new ProjectTree(top);
-        projectExplorer.add(new JScrollPane((JTree) tree));
+        JScrollPane jScrollPane = new JScrollPane((JTree)tree);
+        jScrollPane.setSize(200,600);
+        projectExplorer.add(jScrollPane);
 
         //-----------------------------------------------
         JSplitPane jSplitPane1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,mainContent,bottomBar);
@@ -51,7 +52,8 @@ public class MainPart extends JFrame {
         mainFrame.setContentPane(jSplitPane);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
-        mainFrame.setSize(600, 600);
+        mainFrame.setSize(600,700);
+        mainFrame.setExtendedState(MAXIMIZED_BOTH);
 
 
     }
