@@ -31,6 +31,7 @@ class Tree extends JTree implements MouseListener {
         //Create popup menu
         super(newNode);
         addMouseListener(this);
+        setEditable(true);
     }
 
     @Override
