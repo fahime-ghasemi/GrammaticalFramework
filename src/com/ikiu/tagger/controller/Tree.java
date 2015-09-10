@@ -1,85 +1,105 @@
 package com.ikiu.tagger.controller;
 
 /**
- * Created by Emotion on 8/22/2015.
+ * Created by Emotion on 8/24/2015.
  */
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//package controller;
-
-        import java.awt.*;
-
-        import java.awt.event.*;
-        import javax.swing.*;
-        import javax.swing.event.TreeSelectionEvent;
-        import javax.swing.event.TreeSelectionListener;
-        import javax.swing.tree.*;
 
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Tree extends JFrame implements TreeSelectionListener , ActionListener{
+import javax.swing.JComponent;
+import javax.swing.JPopupMenu;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
-    private JTree tree;
-    private DefaultMutableTreeNode top;
-    private JPopupMenu pop;
-    private JMenuItem popItem;
-    private JButton popbtn;
-    private JTextField popTxt;
 
-    public Tree(){
+/**
+ * @author Emotion
+ */
+class Tree extends JTree implements MouseListener {
 
-        createTree();
+
+    private JPopupMenu popupMenu;
+
+
+    public Tree(DefaultMutableTreeNode newNode) {
+        //Create popup menu
+        super(newNode);
+        addMouseListener(this);
     }
 
-    public void createTree(){
-
-        top=new DefaultMutableTreeNode("Project");
-        tree=new JTree(top);
-
-
-        pop=new JPopupMenu();
-        popItem=new JMenuItem("New");
-        popItem.addActionListener(this);
-        pop.add(popItem);
-        popbtn=new JButton("OK");
-        popbtn.addActionListener(this);
-
-        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        tree.addTreeSelectionListener(this);
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        if(e.getSource()==popItem)
-        {
-            JPanel popPanel=new JPanel(new FlowLayout());
+    public void mousePressed(MouseEvent e) {
 
-            JLabel popLabel=new JLabel("Enter Name : ");
-            popPanel.add(popLabel);
-            popPanel.add(popTxt);
-            popPanel.add(popbtn);
-        }
-        else if(e.getSource()==popbtn)
-        {
-            String fieldText=popTxt. getText();
-            DefaultMutableTreeNode NewNode=new DefaultMutableTreeNode(fieldText);
-            top.add(NewNode);
-        }
+        if (e.isPopupTrigger()) {
 
+            showPopup(e);
+
+        }
     }
+
+    private void showPopup(MouseEvent e) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.getSelectionPath().getLastPathComponent();
+        if (((TreeNodeData) (node.getUserObject())).getType().equals("folder")) {
+            popupMenu = new PopupMenuFolder(this);
+        } else if (((TreeNodeData) (node.getUserObject())).getType().equals("root")) {
+            popupMenu = new PopupMenuRoot(this);
+        } else {
+            popupMenu = new PopupMenuFile(this);
+        }
+        //----
+        popupMenu.show((JComponent) e.getSource(), e.getX(), e.getY());
+    }
+
     @Override
-    public void valueChanged(TreeSelectionEvent e) {
-        //   if(top.){}
+    public void mouseReleased(MouseEvent e) {
+
     }
 
-    public JTree getComponent(){
-        return tree;
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
     }
 
+    @Override
+    public void mouseExited(MouseEvent e) {
 
+    }
 
+    private void DoubleClickFile() {
+
+    }
+
+    public static class TreeNodeData {
+        private String name;
+        private String type;
+
+        public TreeNodeData(String name, String type) {
+            this.name = name;
+            this.type = type;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
 }
+
+
+
+

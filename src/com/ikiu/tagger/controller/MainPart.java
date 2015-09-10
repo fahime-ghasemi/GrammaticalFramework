@@ -39,8 +39,8 @@ public class MainPart extends JFrame {
 
         //------------------------------
         JPanel projectExplorer=new JPanel(new BorderLayout());
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Project", true);
-        ProjectTree tree=new ProjectTree(top);
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode(new Tree.TreeNodeData("Project Explorer","root"), true);
+        Tree tree=new Tree(top);
         JScrollPane jScrollPane = new JScrollPane((JTree)tree);
         jScrollPane.setSize(200,600);
         projectExplorer.add(jScrollPane);
