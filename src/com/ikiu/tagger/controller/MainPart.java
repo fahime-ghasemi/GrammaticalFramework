@@ -33,8 +33,9 @@ public class MainPart extends JFrame {
 
         MenuSection menuHandler = new MenuSection(mainFrame);
 
-        JPanel mainContent=new JPanel(new BorderLayout());
-        mainContent.add(new MainContent().getComponent());
+        JPanel mainContentPanel=new JPanel(new BorderLayout());
+        MainContent mainContent = new MainContent();
+        mainContentPanel.add(mainContent.getComponent());
 
         JPanel bottomBar=new JPanel(new BorderLayout());
         bottomBar.add(new BottomBar().getComponent());
@@ -42,13 +43,13 @@ public class MainPart extends JFrame {
         //------------------------------
         JPanel projectExplorer=new JPanel(new BorderLayout());
         DefaultMutableTreeNode top = new DefaultMutableTreeNode(new Tree.TreeNodeData("Project Explorer","root",(new ConfigurationTask()).getWorkspace()), true);
-        Tree tree=new Tree(top);
+        Tree tree=new Tree(top,mainContent);
         JScrollPane jScrollPane = new JScrollPane((JTree)tree);
         jScrollPane.setSize(200,600);
         projectExplorer.add(jScrollPane);
 
         //-----------------------------------------------
-        JSplitPane jSplitPane1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,mainContent,bottomBar);
+        JSplitPane jSplitPane1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,mainContentPanel,bottomBar);
         JSplitPane jSplitPane=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,projectExplorer,jSplitPane1);
 
         mainFrame.setContentPane(jSplitPane);

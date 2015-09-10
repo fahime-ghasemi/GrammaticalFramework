@@ -28,13 +28,14 @@ import javax.swing.tree.TreePath;
  */
 class Tree extends JTree implements MouseListener {
 
-
     private JPopupMenu popupMenu;
+    private MainContent mainContent;
 
 
-    public Tree(DefaultMutableTreeNode root) {
+    public Tree(DefaultMutableTreeNode root,MainContent mainContent) {
         //Create popup menu
         super(root);
+        this.mainContent = mainContent;
         File file = new File((new ConfigurationTask()).getWorkspace());
         File[] allFiles = file.listFiles();
 
@@ -44,7 +45,7 @@ class Tree extends JTree implements MouseListener {
                 for (int j = 0; allContent != null && j < allContent.length; ++j) {
                     if (allContent[j].isDirectory() && allContent[j].getName().equals(".gf")) {
                         DefaultMutableTreeNode node = new DefaultMutableTreeNode(new Tree.TreeNodeData(allFiles[i].getName(), "folder", allFiles[i].getPath()), true);
-                        ((DefaultTreeModel) getModel()).insertNodeInto(node, root, root.getChildCount());
+                        ((DefaultTreeModel) getModel()).insertNodeInto(node, root, 0);
                         addNodes(allContent, node);
                     }
                 }
@@ -66,10 +67,15 @@ class Tree extends JTree implements MouseListener {
 
     private void addNodes(File[] content, DefaultMutableTreeNode treeNode) {
         for (int i = 0; content != null && i < content.length; ++i) {
-            DefaultMutableTreeNode node = new DefaultMutableTreeNode(new TreeNodeData(content[i].getName(), "folder", content[i].getPath()), true);
-            if (content[i].listFiles() != null)
-                addNodes(content[i].listFiles(), node);
-            ((DefaultTreeModel) getModel()).insertNodeInto(node, treeNode, 0);
+            if(!content[i].getName().equals(".gf")) {
+                String type="folder";
+                if(content[i].getName().contains(".gf"))
+                    type = "file";
+                DefaultMutableTreeNode node = new DefaultMutableTreeNode(new TreeNodeData(content[i].getName(), type, content[i].getPath()), true);
+                if (content[i].listFiles() != null)
+                    addNodes(content[i].listFiles(), node);
+                ((DefaultTreeModel) getModel()).insertNodeInto(node, treeNode, 0);
+            }
         }
     }
 
@@ -101,7 +107,7 @@ class Tree extends JTree implements MouseListener {
     private void doDoubleClick() {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.getSelectionPath().getLastPathComponent();
         if (((TreeNodeData) (node.getUserObject())).getType().equals("file")) {
-            popupMenu = new PopupMenuFolder(this);
+            mainContent.setTextAreaContent(((TreeNodeData)node.getUserObject()).getFilesystemPath());
         }
     }
 
