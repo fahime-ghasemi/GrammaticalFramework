@@ -37,14 +37,15 @@ class Tree extends JTree implements MouseListener {
         super(root);
         File file = new File((new ConfigurationTask()).getWorkspace());
         File[] allFiles = file.listFiles();
-        for (int i = 0; i < allFiles.length; ++i) {
+
+        for (int i = 0; allFiles != null && i < allFiles.length; ++i) {
             if (allFiles[i].isDirectory()) {
                 File[] allContent = allFiles[i].listFiles();
-                for (int j = 0; j < allContent.length; ++j) {
+                for (int j = 0; allContent != null && j < allContent.length; ++j) {
                     if (allContent[j].isDirectory() && allContent[j].getName().equals(".gf")) {
-                        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new Tree.TreeNodeData(allFiles[i].getName(), "folder",allFiles[i].getPath()), true);
-                        ((DefaultTreeModel)getModel()).insertNodeInto(node, root, root.getChildCount());
-                        addNodes(allContent,node);
+                        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new Tree.TreeNodeData(allFiles[i].getName(), "folder", allFiles[i].getPath()), true);
+                        ((DefaultTreeModel) getModel()).insertNodeInto(node, root, root.getChildCount());
+                        addNodes(allContent, node);
                     }
                 }
             }
@@ -62,19 +63,19 @@ class Tree extends JTree implements MouseListener {
         }
         addMouseListener(this);
     }
-    private void addNodes(File[] content,DefaultMutableTreeNode treeNode)
-    {
-        for (int i=0;i<content.length;++i)
-        {
-            DefaultMutableTreeNode node = new DefaultMutableTreeNode(new TreeNodeData(content[i].getName(),"folder",content[i].getPath()),true);
-            addNodes(content[i].listFiles(), node);
-            ((DefaultTreeModel)getModel()).insertNodeInto(node, treeNode, 0);
+
+    private void addNodes(File[] content, DefaultMutableTreeNode treeNode) {
+        for (int i = 0; content != null && i < content.length; ++i) {
+            DefaultMutableTreeNode node = new DefaultMutableTreeNode(new TreeNodeData(content[i].getName(), "folder", content[i].getPath()), true);
+            if (content[i].listFiles() != null)
+                addNodes(content[i].listFiles(), node);
+            ((DefaultTreeModel) getModel()).insertNodeInto(node, treeNode, 0);
         }
     }
 
     @Override
     public boolean isPathEditable(TreePath path) {
-        if(((DefaultMutableTreeNode)path.getLastPathComponent()).isRoot())
+        if (((DefaultMutableTreeNode) path.getLastPathComponent()).isRoot())
             return false;
         return super.isPathEditable(path);
     }
@@ -132,7 +133,7 @@ class Tree extends JTree implements MouseListener {
         private String type;
         private String filesystemPath;
 
-        public TreeNodeData(String name, String type,String filesystemPath) {
+        public TreeNodeData(String name, String type, String filesystemPath) {
             this.name = name;
             this.type = type;
             this.filesystemPath = filesystemPath;

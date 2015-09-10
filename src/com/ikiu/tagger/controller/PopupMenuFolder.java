@@ -7,6 +7,11 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -112,13 +117,21 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
 
                 for (File file : files) {
+                    Path source = Paths.get(file.getPath());
+                    Path desc = Paths.get(((TreeNodeData) node.getUserObject()).getFilesystemPath()+"/"+file.getName());
+                    try {
+                        Files.copy(source, desc, StandardCopyOption.REPLACE_EXISTING);
+                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData(file.getName(), "file", file.getPath()), true);
+                        ((DefaultTreeModel) tree.getModel()).insertNodeInto(nodeFolder, node, 0);
+                        tree.scrollPathToVisible(new TreePath(nodeFolder.getPath()));
 
-                    DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData(file.getName(), "file", ""), true);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
 
-                    node.add(nodeFolder);
+
                 }
 
-                ((DefaultTreeModel) this.tree.getModel()).nodeStructureChanged(node);
 
             }
 
