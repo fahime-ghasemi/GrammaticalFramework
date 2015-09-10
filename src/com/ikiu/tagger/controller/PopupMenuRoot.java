@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 
 /**
@@ -61,11 +62,16 @@ public class PopupMenuRoot extends JPopupMenu implements ActionListener {
                     if(newFolder.mkdir() && newsubFolder.mkdir())
                     {
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+
                         DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder"), true);
-                        node.add(nodeFolder);
+                        //node.add(nodeFolder);
+                        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
+                        model.insertNodeInto(nodeFolder, (MutableTreeNode) model.getRoot(),((DefaultMutableTreeNode)model.getRoot()).getChildCount());
                         TreePath path = new TreePath(((DefaultTreeModel)tree.getModel()).getPathToRoot(nodeFolder));
+                        //((DefaultTreeModel)tree.getModel()).nodeStructureChanged(nodeFolder);
                         tree.scrollPathToVisible(path);
                         tree.setSelectionPath(path);
+
                     }
                     fileFrame.dispose();
 

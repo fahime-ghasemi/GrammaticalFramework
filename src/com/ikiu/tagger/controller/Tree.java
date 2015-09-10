@@ -9,13 +9,18 @@ package com.ikiu.tagger.controller;
  */
 
 
+import com.ikiu.tagger.util.ConfigurationTask;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 
 /**
@@ -27,9 +32,34 @@ class Tree extends JTree implements MouseListener {
     private JPopupMenu popupMenu;
 
 
-    public Tree(DefaultMutableTreeNode newNode) {
+    public Tree(DefaultMutableTreeNode root) {
         //Create popup menu
-        super(newNode);
+        super(root);
+        File file = new File((new ConfigurationTask()).getWorkspace());
+        File[] allFiles = file.listFiles();
+        for (int i = 0; i < allFiles.length; ++i) {
+            if (allFiles[i].isDirectory()) {
+                File[] allContent = allFiles[i].listFiles();
+                for (int j = 0; j < allContent.length; ++j) {
+                    if (allContent[j].isDirectory() && allContent[j].getName().equals(".gf")) {
+                        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new Tree.TreeNodeData(allFiles[i].getName(), "folder"), true);
+                        root.add(node);
+                    }
+                }
+            }
+        }
+        //---
+        DefaultMutableTreeNode currentNode = root.getNextNode();
+        while (currentNode != null) {
+
+            if (currentNode.getLevel() == 1) {
+                expandPath(new TreePath(currentNode.getPath()));
+                TreePath path = new TreePath(((DefaultTreeModel) getModel()).getPathToRoot(currentNode));
+                scrollPathToVisible(path);
+            }
+            currentNode = currentNode.getNextSibling();
+        }
+
         addMouseListener(this);
         setEditable(true);
     }
