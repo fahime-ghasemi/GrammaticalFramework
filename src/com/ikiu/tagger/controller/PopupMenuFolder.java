@@ -13,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -57,10 +58,7 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("import")) {
-
-
-        } else if (e.getActionCommand().equals("newFolder")) {
+        if (e.getActionCommand().equals("newFolder")) {
 
             JFrame fileFrame = new JFrame();
             JButton btnSave = new JButton("Save");
@@ -73,16 +71,15 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
 
-                    File newFolder=new File(((TreeNodeData)node.getUserObject()).getFilesystemPath()+"/"+txtProjectName.getText());
+                    File newFolder = new File(((TreeNodeData) node.getUserObject()).getFilesystemPath() + "/" + txtProjectName.getText());
                     newFolder.setWritable(true);
                     newFolder.setReadable(true);
 
-                    if(newFolder.mkdir() )
-                    {
-                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder",newFolder.getPath()), true);
-                        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
-                        model.insertNodeInto(nodeFolder, node,node.getChildCount());
-                        TreePath path = new TreePath(((DefaultTreeModel)tree.getModel()).getPathToRoot(nodeFolder));
+                    if (newFolder.mkdir()) {
+                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder", newFolder.getPath()), true);
+                        DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+                        model.insertNodeInto(nodeFolder, node, node.getChildCount());
+                        TreePath path = new TreePath(((DefaultTreeModel) tree.getModel()).getPathToRoot(nodeFolder));
                         //((DefaultTreeModel)tree.getModel()).nodeStructureChanged(nodeFolder);
                         tree.scrollPathToVisible(path);
                         tree.setSelectionPath(path);
@@ -114,9 +111,9 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
                 File[] files = jFileChooser.getSelectedFiles();
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
 
-                for (File file:files) {
+                for (File file : files) {
 
-                    DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData(file.getName(),"file",""), true);
+                    DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData(file.getName(), "file", ""), true);
 
                     node.add(nodeFolder);
                 }
@@ -126,6 +123,28 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
             }
 
 
+        } else if (e.getActionCommand().equals("delete")) {
+
+
+            int select = JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION);
+            if (select == JOptionPane.YES_OPTION) {
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+                File file = new File(((TreeNodeData) node.getUserObject()).getFilesystemPath());
+                delete(file);
+                ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(node);
+
+            }
+        }
+    }
+
+    private void delete(File file) {
+        if (file.length() == 0)
+            file.delete();
+        else {
+            for (int i = 0; i < file.listFiles().length; ++i) {
+                delete(file.listFiles()[i]);
+            }
+            file.delete();
         }
     }
 }

@@ -68,7 +68,7 @@ class Tree extends JTree implements MouseListener {
         {
             DefaultMutableTreeNode node = new DefaultMutableTreeNode(new TreeNodeData(content[i].getName(),"folder",content[i].getPath()),true);
             addNodes(content[i].listFiles(), node);
-            ((DefaultTreeModel)getModel()).insertNodeInto(node, treeNode, node.getChildCount());
+            ((DefaultTreeModel)getModel()).insertNodeInto(node, treeNode, 0);
         }
     }
 

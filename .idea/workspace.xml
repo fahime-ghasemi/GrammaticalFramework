@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="108d110d-3b77-4b3f-b141-6522cb8e726b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainPart.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainPart.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PopupMenuFolder$1.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PopupMenuFolder$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PopupMenuFolder.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PopupMenuFolder.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/Tree.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/Tree.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuFolder.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuFolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuRoot.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuRoot.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/Tree.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/Tree.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GrammaticalFramework.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainPart.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainPart.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainPart.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79545456">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="53" column="38" selection-start-line="53" selection-start-column="38" selection-end-line="53" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -41,42 +43,12 @@
         <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/Tree.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="103" column="16" selection-start-line="103" selection-start-column="16" selection-end-line="103" selection-end-column="16" />
+              <caret line="75" column="50" selection-start-line="75" selection-start-column="50" selection-end-line="75" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4394#4395#0" expanded="true" />
-                <element signature="e#4439#4440#0" expanded="true" />
+                <element signature="e#4375#4376#0" expanded="true" />
+                <element signature="e#4420#4421#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JTree.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/javax/swing/JTree.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="776" column="16" selection-start-line="776" selection-start-column="16" selection-end-line="776" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="configuration.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/configuration.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="File.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/java/io/File.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="613" column="18" selection-start-line="613" selection-start-column="18" selection-end-line="613" selection-end-column="18" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -97,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuRoot.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
+              <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,36 +77,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultTreeModel.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/javax/swing/tree/DefaultTreeModel.java">
+      <file leaf-file-name="PopupMenuFolder.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuFolder.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="239" column="28" selection-start-line="239" selection-start-column="23" selection-end-line="239" selection-end-column="28" />
+              <caret line="115" column="24" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Files.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/java/nio/file/Files.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1124" column="32" selection-start-line="1124" selection-start-column="32" selection-end-line="1124" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConfigurationTask.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/util/ConfigurationTask.java">
+      <file leaf-file-name="JOptionPane.java" pinned="false" current-in-tab="false">
+        <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/javax/swing/JOptionPane.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PopupMenuFolder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuFolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="85" column="32" selection-start-line="85" selection-start-column="32" selection-end-line="85" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <caret line="717" column="32" selection-start-line="717" selection-start-column="15" selection-end-line="717" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -180,8 +150,8 @@
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/util/ConfigurationTask.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuRoot.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainPart.java" />
-        <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuFolder.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/Tree.java" />
+        <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuFolder.java" />
       </list>
     </option>
   </component>
@@ -227,6 +197,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -313,6 +284,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -323,8 +295,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -573,33 +543,33 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17290837" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32817337" sideWeight="0.49721116" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32817337" sideWeight="0.50278884" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51857585" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21832669" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4613003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4613003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32817337" sideWeight="0.49721116" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="100" y="128" width="1166" height="596" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2972136" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -615,15 +585,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuRoot.java</url>
-          <line>61</line>
-          <properties />
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="25" />
+      <option name="time" value="32" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -632,42 +594,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/configuration.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="7" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/Tree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4394#4395#0" expanded="true" />
-            <element signature="e#4439#4440#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/MenuSection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/Tree.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4394#4395#0" expanded="true" />
-            <element signature="e#4439#4440#0" expanded="true" />
+            <element signature="e#4375#4376#0" expanded="true" />
+            <element signature="e#4420#4421#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -691,7 +625,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="35" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -701,8 +634,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4394#4395#0" expanded="true" />
-            <element signature="e#4439#4440#0" expanded="true" />
+            <element signature="e#4375#4376#0" expanded="true" />
+            <element signature="e#4420#4421#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -733,7 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="22" column="35" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -743,8 +675,8 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4394#4395#0" expanded="true" />
-            <element signature="e#4439#4440#0" expanded="true" />
+            <element signature="e#4375#4376#0" expanded="true" />
+            <element signature="e#4420#4421#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -775,7 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -793,22 +724,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/java/awt/Container.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9453125">
-          <caret line="1074" column="61" selection-start-line="1074" selection-start-column="50" selection-end-line="1074" selection-end-column="61" />
-          <folding>
-            <element signature="e#37566#37567#0" expanded="false" />
-            <element signature="e#37612#37613#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/javax/swing/JFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="858" column="19" selection-start-line="858" selection-start-column="19" selection-end-line="858" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -816,92 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1149" column="16" selection-start-line="1149" selection-start-column="16" selection-end-line="1149" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#153768#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#14528#14529#0" expanded="false" />
-            <element signature="e#14552#14553#0" expanded="false" />
-            <element signature="e#30704#30705#0" expanded="false" />
-            <element signature="e#30736#30737#0" expanded="false" />
-            <element signature="e#31427#31428#0" expanded="false" />
-            <element signature="e#31471#31472#0" expanded="false" />
-            <element signature="e#31867#31868#0" expanded="false" />
-            <element signature="e#31906#31907#0" expanded="false" />
-            <element signature="e#32297#32298#0" expanded="false" />
-            <element signature="e#32333#32334#0" expanded="false" />
-            <element signature="e#35447#35448#0" expanded="false" />
-            <element signature="e#35482#35483#0" expanded="false" />
-            <element signature="e#46097#46098#0" expanded="false" />
-            <element signature="e#46135#46136#0" expanded="false" />
-            <element signature="e#48100#48101#0" expanded="false" />
-            <element signature="e#48137#48138#0" expanded="false" />
-            <element signature="e#48890#48891#0" expanded="false" />
-            <element signature="e#48940#48941#0" expanded="false" />
-            <element signature="e#49670#49671#0" expanded="false" />
-            <element signature="e#49706#49707#0" expanded="false" />
-            <element signature="e#52242#52243#0" expanded="false" />
-            <element signature="e#52288#52289#0" expanded="false" />
-            <element signature="e#52331#52332#0" expanded="false" />
-            <element signature="e#52368#52369#0" expanded="false" />
-            <element signature="e#52528#52529#0" expanded="false" />
-            <element signature="e#52581#52582#0" expanded="false" />
-            <element signature="e#53674#53675#0" expanded="false" />
-            <element signature="e#53717#53718#0" expanded="false" />
-            <element signature="e#54077#54078#0" expanded="false" />
-            <element signature="e#54112#54113#0" expanded="false" />
-            <element signature="e#56720#56721#0" expanded="false" />
-            <element signature="e#56781#56782#0" expanded="false" />
-            <element signature="e#60792#60793#0" expanded="false" />
-            <element signature="e#60833#60834#0" expanded="false" />
-            <element signature="e#82906#82907#0" expanded="false" />
-            <element signature="e#82940#82941#0" expanded="false" />
-            <element signature="e#88982#88983#0" expanded="false" />
-            <element signature="e#89009#89010#0" expanded="false" />
-            <element signature="e#89305#89306#0" expanded="false" />
-            <element signature="e#89332#89333#0" expanded="false" />
-            <element signature="e#92137#92138#0" expanded="false" />
-            <element signature="e#92180#92181#0" expanded="false" />
-            <element signature="e#96383#96384#0" expanded="false" />
-            <element signature="e#96422#96423#0" expanded="false" />
-            <element signature="e#100602#100603#0" expanded="false" />
-            <element signature="e#100629#100630#0" expanded="false" />
-            <element signature="e#101365#101366#0" expanded="false" />
-            <element signature="e#101395#101396#0" expanded="false" />
-            <element signature="e#101424#101425#0" expanded="false" />
-            <element signature="e#101456#101457#0" expanded="false" />
-            <element signature="e#103901#103902#0" expanded="false" />
-            <element signature="e#103959#103960#0" expanded="false" />
-            <element signature="e#114360#114361#0" expanded="false" />
-            <element signature="e#114412#114413#0" expanded="false" />
-            <element signature="e#122316#122317#0" expanded="false" />
-            <element signature="e#122370#122371#0" expanded="false" />
-            <element signature="e#123900#123901#0" expanded="false" />
-            <element signature="e#123948#123949#0" expanded="false" />
-            <element signature="e#123993#123994#0" expanded="false" />
-            <element signature="e#124038#124039#0" expanded="false" />
-            <element signature="e#129889#129890#0" expanded="false" />
-            <element signature="e#129943#129944#0" expanded="false" />
-            <element signature="e#138739#138740#0" expanded="false" />
-            <element signature="e#138783#138784#0" expanded="false" />
-            <element signature="e#147444#147445#0" expanded="false" />
-            <element signature="e#147471#147472#0" expanded="false" />
-            <element signature="e#148152#148153#0" expanded="false" />
-            <element signature="e#148190#148191#0" expanded="false" />
-            <element signature="e#150517#150518#0" expanded="false" />
-            <element signature="e#150570#150571#0" expanded="false" />
-            <element signature="e#150637#150638#0" expanded="false" />
-            <element signature="e#150695#150696#0" expanded="false" />
-            <element signature="e#150746#150747#0" expanded="false" />
-            <element signature="e#150802#150803#0" expanded="false" />
-            <element signature="e#150865#150866#0" expanded="false" />
-            <element signature="e#150919#150920#0" expanded="false" />
-            <element signature="e#151361#151362#0" expanded="false" />
-            <element signature="e#151414#151415#0" expanded="false" />
-            <element signature="e#152956#152957#0" expanded="false" />
-            <element signature="e#153013#153014#0" expanded="false" />
-            <element signature="e#153070#153071#0" expanded="false" />
-            <element signature="e#153127#153128#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -986,10 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.290323">
           <caret line="929" column="27" selection-start-line="929" selection-start-column="27" selection-end-line="929" selection-end-column="27" />
-          <folding>
-            <element signature="e#49994#49995#0" expanded="false" />
-            <element signature="e#50021#50022#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -997,7 +826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1322" column="16" selection-start-line="1322" selection-start-column="16" selection-end-line="1322" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,7 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1020,7 +847,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1734694">
           <caret line="109" column="9" selection-start-line="109" selection-start-column="9" selection-end-line="109" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1028,7 +854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6147959">
           <caret line="101" column="11" selection-start-line="101" selection-start-column="11" selection-end-line="101" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1036,9 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1046,10 +868,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.65731466">
           <caret line="763" column="23" selection-start-line="763" selection-start-column="23" selection-end-line="763" selection-end-column="23" />
-          <folding>
-            <element signature="e#25617#25618#0" expanded="true" />
-            <element signature="e#25669#25670#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1057,7 +875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="239" column="28" selection-start-line="239" selection-start-column="23" selection-end-line="239" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1065,15 +882,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.65731466">
           <caret line="4488" column="16" selection-start-line="4488" selection-start-column="16" selection-end-line="4488" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="613" column="18" selection-start-line="613" selection-start-column="18" selection-end-line="613" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1081,14 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/javax/swing/JTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="776" column="16" selection-start-line="776" selection-start-column="16" selection-end-line="776" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1103,32 +903,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8419811">
+          <caret line="1284" column="16" selection-start-line="1284" selection-start-column="16" selection-end-line="1284" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/javax/swing/JOptionPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="717" column="32" selection-start-line="717" selection-start-column="15" selection-end-line="717" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/java/nio/file/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.539604">
+          <caret line="97" column="17" selection-start-line="97" selection-start-column="17" selection-end-line="97" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/java/nio/file/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1124" column="32" selection-start-line="1124" selection-start-column="32" selection-end-line="1124" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuRoot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/Tree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="16" selection-start-line="103" selection-start-column="16" selection-end-line="103" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4394#4395#0" expanded="true" />
-            <element signature="e#4439#4440#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuFolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="32" selection-start-line="85" selection-start-column="32" selection-end-line="85" selection-end-column="32" />
+          <caret line="59" column="14" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1137,9 +945,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainPart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79545456">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="38" selection-start-line="53" selection-start-column="38" selection-end-line="53" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5681818">
+          <caret line="1032" column="19" selection-start-line="1032" selection-start-column="19" selection-end-line="1032" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/jdk1.8.0_60/src.zip!/javax/swing/JTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5779221">
+          <caret line="776" column="16" selection-start-line="776" selection-start-column="16" selection-end-line="776" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/Tree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="75" column="50" selection-start-line="75" selection-start-column="50" selection-end-line="75" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4375#4376#0" expanded="true" />
+            <element signature="e#4420#4421#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/PopupMenuFolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="115" column="24" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
