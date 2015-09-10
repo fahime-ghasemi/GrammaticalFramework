@@ -94,6 +94,15 @@ class Tree extends JTree implements MouseListener {
             showPopup(e);
 
         }
+        else if(e.getClickCount()==2)
+            doDoubleClick();
+    }
+
+    private void doDoubleClick() {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.getSelectionPath().getLastPathComponent();
+        if (((TreeNodeData) (node.getUserObject())).getType().equals("file")) {
+            popupMenu = new PopupMenuFolder(this);
+        }
     }
 
     private void showPopup(MouseEvent e) {

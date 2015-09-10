@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="rsyntaxtextarea-2.5.7">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../rsyntaxtextarea-2.5.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/rsyntaxtextarea-2.5.7.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
