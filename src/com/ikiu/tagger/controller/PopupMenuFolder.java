@@ -14,6 +14,7 @@ import javax.swing.JTree;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  * Created by fahime on 9/4/15.
@@ -23,6 +24,7 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
     private JMenuItem menuItemDelete;
     private JMenuItem menuItemOpenFile;
     private JTree tree;
+    private TreePath path;
 
     public PopupMenuFolder(JTree tree) {
 
@@ -54,10 +56,15 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
 
 
         } else if (e.getActionCommand().equals("newFolder")) {
+
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.tree.getSelectionPath().getLastPathComponent();
             DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData("New Folder","folder"), true);
             node.add(nodeFolder);
-            ((DefaultTreeModel) this.tree.getModel()).nodeStructureChanged(node);
+
+            TreePath path = new TreePath(((DefaultTreeModel)tree.getModel()).getPathToRoot(nodeFolder));
+            tree.scrollPathToVisible(path);
+            tree.startEditingAtPath(path);
+            tree.setSelectionPath(path);
 
         } else if (e.getActionCommand().equals("importFile")) {
 

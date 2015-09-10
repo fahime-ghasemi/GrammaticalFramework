@@ -1,5 +1,7 @@
 package com.ikiu.tagger.controller;
 
+import com.ikiu.tagger.util.ConfigurationTask;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  * Created by fahime on 9/4/15.
@@ -49,15 +52,20 @@ public class PopupMenuRoot extends JPopupMenu implements ActionListener {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    File newFolder=new File("/home/fahime/Documents/Thesis/Application/"+txtProjectName.getText());
+                    File newFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText());
+                    File newsubFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText()+"/.gf");
                     newFolder.setWritable(true);
                     newFolder.setReadable(true);
-                    if(newFolder.mkdir())
+                    newsubFolder.setWritable(true);
+                    newsubFolder.setReadable(true);
+                    if(newFolder.mkdir() && newsubFolder.mkdir())
                     {
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
                         DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder"), true);
                         node.add(nodeFolder);
-                        ((DefaultTreeModel) tree.getModel()).nodeStructureChanged(node);
+                        TreePath path = new TreePath(((DefaultTreeModel)tree.getModel()).getPathToRoot(nodeFolder));
+                        tree.scrollPathToVisible(path);
+                        tree.setSelectionPath(path);
                     }
                     fileFrame.dispose();
 
