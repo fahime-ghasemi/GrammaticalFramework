@@ -63,7 +63,7 @@ public class PopupMenuRoot extends JPopupMenu implements ActionListener {
                     {
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
 
-                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder"), true);
+                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder",newFolder.getPath()), true);
                         //node.add(nodeFolder);
                         DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
                         model.insertNodeInto(nodeFolder, (MutableTreeNode) model.getRoot(),((DefaultMutableTreeNode)model.getRoot()).getChildCount());

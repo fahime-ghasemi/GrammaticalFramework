@@ -8,6 +8,8 @@ package com.ikiu.tagger.controller;
  * and open the template in the editor.
  */
 
+import com.ikiu.tagger.util.ConfigurationTask;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
@@ -39,7 +41,7 @@ public class MainPart extends JFrame {
 
         //------------------------------
         JPanel projectExplorer=new JPanel(new BorderLayout());
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode(new Tree.TreeNodeData("Project Explorer","root"), true);
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode(new Tree.TreeNodeData("Project Explorer","root",(new ConfigurationTask()).getWorkspace()), true);
         Tree tree=new Tree(top);
         JScrollPane jScrollPane = new JScrollPane((JTree)tree);
         jScrollPane.setSize(200,600);

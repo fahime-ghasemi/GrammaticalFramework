@@ -3,13 +3,18 @@ package com.ikiu.tagger.controller;
 import com.ikiu.tagger.controller.Tree.TreeNodeData;
 
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -57,14 +62,44 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
 
         } else if (e.getActionCommand().equals("newFolder")) {
 
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.tree.getSelectionPath().getLastPathComponent();
-            DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData("New Folder","folder"), true);
-            node.add(nodeFolder);
+            JFrame fileFrame = new JFrame();
+            JButton btnSave = new JButton("Save");
+            JTextField txtProjectName = new JTextField(20);
 
-            TreePath path = new TreePath(((DefaultTreeModel)tree.getModel()).getPathToRoot(nodeFolder));
-            tree.scrollPathToVisible(path);
-            tree.startEditingAtPath(path);
-            tree.setSelectionPath(path);
+            fileFrame.setLayout(new FlowLayout());
+            JLabel fileLabel = new JLabel("Name :");
+            btnSave.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+
+                    File newFolder=new File(((TreeNodeData)node.getUserObject()).getFilesystemPath()+"/"+txtProjectName.getText());
+                    newFolder.setWritable(true);
+                    newFolder.setReadable(true);
+
+                    if(newFolder.mkdir() )
+                    {
+                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder",newFolder.getPath()), true);
+                        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
+                        model.insertNodeInto(nodeFolder, node,node.getChildCount());
+                        TreePath path = new TreePath(((DefaultTreeModel)tree.getModel()).getPathToRoot(nodeFolder));
+                        //((DefaultTreeModel)tree.getModel()).nodeStructureChanged(nodeFolder);
+                        tree.scrollPathToVisible(path);
+                        tree.setSelectionPath(path);
+
+                    }
+                    fileFrame.dispose();
+
+
+                }
+            });
+
+            fileFrame.add(fileLabel);
+            fileFrame.add(txtProjectName);
+            fileFrame.add(btnSave);
+            fileFrame.setVisible(true);
+            fileFrame.setSize(500, 200);
+
 
         } else if (e.getActionCommand().equals("importFile")) {
 
@@ -81,7 +116,7 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
 
                 for (File file:files) {
 
-                    DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData(file.getName(),"file"), true);
+                    DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData(file.getName(),"file",""), true);
 
                     node.add(nodeFolder);
                 }

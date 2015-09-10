@@ -42,13 +42,14 @@ class Tree extends JTree implements MouseListener {
                 File[] allContent = allFiles[i].listFiles();
                 for (int j = 0; j < allContent.length; ++j) {
                     if (allContent[j].isDirectory() && allContent[j].getName().equals(".gf")) {
-                        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new Tree.TreeNodeData(allFiles[i].getName(), "folder"), true);
-                        root.add(node);
+                        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new Tree.TreeNodeData(allFiles[i].getName(), "folder",allFiles[i].getPath()), true);
+                        ((DefaultTreeModel)getModel()).insertNodeInto(node, root, root.getChildCount());
+                        addNodes(allContent,node);
                     }
                 }
             }
         }
-        //---
+        //---expand level one
         DefaultMutableTreeNode currentNode = root.getNextNode();
         while (currentNode != null) {
 
@@ -59,9 +60,23 @@ class Tree extends JTree implements MouseListener {
             }
             currentNode = currentNode.getNextSibling();
         }
-
         addMouseListener(this);
-        setEditable(true);
+    }
+    private void addNodes(File[] content,DefaultMutableTreeNode treeNode)
+    {
+        for (int i=0;i<content.length;++i)
+        {
+            DefaultMutableTreeNode node = new DefaultMutableTreeNode(new TreeNodeData(content[i].getName(),"folder",content[i].getPath()),true);
+            addNodes(content[i].listFiles(), node);
+            ((DefaultTreeModel)getModel()).insertNodeInto(node, treeNode, node.getChildCount());
+        }
+    }
+
+    @Override
+    public boolean isPathEditable(TreePath path) {
+        if(((DefaultMutableTreeNode)path.getLastPathComponent()).isRoot())
+            return false;
+        return super.isPathEditable(path);
     }
 
     @Override
@@ -74,6 +89,7 @@ class Tree extends JTree implements MouseListener {
 
         if (e.isPopupTrigger()) {
 
+            setSelectionPath(getPathForLocation(e.getX(), e.getY()));
             showPopup(e);
 
         }
@@ -114,10 +130,12 @@ class Tree extends JTree implements MouseListener {
     public static class TreeNodeData {
         private String name;
         private String type;
+        private String filesystemPath;
 
-        public TreeNodeData(String name, String type) {
+        public TreeNodeData(String name, String type,String filesystemPath) {
             this.name = name;
             this.type = type;
+            this.filesystemPath = filesystemPath;
         }
 
         @Override
@@ -127,6 +145,10 @@ class Tree extends JTree implements MouseListener {
 
         public String getType() {
             return type;
+        }
+
+        public String getFilesystemPath() {
+            return filesystemPath;
         }
     }
 }
