@@ -37,8 +37,8 @@ public class MainPart extends JFrame {
         MainContent mainContent = new MainContent();
         mainContentPanel.add(mainContent.getComponent());
 
-        JPanel bottomBar=new JPanel(new BorderLayout());
-        bottomBar.add(new BottomBar().getComponent());
+//        JPanel bottomBar=new JPanel(new BorderLayout());
+//        bottomBar.add(new BottomBar().getComponent());
 
         //------------------------------
         JPanel projectExplorer=new JPanel(new BorderLayout());
@@ -49,8 +49,8 @@ public class MainPart extends JFrame {
         projectExplorer.add(jScrollPane);
 
         //-----------------------------------------------
-        JSplitPane jSplitPane1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,mainContentPanel,bottomBar);
-        JSplitPane jSplitPane=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,projectExplorer,jSplitPane1);
+//        JSplitPane jSplitPane1=new JSplitPane(JSplitPane.VERTICAL_SPLIT,mainContentPanel,bottomBar);
+        JSplitPane jSplitPane=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,projectExplorer,mainContentPanel);
 
         mainFrame.setContentPane(jSplitPane);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
