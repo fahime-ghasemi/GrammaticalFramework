@@ -29,13 +29,13 @@ import javax.swing.tree.TreePath;
 class Tree extends JTree implements MouseListener {
 
     private JPopupMenu popupMenu;
-    private MainContent mainContent;
+    private MainPart mainPart;
 
 
-    public Tree(DefaultMutableTreeNode root,MainContent mainContent) {
+    public Tree(DefaultMutableTreeNode root,MainPart mainPart) {
         //Create popup menu
         super(root);
-        this.mainContent = mainContent;
+        this.mainPart = mainPart;
         File file = new File((new ConfigurationTask()).getWorkspace());
         File[] allFiles = file.listFiles();
 
@@ -63,6 +63,10 @@ class Tree extends JTree implements MouseListener {
             currentNode = currentNode.getNextSibling();
         }
         addMouseListener(this);
+    }
+    public void setMainPart(MainPart mainPart)
+    {
+        this.mainPart = mainPart;
     }
 
     private void addNodes(File[] content, DefaultMutableTreeNode treeNode) {
@@ -107,7 +111,7 @@ class Tree extends JTree implements MouseListener {
     private void doDoubleClick() {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.getSelectionPath().getLastPathComponent();
         if (((TreeNodeData) (node.getUserObject())).getType().equals("file")) {
-            mainContent.setTextAreaContent(((TreeNodeData)node.getUserObject()).getFilesystemPath());
+            mainPart.getCurrentPanel().setTextAreaContent(((TreeNodeData) node.getUserObject()).getFilesystemPath());
         }
     }
 

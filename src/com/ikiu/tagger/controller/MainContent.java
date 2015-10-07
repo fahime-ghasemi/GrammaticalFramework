@@ -1,8 +1,12 @@
 package com.ikiu.tagger.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -13,15 +17,37 @@ import javax.swing.JTabbedPane;
 /**
  * Created by fahime on 9/4/15.
  */
-public class MainContent {
+public class MainContent implements MouseListener{
 
-    JTabbedPane jTabbedPane;
+    protected JTabbedPane jTabbedPane;
+    protected MainPart mainPart;
+
+
+    public MainContent(MainPart mainPart) {
+        this.jTabbedPane = new JTabbedPane();
+        jTabbedPane.addMouseListener(this);
+        this.mainPart = mainPart;
+
+    }
+    public MainPart getContainer()
+    {
+        return mainPart;
+    }
 
     public JComponent getComponent() {
-        jTabbedPane = new JTabbedPane();
         return jTabbedPane;
     }
 
+    public void select()
+    {
+        jTabbedPane.setBorder(BorderFactory.createLineBorder(Color.blue));
+        mainPart.setCurrentPanel(this);
+    }
+
+    public void deSelect()
+    {
+        jTabbedPane.setBorder(null);
+    }
     public void setTextAreaContent(String filesystemPath) {
 
         int l = filesystemPath.lastIndexOf("/");
@@ -61,5 +87,37 @@ public class MainContent {
         pnlTab.add(lblTitle);
         pnlTab.add(btnClose);
         return pnlTab;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(!e.isPopupTrigger())
+        {
+            if(mainPart.getCurrentPanel()!=null)
+            {
+                mainPart.getCurrentPanel().deSelect();
+            }
+            this.select();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

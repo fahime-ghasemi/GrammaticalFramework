@@ -4,6 +4,7 @@
  */
 package com.ikiu.tagger.controller;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
- *
  * @author Emotion
  */
 class MenuSection implements ActionListener {
@@ -28,40 +28,47 @@ class MenuSection implements ActionListener {
     private JMenu File;
     private JMenuItem New;
     private JMenuItem Setting;
-    private JMenuItem GFproject;
+    private JMenu view;
+    private JMenuItem tagger;
+    private MainPart mainFrame;
     //private JFrame frame=new JFrame();
 
-    public MenuSection(JFrame frame){
+    public MenuSection(MainPart frame) {
 
-        File= new JMenu("File");
+        this.mainFrame = frame;
+        File = new JMenu("File");
         New = new JMenuItem("New");
-        Setting=new JMenuItem("Setting");
+        Setting = new JMenuItem("Setting");
         File.add(New);
         New.addActionListener(this);
         File.add(Setting);
         Setting.addActionListener(this);
-        // GFproject=new JMenuItem("GFproject");
-        //  Setting.add(GFproject);
-        //  GFproject.addActionListener(this);
-        menu1=new JMenuBar();
-        menu2=new JMenuBar();
+        //----
+        view = new JMenu("View");
+        tagger = new JMenuItem("Tagger");
+        tagger.addActionListener(this);
+        view.add(tagger);
+        menu1 = new JMenuBar();
         menu1.add(File);
+        menu1.add(view);
+        //----
+
         frame.setJMenuBar(menu1);
 
     }
-    public JMenuBar getComponent()
-    {
+
+    public JMenuBar getComponent() {
         return menu1;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
 
-        if(e.getSource()==Setting)
-        {
+        if (e.getSource() == Setting) {
             JFrame fileFrame = new JFrame();
             JButton btnSelectDirectory = new JButton("Select Directory");
-            JButton btnSaveConfig=new JButton("Save");
+            JButton btnSaveConfig = new JButton("Save");
             JTextField txtWorkspace = new JTextField(20);
 
             fileFrame.setLayout(new FlowLayout());
@@ -70,13 +77,11 @@ class MenuSection implements ActionListener {
             btnSelectDirectory.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(e.getSource()==btnSelectDirectory)
-                    {
+                    if (e.getSource() == btnSelectDirectory) {
                         JFileChooser jFileChooser = new JFileChooser();
                         jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                        int returnVal=jFileChooser.showOpenDialog(fileFrame);
-                        if(returnVal ==JFileChooser.APPROVE_OPTION)
-                        {
+                        int returnVal = jFileChooser.showOpenDialog(fileFrame);
+                        if (returnVal == JFileChooser.APPROVE_OPTION) {
                             java.io.File file = jFileChooser.getSelectedFile();
                             txtWorkspace.setText(file.getPath());
 
@@ -102,6 +107,13 @@ class MenuSection implements ActionListener {
 
             fileFrame.setVisible(true);
             fileFrame.setSize(500, 200);
+        } else if (e.getSource() == tagger) {
+            mainFrame.setLayout(new BorderLayout());
+            //-----
+
+            mainFrame.setContentPane(new TaggerView(mainFrame));
+            mainFrame.revalidate();
+
         }
     }
 

@@ -107,7 +107,7 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
 
             JFileChooser jFileChooser = new JFileChooser();
             jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            jFileChooser.setFileFilter(new FileNameExtensionFilter("GF Files", "gf"));
+            jFileChooser.setFileFilter(new FileNameExtensionFilter("GF Files", "gf","txt"));
             jFileChooser.setAcceptAllFileFilterUsed(false);
             jFileChooser.setMultiSelectionEnabled(true);
             int returnVal = jFileChooser.showOpenDialog((Component) e.getSource());

@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
  * Created by fahime on 9/11/15.
  */
 public class MainContentTab extends JScrollPane {
-    JTextArea textArea;
+    protected JTextArea textArea;
     String filesystemPath;
     String olContent;
 
