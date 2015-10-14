@@ -43,9 +43,9 @@ public class PopupMenuRoot extends JPopupMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("newProject")) {
 
-            JFrame fileFrame = new JFrame();
+            final JFrame fileFrame = new JFrame();
             JButton btnSave = new JButton("Save");
-            JTextField txtProjectName = new JTextField(20);
+            final JTextField txtProjectName = new JTextField(20);
 
             fileFrame.setLayout(new FlowLayout());
             JLabel fileLabel = new JLabel("Name :");
@@ -54,7 +54,7 @@ public class PopupMenuRoot extends JPopupMenu implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
 
                     File newFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText());
-                    File newsubFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText()+"/.gf");
+                    File newsubFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText()+"/_gf");
                     newFolder.setWritable(true);
                     newFolder.setReadable(true);
                     newsubFolder.setWritable(true);
@@ -63,7 +63,7 @@ public class PopupMenuRoot extends JPopupMenu implements ActionListener {
                     {
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
 
-                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder",newFolder.getPath()), true);
+                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new ProjectTree.FolderNode(txtProjectName.getText(), newFolder.getPath()), true);
                         //node.add(nodeFolder);
                         DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
                         model.insertNodeInto(nodeFolder, (MutableTreeNode) model.getRoot(),((DefaultMutableTreeNode)model.getRoot()).getChildCount());

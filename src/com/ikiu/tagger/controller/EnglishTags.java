@@ -9,7 +9,7 @@ public class EnglishTags extends LanguageTags {
 
     public EnglishTags(DatabaseManager databaseManager) {
         super(databaseManager);
-        tokens = databaseManager.getEnglishTokens();
+        tokenTableRows = databaseManager.getEnglishTokens();
         tableModel.addColumn("id");
         tableModel.addColumn("type");
         tableModel.addColumn("word");

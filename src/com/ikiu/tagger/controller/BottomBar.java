@@ -6,12 +6,8 @@ import javax.swing.JTabbedPane;
 /**
  * Created by fahime on 9/4/15.
  */
-public class BottomBar {
+public class BottomBar extends JTabbedPane  {
 
-    JTabbedPane jTabbedPane;
-    public JComponent getComponent()
-    {
-        jTabbedPane = new JTabbedPane();
-        return jTabbedPane;
+    public BottomBar() {
     }
 }

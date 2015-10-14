@@ -11,8 +11,7 @@ public class PersianTags extends LanguageTags {
 
     public PersianTags(DatabaseManager databaseManager) {
         super(databaseManager);
-        tokens = databaseManager.getPersianTokens();
-        tableModel = new DefaultTableModel();
+        tokenTableRows = databaseManager.getPersianTokens();
         tableModel.addColumn("id");
         tableModel.addColumn("type");
         tableModel.addColumn("word");

@@ -1,6 +1,5 @@
 package com.ikiu.tagger.controller;
 
-import com.ikiu.tagger.controller.Tree.TreeNodeData;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -65,9 +64,9 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("newFolder")) {
 
-            JFrame fileFrame = new JFrame();
+            final JFrame fileFrame = new JFrame();
             JButton btnSave = new JButton("Save");
-            JTextField txtProjectName = new JTextField(20);
+            final JTextField txtProjectName = new JTextField(20);
 
             fileFrame.setLayout(new FlowLayout());
             JLabel fileLabel = new JLabel("Name :");
@@ -76,12 +75,12 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
 
-                    File newFolder = new File(((TreeNodeData) node.getUserObject()).getFilesystemPath() + "/" + txtProjectName.getText());
+                    File newFolder = new File(((ProjectTree.FolderNode) node.getUserObject()).getFilesystemPath() + "/" + txtProjectName.getText());
                     newFolder.setWritable(true);
                     newFolder.setReadable(true);
 
                     if (newFolder.mkdir()) {
-                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new Tree.TreeNodeData(txtProjectName.getText(), "folder", newFolder.getPath()), true);
+                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new ProjectTree.FolderNode(txtProjectName.getText(), newFolder.getPath()), true);
                         DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
                         model.insertNodeInto(nodeFolder, node, node.getChildCount());
                         TreePath path = new TreePath(((DefaultTreeModel) tree.getModel()).getPathToRoot(nodeFolder));
@@ -118,10 +117,10 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
 
                 for (File file : files) {
                     Path source = Paths.get(file.getPath());
-                    Path desc = Paths.get(((TreeNodeData) node.getUserObject()).getFilesystemPath()+"/"+file.getName());
+                    Path desc = Paths.get(((ProjectTree.FolderNode) node.getUserObject()).getFilesystemPath()+"/"+file.getName());
                     try {
                         Files.copy(source, desc, StandardCopyOption.REPLACE_EXISTING);
-                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new TreeNodeData(file.getName(), "file", file.getPath()), true);
+                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new ProjectTree.FileNode(file.getName(), file.getPath()), true);
                         ((DefaultTreeModel) tree.getModel()).insertNodeInto(nodeFolder, node, 0);
                         tree.scrollPathToVisible(new TreePath(nodeFolder.getPath()));
 
@@ -142,7 +141,7 @@ public class PopupMenuFolder extends JPopupMenu implements ActionListener {
             int select = JOptionPane.showConfirmDialog(null, "Are you sure?", "WARNING", JOptionPane.YES_NO_OPTION);
             if (select == JOptionPane.YES_OPTION) {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
-                File file = new File(((TreeNodeData) node.getUserObject()).getFilesystemPath());
+                File file = new File(((ProjectTree.FolderNode) node.getUserObject()).getFilesystemPath());
                 delete(file);
                 ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(node);
 

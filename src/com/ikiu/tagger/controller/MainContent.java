@@ -20,18 +20,18 @@ import javax.swing.JTabbedPane;
 public class MainContent implements MouseListener{
 
     protected JTabbedPane jTabbedPane;
-    protected MainPart mainPart;
+    protected Context context;
 
 
-    public MainContent(MainPart mainPart) {
+    public MainContent(Context context) {
         this.jTabbedPane = new JTabbedPane();
         jTabbedPane.addMouseListener(this);
-        this.mainPart = mainPart;
+        this.context = context;
 
     }
-    public MainPart getContainer()
+    public Context getContainer()
     {
-        return mainPart;
+        return context;
     }
 
     public JComponent getComponent() {
@@ -41,7 +41,7 @@ public class MainContent implements MouseListener{
     public void select()
     {
         jTabbedPane.setBorder(BorderFactory.createLineBorder(Color.blue));
-        mainPart.setCurrentPanel(this);
+        context.setCurrentPanel(this);
     }
 
     public void deSelect()
@@ -93,9 +93,9 @@ public class MainContent implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         if(!e.isPopupTrigger())
         {
-            if(mainPart.getCurrentPanel()!=null)
+            if(context.getCurrentPanel()!=null)
             {
-                mainPart.getCurrentPanel().deSelect();
+                context.getCurrentPanel().deSelect();
             }
             this.select();
         }

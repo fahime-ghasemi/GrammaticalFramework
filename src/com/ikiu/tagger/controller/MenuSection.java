@@ -16,26 +16,25 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
  * @author Emotion
  */
-class MenuSection implements ActionListener {
-    JMenuBar menu1;
-    private JMenuBar menu2;
+class MenuSection extends JMenuBar implements ActionListener {
     private JMenu File;
     private JMenuItem New;
     private JMenuItem Setting;
     private JMenu view;
     private JMenuItem tagger;
-    private MainPart mainFrame;
-    //private JFrame frame=new JFrame();
+    private Context context;
 
-    public MenuSection(MainPart frame) {
+    public MenuSection(Context context) {
 
-        this.mainFrame = frame;
+        this.context = context;
         File = new JMenu("File");
         New = new JMenuItem("New");
         Setting = new JMenuItem("Setting");
@@ -48,17 +47,12 @@ class MenuSection implements ActionListener {
         tagger = new JMenuItem("Tagger");
         tagger.addActionListener(this);
         view.add(tagger);
-        menu1 = new JMenuBar();
-        menu1.add(File);
-        menu1.add(view);
+
+        add(File);
+        add(view);
         //----
 
-        frame.setJMenuBar(menu1);
 
-    }
-
-    public JMenuBar getComponent() {
-        return menu1;
     }
 
     @Override
@@ -66,10 +60,10 @@ class MenuSection implements ActionListener {
 
 
         if (e.getSource() == Setting) {
-            JFrame fileFrame = new JFrame();
-            JButton btnSelectDirectory = new JButton("Select Directory");
+            final JFrame fileFrame = new JFrame();
+            final JButton btnSelectDirectory = new JButton("Select Directory");
             JButton btnSaveConfig = new JButton("Save");
-            JTextField txtWorkspace = new JTextField(20);
+            final JTextField txtWorkspace = new JTextField(20);
 
             fileFrame.setLayout(new FlowLayout());
             JLabel fileLabel = new JLabel("Workspace :");
@@ -108,11 +102,25 @@ class MenuSection implements ActionListener {
             fileFrame.setVisible(true);
             fileFrame.setSize(500, 200);
         } else if (e.getSource() == tagger) {
-            mainFrame.setLayout(new BorderLayout());
+            context.setLayout(new BorderLayout());
             //-----
+            JPanel englishPanel=new JPanel(new BorderLayout());
+            MainContent english = new EnglishPanel(context);
+            englishPanel.add(english.getComponent());
 
-            mainFrame.setContentPane(new TaggerView(mainFrame));
-            mainFrame.revalidate();
+            JPanel persianPanel=new JPanel(new BorderLayout());
+            MainContent persian = new PersianPanel(context);
+            persianPanel.add(persian.getComponent());
+            JSplitPane languagePanels=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,englishPanel,persianPanel);
+            languagePanels.setResizeWeight(0.5);
+
+            TaggerView taggerView = new TaggerView();
+            taggerView.setLanguagePanels(languagePanels);
+            taggerView.setProjectExplorer(new ProjectExplorer(context));
+            taggerView.setTaggerBottomBar(new TaggerBottomBar());
+            context.setContentPane(taggerView);
+            context.setCurrentPanel(english);
+            context.revalidate();
 
         }
     }

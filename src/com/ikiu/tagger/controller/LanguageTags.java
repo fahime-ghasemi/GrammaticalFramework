@@ -2,9 +2,13 @@ package com.ikiu.tagger.controller;
 
 import com.ikiu.tagger.model.DatabaseManager;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
@@ -16,7 +20,9 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  * Created by fahime on 9/25/15.
@@ -26,20 +32,35 @@ public class LanguageTags implements MouseListener{
     protected JTable table;
     protected DefaultTableModel tableModel;
     protected DatabaseManager databaseManager;
-    protected Vector<DatabaseManager.Token> tokens;
+    protected Vector<DatabaseManager.TokenTableRow> tokenTableRows;
+    private LanguageTagListener listener;
+    public interface LanguageTagListener
+    {
+        public void onTokenRowChange();
+    }
 
-    public LanguageTags(DatabaseManager databaseManager,DefaultTableModel tableModel) {
+    public LanguageTags(DatabaseManager databaseManager) {
         scrollPane = new JScrollPane();
         this.databaseManager = databaseManager;
         table = new JTable();
         table.setFillsViewportHeight(true);
-        this.tableModel = tableModel;
+        this.tableModel = new MyTableModel();
         scrollPane.getViewport().add(table);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.addMouseListener(this);
+
     }
+
+    public LanguageTagListener getListener() {
+        return listener;
+    }
+
+    public void setListener(LanguageTagListener listener) {
+        this.listener = listener;
+    }
+
     public JComponent getComponent()
     {
         return scrollPane;
@@ -47,31 +68,31 @@ public class LanguageTags implements MouseListener{
 
     public void addToken(String word)
     {
-        DatabaseManager.Token token = new DatabaseManager.Token();
+        DatabaseManager.TokenTableRow tokenTableRow = new DatabaseManager.TokenTableRow();
         int insertedId =0;
-        token.setWord(word);
-        token.setType("noun");
+        tokenTableRow.setWord(word);
+        tokenTableRow.setType("noun");
         if(this.getClass().getSimpleName().equals("EnglishTags"))
-            insertedId=databaseManager.insertLanguageToken(DatabaseManager.ENGLISH,token );
+            insertedId=databaseManager.insertLanguageToken(DatabaseManager.ENGLISH, tokenTableRow);
         else
-            insertedId=databaseManager.insertLanguageToken(DatabaseManager.PERSIAN,token );
+            insertedId=databaseManager.insertLanguageToken(DatabaseManager.PERSIAN, tokenTableRow);
         if(insertedId>0) {
 
-            token.setId(insertedId);
-            String []newRow={String.valueOf(insertedId),token.getType(),token.getWord(),
-                    String.valueOf(token.getMeaning()),String.valueOf(token.isGenerated())};
+            tokenTableRow.setId(insertedId);
+            String []newRow={String.valueOf(insertedId), tokenTableRow.getType(), tokenTableRow.getWord(),
+                    String.valueOf(tokenTableRow.getMeaning()),String.valueOf(tokenTableRow.isGenerated())};
             tableModel.addRow(newRow);
-            tokens.add(token);
+            tokenTableRows.add(tokenTableRow);
         }
     }
     public void loadTokens()
     {
-        Iterator<DatabaseManager.Token> iterator = tokens.iterator();
+        Iterator<DatabaseManager.TokenTableRow> iterator = tokenTableRows.iterator();
         while (iterator.hasNext())
         {
-            DatabaseManager.Token token = iterator.next();
-            String []newRow={String.valueOf(token.getId()),token.getType(),token.getWord(),
-                    String.valueOf(token.getMeaning()),String.valueOf(token.isGenerated())};
+            DatabaseManager.TokenTableRow tokenTableRow = iterator.next();
+            String []newRow={String.valueOf(tokenTableRow.getId()), tokenTableRow.getType(), tokenTableRow.getWord(),
+                    String.valueOf(tokenTableRow.getMeaning()),String.valueOf(tokenTableRow.isGenerated())};
             tableModel.addRow(newRow);
         }
     }
@@ -131,12 +152,12 @@ public class LanguageTags implements MouseListener{
 
                 String name=LanguageTags.this.getClass().getSimpleName();
                 if(LanguageTags.this.getClass().getSimpleName().equals("EnglishTags")) {
-                    if (databaseManager.deleteLanguageToken(DatabaseManager.ENGLISH, tokens.get(rowNumber).getId()) > 0)
+                    if (databaseManager.deleteLanguageToken(DatabaseManager.ENGLISH, tokenTableRows.get(rowNumber).getId()) > 0)
                         ((DefaultTableModel) table.getModel()).removeRow(rowNumber);
                 }
                 else
                 {
-                    if (databaseManager.deleteLanguageToken(DatabaseManager.PERSIAN, tokens.get(rowNumber).getId()) > 0)
+                    if (databaseManager.deleteLanguageToken(DatabaseManager.PERSIAN, tokenTableRows.get(rowNumber).getId()) > 0)
                         ((DefaultTableModel) table.getModel()).removeRow(rowNumber);
                 }
 
@@ -144,11 +165,68 @@ public class LanguageTags implements MouseListener{
         }
     }
 
-    class MyTabelModel extends DefaultTableModel
+    class MyTableModel extends DefaultTableModel
     {
         @Override
         public boolean isCellEditable(int row, int column) {
+            if( column==1 || column==2 || (column==3 && LanguageTags.this instanceof EnglishTags) )
             return super.isCellEditable(row, column);
+            return false;
         }
+
+        @Override
+        public void fireTableCellUpdated(final int rowEdited, int column) {
+            super.fireTableCellUpdated(rowEdited, column);
+            DatabaseManager.TokenTableRow tableRow = tokenTableRows.get(rowEdited);
+            String value="";
+            int index=0;
+            switch (column)
+            {
+                case 1:
+                {
+                    value = tableRow.getType();
+                    tableRow.setType(tableModel.getValueAt(rowEdited, column).toString());
+                    break;
+                }
+                case 2:
+                {
+                    value = tableRow.getWord();
+                    tableRow.setWord(tableModel.getValueAt(rowEdited, column).toString());
+                    break;
+                }
+                case 3:
+                {
+                    value = String.valueOf(tableRow.getMeaning());
+                    tableRow.setMeaning(Integer.valueOf(tableModel.getValueAt(rowEdited, column).toString()));
+                }
+            }
+            if(!tableModel.getValueAt(rowEdited, column).toString().equals(value)) {
+                tableRow.setEditedCells(tableRow.getEditedCells() + 1);
+
+            }
+            if(tableRow.getEditedCells()>0) {
+                LanguageTags.this.updateTableBackground();
+                if(listener!=null)
+                    listener.onTokenRowChange();
+            }
+        }
+    }
+
+    public void updateTableBackground() {
+        table.setDefaultRenderer(Object.class, new TableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+                DefaultTableCellRenderer defaultTableCellRenderer = new DefaultTableCellRenderer();
+                Component component = defaultTableCellRenderer.getTableCellRendererComponent(table,
+                        value, isSelected, hasFocus, row, column);
+                if (tokenTableRows.get(row).getEditedCells() > 0) {
+                    component.setBackground(Color.cyan);
+                }
+                return component;
+            }
+        });
+
+        table.repaint();
     }
 }

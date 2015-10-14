@@ -8,8 +8,8 @@ import com.ikiu.tagger.model.DatabaseManager;
 public class EnglishPanel extends MainContent{
 
 
-    public EnglishPanel(MainPart mainPart) {
-        super(mainPart);
+    public EnglishPanel(Context context) {
+        super(context);
 
     }
     @Override

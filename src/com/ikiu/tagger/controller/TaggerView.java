@@ -14,48 +14,37 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * Created by fahime on 9/25/15.
  */
 public class TaggerView extends JSplitPane {
-    private MainPart container;
+    private JSplitPane mainContent;
     private TaggerBottomBar taggerBottomBar;
 
-    public TaggerView(MainPart container) {
-        this.container = container;
-        JPanel englishPanel=new JPanel(new BorderLayout());
-        MainContent english = new EnglishPanel(container);
-        englishPanel.add(english.getComponent());
+    public TaggerView() {
 
-        JPanel persianPanel=new JPanel(new BorderLayout());
-        MainContent persian = new PersianPanel(container);
-        persianPanel.add(persian.getComponent());
-
-        taggerBottomBar = new TaggerBottomBar();
-        //------------------------------
-        container.setCurrentPanel(english);
-        //----------------------
-        JPanel projectExplorer=new JPanel(new BorderLayout());
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode(new Tree.TreeNodeData("Project Explorer","root",(new ConfigurationTask()).getWorkspace()), true);
-        Tree tree=new Tree(top,container);
-        JScrollPane jScrollPane = new JScrollPane((JTree)tree);
-        projectExplorer.add(jScrollPane);
-
-        //-----------------------------------------------
-        JSplitPane languagePanels=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,englishPanel,persianPanel);
-
-        languagePanels.setResizeWeight(0.5);
-        JSplitPane mainContent=new JSplitPane(JSplitPane.VERTICAL_SPLIT,languagePanels, taggerBottomBar);
+        mainContent = new JSplitPane();
+        mainContent.setOrientation(JSplitPane.VERTICAL_SPLIT);
         mainContent.setResizeWeight(0.6);
         //----
         setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-        setLeftComponent(projectExplorer);
+
         setRightComponent(mainContent);
         setResizeWeight(0.1);
     }
 
-    public void addEnglishTag(String word)
+    public void setLanguagePanels(JSplitPane languagePanels)
     {
-        taggerBottomBar.addEnglishTag(word);
+        mainContent.setTopComponent(languagePanels);
     }
-    public void addPersianTag(String word)
+
+    public TaggerBottomBar getTaggerBottomBar() {
+        return taggerBottomBar;
+    }
+
+    public void setTaggerBottomBar(TaggerBottomBar taggerBottomBar)
     {
-        taggerBottomBar.addPersianTag(word);
+        this.taggerBottomBar = taggerBottomBar;
+        mainContent.setBottomComponent(taggerBottomBar);
+    }
+    public void setProjectExplorer(ProjectExplorer projectExplorer)
+    {
+        setLeftComponent(projectExplorer);
     }
 }

@@ -7,8 +7,8 @@ import com.ikiu.tagger.model.DatabaseManager;
  */
 public class PersianPanel extends MainContent {
 
-    public PersianPanel(MainPart mainPart) {
-        super(mainPart);
+    public PersianPanel(Context context) {
+        super(context);
     }
     @Override
     public void setTextAreaContent(String filesystemPath) {

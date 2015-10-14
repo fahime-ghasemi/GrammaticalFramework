@@ -26,16 +26,15 @@ import javax.swing.tree.TreePath;
 /**
  * @author Emotion
  */
-class Tree extends JTree implements MouseListener {
+class ProjectTree extends JTree implements MouseListener {
 
     private JPopupMenu popupMenu;
-    private MainPart mainPart;
+    private TreeNode.TreeNodeListener listener;
 
-
-    public Tree(DefaultMutableTreeNode root,MainPart mainPart) {
+    public ProjectTree(DefaultMutableTreeNode root,TreeNode.TreeNodeListener listener) {
         //Create popup menu
         super(root);
-        this.mainPart = mainPart;
+        this.listener = listener;
         File file = new File((new ConfigurationTask()).getWorkspace());
         File[] allFiles = file.listFiles();
 
@@ -43,8 +42,10 @@ class Tree extends JTree implements MouseListener {
             if (allFiles[i].isDirectory()) {
                 File[] allContent = allFiles[i].listFiles();
                 for (int j = 0; allContent != null && j < allContent.length; ++j) {
-                    if (allContent[j].isDirectory() && allContent[j].getName().equals(".gf")) {
-                        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new Tree.TreeNodeData(allFiles[i].getName(), "folder", allFiles[i].getPath()), true);
+                    if (allContent[j].isDirectory() && allContent[j].getName().equals("_gf")) {
+                        TreeNode treeNode = new ProjectTree.FolderNode(allFiles[i].getName(), allFiles[i].getPath());
+                        treeNode.setListener(this.listener);
+                        DefaultMutableTreeNode node = new DefaultMutableTreeNode(treeNode, true);
                         ((DefaultTreeModel) getModel()).insertNodeInto(node, root, 0);
                         addNodes(allContent, node);
                     }
@@ -64,21 +65,25 @@ class Tree extends JTree implements MouseListener {
         }
         addMouseListener(this);
     }
-    public void setMainPart(MainPart mainPart)
-    {
-        this.mainPart = mainPart;
-    }
 
-    private void addNodes(File[] content, DefaultMutableTreeNode treeNode) {
+    public void setListener(TreeNode.TreeNodeListener listener)
+    {
+        this.listener = listener;
+    }
+    private void addNodes(File[] content, DefaultMutableTreeNode node) {
         for (int i = 0; content != null && i < content.length; ++i) {
-            if(!content[i].getName().equals(".gf")) {
-                String type="folder";
-                if(content[i].getName().contains(".gf"))
-                    type = "file";
-                DefaultMutableTreeNode node = new DefaultMutableTreeNode(new TreeNodeData(content[i].getName(), type, content[i].getPath()), true);
+            if(!content[i].getName().equals("_gf")) {
+                TreeNode treeNode=null;
+                if(content[i].getName().contains(".gf") || content[i].getName().contains(".txt") )
+                    treeNode = new FileNode(content[i].getName(),content[i].getPath());
+                else
+                    treeNode = new FolderNode(content[i].getName(),content[i].getPath());
+
+                treeNode.setListener(this.listener);
+                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(treeNode, true);
                 if (content[i].listFiles() != null)
-                    addNodes(content[i].listFiles(), node);
-                ((DefaultTreeModel) getModel()).insertNodeInto(node, treeNode, 0);
+                    addNodes(content[i].listFiles(), newNode);
+                ((DefaultTreeModel) getModel()).insertNodeInto(newNode, node, 0);
             }
         }
     }
@@ -110,16 +115,17 @@ class Tree extends JTree implements MouseListener {
 
     private void doDoubleClick() {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.getSelectionPath().getLastPathComponent();
-        if (((TreeNodeData) (node.getUserObject())).getType().equals("file")) {
-            mainPart.getCurrentPanel().setTextAreaContent(((TreeNodeData) node.getUserObject()).getFilesystemPath());
+        if (((TreeNode) (node.getUserObject())) instanceof FileNode) {
+            if(((TreeNode) (node.getUserObject())).getListener()!=null)
+                ((TreeNode) (node.getUserObject())).getListener().treeNodeDoubleClickListener(((FileNode) node.getUserObject()).getFilesystemPath());
         }
     }
 
     private void showPopup(MouseEvent e) {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.getSelectionPath().getLastPathComponent();
-        if (((TreeNodeData) (node.getUserObject())).getType().equals("folder")) {
+        if (((TreeNode) (node.getUserObject())) instanceof FolderNode) {
             popupMenu = new PopupMenuFolder(this);
-        } else if (((TreeNodeData) (node.getUserObject())).getType().equals("root")) {
+        } else if (((TreeNode) (node.getUserObject())) instanceof RootNode) {
             popupMenu = new PopupMenuRoot(this);
         } else {
             popupMenu = new PopupMenuFile(this);
@@ -147,28 +153,57 @@ class Tree extends JTree implements MouseListener {
 
     }
 
-    public static class TreeNodeData {
-        private String name;
-        private String type;
-        private String filesystemPath;
-
-        public TreeNodeData(String name, String type, String filesystemPath) {
-            this.name = name;
-            this.type = type;
-            this.filesystemPath = filesystemPath;
+    public static class TreeNode
+    {
+        protected String name;
+        protected String filesystemPath;
+        public interface TreeNodeListener
+        {
+            public void onRightClickListener();
+            public void treeNodeDoubleClickListener(String path);
         }
 
+        public TreeNode(String name, String filesystemPath) {
+            this.filesystemPath = filesystemPath;
+            this.name = name;
+        }
+
+        protected TreeNodeListener listener;
         @Override
         public String toString() {
             return name;
         }
 
-        public String getType() {
-            return type;
+        public void setListener(TreeNodeListener listener)
+        {
+            this.listener = listener;
         }
 
+        public TreeNodeListener getListener() {
+            return listener;
+        }
         public String getFilesystemPath() {
             return filesystemPath;
+        }
+    }
+    public static class RootNode extends TreeNode{
+
+        public RootNode(String name, String filesystemPath) {
+            super(name, filesystemPath);
+        }
+    }
+
+    public static class FolderNode extends TreeNode
+    {
+        public FolderNode(String name, String filesystemPath) {
+            super(name,filesystemPath);
+        }
+    }
+
+    public static class FileNode extends TreeNode
+    {
+        public FileNode(String name, String filesystemPath) {
+            super(name, filesystemPath);
         }
     }
 }

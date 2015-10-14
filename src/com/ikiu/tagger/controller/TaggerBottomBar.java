@@ -7,18 +7,23 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Iterator;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
  * Created by fahime on 9/25/15.
  */
-public class TaggerBottomBar extends JPanel{
+public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagListener{
     JPanel toolbar;
     EnglishTags englishTags;
     PersianTags persianTags;
     DatabaseManager databaseManager;
-
+    JButton btnSaveChanges;
+    JButton btnGenerator;
 
     public TaggerBottomBar() {
         databaseManager = new DatabaseManager();
@@ -26,12 +31,19 @@ public class TaggerBottomBar extends JPanel{
         databaseManager.createPersianTokenTable();
         //----
         this.toolbar = new JPanel(new FlowLayout());
-        toolbar.add(new Button("Save Changes"));
+        btnSaveChanges = new JButton("Save Changes");
+        btnSaveChanges.addActionListener(btnSaveChangeActionListener);
+        btnSaveChanges.setEnabled(false);
+        toolbar.add(btnSaveChanges);
         toolbar.setBackground(Color.blue);
-        toolbar.add(new Button("Generate Lexicon"));
+        btnGenerator = new JButton("Generate Lexicon");
+        btnGenerator.addActionListener(btnGeneratorActionListener);
+        toolbar.add(btnGenerator);
 //        //---
         englishTags = new EnglishTags(databaseManager);
+        englishTags.setListener(this);
         persianTags = new PersianTags(databaseManager);
+        persianTags.setListener(this);
 //        //----
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -57,6 +69,50 @@ public class TaggerBottomBar extends JPanel{
 
     }
 
+    private ActionListener btnGeneratorActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            TaggerGenerator generator = new TaggerGenerator();
+            generator.display();
+        }
+    };
+    private ActionListener btnSaveChangeActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boolean updateSuccessful=true;
+            btnSaveChanges.setEnabled(false);
+        Iterator <DatabaseManager.TokenTableRow> iterator = englishTags.tokenTableRows.iterator();
+            while (iterator.hasNext())
+            {
+                DatabaseManager.TokenTableRow row = iterator.next();
+                if(row.getEditedCells()>0)
+                {
+                    if(databaseManager.updateLanguageToken(row,DatabaseManager.ENGLISH)>0)
+                        row.setEditedCells(0);
+                    else
+                        updateSuccessful = false;
+                }
+            }
+
+        iterator = persianTags.tokenTableRows.iterator();
+            while (iterator.hasNext())
+            {
+                DatabaseManager.TokenTableRow row = iterator.next();
+                if(row.getEditedCells()>0)
+                {
+                    if(databaseManager.updateLanguageToken(row,DatabaseManager.PERSIAN)>0)
+                        row.setEditedCells(0);
+                    else
+                        updateSuccessful = false;
+                }
+            }
+            persianTags.updateTableBackground();
+            englishTags.updateTableBackground();
+
+            if(!updateSuccessful)
+                btnSaveChanges.setEnabled(true);
+        }
+    };
     public void addEnglishTag(String word)
     {
         englishTags.addToken(word);
@@ -64,5 +120,10 @@ public class TaggerBottomBar extends JPanel{
     public void addPersianTag(String word)
     {
         persianTags.addToken(word);
+    }
+
+    @Override
+    public void onTokenRowChange() {
+        btnSaveChanges.setEnabled(true);
     }
 }
