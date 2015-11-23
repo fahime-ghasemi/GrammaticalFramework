@@ -146,8 +146,12 @@ public class DatabaseManager {
         try {
             c = createConnection();
             stmt = c.createStatement();
+            int isGenerated=0;
+            if(tokenTableRow.isGenerated())
+                isGenerated = 1;
             String sql = "UPDATE " + englishTokenTable +
                     " SET WORD='"+tokenTableRow.getWord()+"',TYPE='"+tokenTableRow.getType()+"',MEANING="+tokenTableRow.getMeaning()
+                    +",ISGENERATED="+isGenerated
                     +" WHERE ID="+tokenTableRow.getId();
             result = stmt.executeUpdate(sql);
 
@@ -167,9 +171,13 @@ public class DatabaseManager {
         try {
             c = createConnection();
             stmt = c.createStatement();
+            int isGenerated=0;
+            if(tokenTableRow.isGenerated())
+                isGenerated = 1;
             String sql = "UPDATE " + persianTokenTable +
                     " SET WORD='"+tokenTableRow.getWord()+"',TYPE='"+tokenTableRow.getType()
-                    +"' WHERE ID="+tokenTableRow.getId();
+                    +"',ISGENERATED="+isGenerated
+                    +" WHERE ID="+tokenTableRow.getId();
             result = stmt.executeUpdate(sql);
 
             stmt.close();
@@ -302,6 +310,7 @@ public class DatabaseManager {
         private int meaning;
         private boolean isGenerated;
         private int editedCells;
+        private boolean mReadyForGenerate;
         //------
 
         public TokenTableRow() {
@@ -361,6 +370,14 @@ public class DatabaseManager {
 
         public void setEditedCells(int editedCells) {
             this.editedCells = editedCells;
+        }
+
+        public boolean isReadyForGenerate() {
+            return mReadyForGenerate;
+        }
+
+        public void setReadyForGenerate(boolean mReadyForGenerate) {
+            this.mReadyForGenerate = mReadyForGenerate;
         }
     }
 }

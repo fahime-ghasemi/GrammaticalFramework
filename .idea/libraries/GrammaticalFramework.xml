@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="GrammaticalFramework">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/kxml2-2.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/rsyntaxtextarea-2.5.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/sqlite-jdbc-3.8.11.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

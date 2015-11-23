@@ -26,33 +26,20 @@ import javax.swing.WindowConstants;
  */
 class MenuSection extends JMenuBar implements ActionListener {
     private JMenu File;
-    private JMenuItem New;
     private JMenuItem Setting;
-    private JMenu view;
-    private JMenuItem tagger;
+
     private Context context;
 
     public MenuSection(Context context) {
 
         this.context = context;
         File = new JMenu("File");
-        New = new JMenuItem("New");
         Setting = new JMenuItem("Setting");
-        File.add(New);
-        New.addActionListener(this);
         File.add(Setting);
         Setting.addActionListener(this);
         //----
-        view = new JMenu("View");
-        tagger = new JMenuItem("Tagger");
-        tagger.addActionListener(this);
-        view.add(tagger);
-
         add(File);
-        add(view);
         //----
-
-
     }
 
     @Override
@@ -101,27 +88,6 @@ class MenuSection extends JMenuBar implements ActionListener {
 
             fileFrame.setVisible(true);
             fileFrame.setSize(500, 200);
-        } else if (e.getSource() == tagger) {
-            context.setLayout(new BorderLayout());
-            //-----
-            JPanel englishPanel=new JPanel(new BorderLayout());
-            MainContent english = new EnglishPanel(context);
-            englishPanel.add(english.getComponent());
-
-            JPanel persianPanel=new JPanel(new BorderLayout());
-            MainContent persian = new PersianPanel(context);
-            persianPanel.add(persian.getComponent());
-            JSplitPane languagePanels=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,englishPanel,persianPanel);
-            languagePanels.setResizeWeight(0.5);
-
-            TaggerView taggerView = new TaggerView();
-            taggerView.setLanguagePanels(languagePanels);
-            taggerView.setProjectExplorer(new ProjectExplorer(context));
-            taggerView.setTaggerBottomBar(new TaggerBottomBar());
-            context.setContentPane(taggerView);
-            context.setCurrentPanel(english);
-            context.revalidate();
-
         }
     }
 

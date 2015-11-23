@@ -7,8 +7,6 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
@@ -27,29 +25,37 @@ import javax.swing.table.TableCellRenderer;
 /**
  * Created by fahime on 9/25/15.
  */
-public class LanguageTags implements MouseListener{
+public class LanguageTags implements MouseListener {
     protected JScrollPane scrollPane;
-    protected JTable table;
-    protected DefaultTableModel tableModel;
+    protected JTable mTable;
+    protected DefaultTableModel mTableModel;
     protected DatabaseManager databaseManager;
     protected Vector<DatabaseManager.TokenTableRow> tokenTableRows;
-    private LanguageTagListener listener;
-    public interface LanguageTagListener
-    {
+    protected LanguageTagListener listener;
+
+    public interface LanguageTagListener {
         public void onTokenRowChange();
+
+        public void onTableSelectedCountChange(int selectedCount);
     }
 
-    public LanguageTags(DatabaseManager databaseManager) {
+    public void refreshTags(Vector<DatabaseManager.TokenTableRow> rows) {
+        mTableModel.getDataVector().removeAllElements();
+        mTableModel.fireTableDataChanged();
+        tokenTableRows = rows;
+        loadTokens();
+    }
+
+    public LanguageTags(DatabaseManager databaseManager,JTable table) {
         scrollPane = new JScrollPane();
         this.databaseManager = databaseManager;
-        table = new JTable();
-        table.setFillsViewportHeight(true);
-        this.tableModel = new MyTableModel();
-        scrollPane.getViewport().add(table);
+        mTable = table;
+        mTable.setFillsViewportHeight(true);
+        scrollPane.getViewport().add(mTable);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        table.setPreferredScrollableViewportSize(table.getPreferredSize());
-        table.addMouseListener(this);
+        mTable.setPreferredScrollableViewportSize(mTable.getPreferredSize());
+        mTable.addMouseListener(this);
 
     }
 
@@ -61,41 +67,42 @@ public class LanguageTags implements MouseListener{
         this.listener = listener;
     }
 
-    public JComponent getComponent()
-    {
+    public JComponent getComponent() {
         return scrollPane;
     }
 
-    public void addToken(String word)
-    {
+    public int addToken(String word) {
         DatabaseManager.TokenTableRow tokenTableRow = new DatabaseManager.TokenTableRow();
-        int insertedId =0;
+        int insertedId = 0;
         tokenTableRow.setWord(word);
         tokenTableRow.setType("noun");
-        if(this.getClass().getSimpleName().equals("EnglishTags"))
-            insertedId=databaseManager.insertLanguageToken(DatabaseManager.ENGLISH, tokenTableRow);
+        if (this.getClass().getSimpleName().equals("EnglishTags"))
+            insertedId = databaseManager.insertLanguageToken(DatabaseManager.ENGLISH, tokenTableRow);
         else
-            insertedId=databaseManager.insertLanguageToken(DatabaseManager.PERSIAN, tokenTableRow);
-        if(insertedId>0) {
+            insertedId = databaseManager.insertLanguageToken(DatabaseManager.PERSIAN, tokenTableRow);
+        if (insertedId > 0) {
 
             tokenTableRow.setId(insertedId);
-            String []newRow={String.valueOf(insertedId), tokenTableRow.getType(), tokenTableRow.getWord(),
-                    String.valueOf(tokenTableRow.getMeaning()),String.valueOf(tokenTableRow.isGenerated())};
-            tableModel.addRow(newRow);
+            Object[] newRow = {false, String.valueOf(insertedId), tokenTableRow.getType(), tokenTableRow.getWord(),
+                    String.valueOf(tokenTableRow.getMeaning()), String.valueOf(tokenTableRow.isGenerated())};
+            mTableModel.addRow(newRow);
             tokenTableRows.add(tokenTableRow);
         }
+        return insertedId;
     }
-    public void loadTokens()
-    {
+
+    public void loadTokens() {
+        if(tokenTableRows==null)
+            return;
         Iterator<DatabaseManager.TokenTableRow> iterator = tokenTableRows.iterator();
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             DatabaseManager.TokenTableRow tokenTableRow = iterator.next();
-            String []newRow={String.valueOf(tokenTableRow.getId()), tokenTableRow.getType(), tokenTableRow.getWord(),
-                    String.valueOf(tokenTableRow.getMeaning()),String.valueOf(tokenTableRow.isGenerated())};
-            tableModel.addRow(newRow);
+            Object[] newRow = {false, String.valueOf(tokenTableRow.getId()), tokenTableRow.getType(), tokenTableRow.getWord(),
+                    String.valueOf(tokenTableRow.getMeaning()), String.valueOf(tokenTableRow.isGenerated())};
+            mTableModel.addRow(newRow);
         }
     }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -103,11 +110,10 @@ public class LanguageTags implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.isPopupTrigger())
-        {
-            Point p=e.getPoint();
-            int rowNumber=table.rowAtPoint(p);
-            table.setRowSelectionInterval(rowNumber, rowNumber);
+        if (e.isPopupTrigger()) {
+            Point p = e.getPoint();
+            int rowNumber = mTable.rowAtPoint(p);
+            mTable.setRowSelectionInterval(rowNumber, rowNumber);
             JPopupMenu popupMenu = new PopupMenuTaggerTable(rowNumber);
             popupMenu.show((JComponent) e.getSource(), e.getX(), e.getY());
         }
@@ -129,8 +135,7 @@ public class LanguageTags implements MouseListener{
 
     }
 
-    class PopupMenuTaggerTable extends JPopupMenu implements ActionListener
-    {
+    class PopupMenuTaggerTable extends JPopupMenu implements ActionListener {
         private JMenuItem menuItemDelete;
         private int rowNumber;
 
@@ -150,70 +155,24 @@ public class LanguageTags implements MouseListener{
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("delete")) {
 
-                String name=LanguageTags.this.getClass().getSimpleName();
-                if(LanguageTags.this.getClass().getSimpleName().equals("EnglishTags")) {
-                    if (databaseManager.deleteLanguageToken(DatabaseManager.ENGLISH, tokenTableRows.get(rowNumber).getId()) > 0)
-                        ((DefaultTableModel) table.getModel()).removeRow(rowNumber);
-                }
-                else
-                {
-                    if (databaseManager.deleteLanguageToken(DatabaseManager.PERSIAN, tokenTableRows.get(rowNumber).getId()) > 0)
-                        ((DefaultTableModel) table.getModel()).removeRow(rowNumber);
+                String name = LanguageTags.this.getClass().getSimpleName();
+                if (LanguageTags.this.getClass().getSimpleName().equals("EnglishTags")) {
+                    if (databaseManager.deleteLanguageToken(DatabaseManager.ENGLISH, tokenTableRows.get(rowNumber).getId()) > 0) {
+                        ((DefaultTableModel) mTable.getModel()).removeRow(rowNumber);
+                        tokenTableRows.remove(rowNumber);
+                    }
+                } else {
+                    if (databaseManager.deleteLanguageToken(DatabaseManager.PERSIAN, tokenTableRows.get(rowNumber).getId()) > 0) {
+                        ((DefaultTableModel) mTable.getModel()).removeRow(rowNumber);
+                        tokenTableRows.remove(rowNumber);
+                    }
                 }
 
             }
         }
     }
-
-    class MyTableModel extends DefaultTableModel
-    {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            if( column==1 || column==2 || (column==3 && LanguageTags.this instanceof EnglishTags) )
-            return super.isCellEditable(row, column);
-            return false;
-        }
-
-        @Override
-        public void fireTableCellUpdated(final int rowEdited, int column) {
-            super.fireTableCellUpdated(rowEdited, column);
-            DatabaseManager.TokenTableRow tableRow = tokenTableRows.get(rowEdited);
-            String value="";
-            int index=0;
-            switch (column)
-            {
-                case 1:
-                {
-                    value = tableRow.getType();
-                    tableRow.setType(tableModel.getValueAt(rowEdited, column).toString());
-                    break;
-                }
-                case 2:
-                {
-                    value = tableRow.getWord();
-                    tableRow.setWord(tableModel.getValueAt(rowEdited, column).toString());
-                    break;
-                }
-                case 3:
-                {
-                    value = String.valueOf(tableRow.getMeaning());
-                    tableRow.setMeaning(Integer.valueOf(tableModel.getValueAt(rowEdited, column).toString()));
-                }
-            }
-            if(!tableModel.getValueAt(rowEdited, column).toString().equals(value)) {
-                tableRow.setEditedCells(tableRow.getEditedCells() + 1);
-
-            }
-            if(tableRow.getEditedCells()>0) {
-                LanguageTags.this.updateTableBackground();
-                if(listener!=null)
-                    listener.onTokenRowChange();
-            }
-        }
-    }
-
     public void updateTableBackground() {
-        table.setDefaultRenderer(Object.class, new TableCellRenderer() {
+        mTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 
@@ -227,6 +186,6 @@ public class LanguageTags implements MouseListener{
             }
         });
 
-        table.repaint();
+        mTable.repaint();
     }
 }

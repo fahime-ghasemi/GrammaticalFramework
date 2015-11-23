@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GrammaticalFramework:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GrammaticalFramework_jar</output-path>
+    <root id="archive" name="GrammaticalFramework.jar">
+      <element id="module-output" name="GrammaticalFramework" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/kxml2-2.3.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/rsyntaxtextarea-2.5.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/sqlite-jdbc-3.8.11.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

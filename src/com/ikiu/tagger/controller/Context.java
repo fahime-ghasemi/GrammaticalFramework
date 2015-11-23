@@ -8,18 +8,19 @@ package com.ikiu.tagger.controller;
  * and open the template in the editor.
  */
 
+import com.ikiu.tagger.model.DatabaseManager;
+
 import java.awt.BorderLayout;
-import java.awt.Container;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 /**
  * @author Emotion
  */
-public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeListener{
+public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeListener {
 
     private MainContent currentPanel;
     private JSplitPane mainContent;
@@ -30,19 +31,11 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
         Context context = new Context();
 
         context.setLayout(new BorderLayout());
-//
         GeneralView contentPane = new GeneralView();
 
-        JPanel mainContentPanel=new JPanel(new BorderLayout());
         MainContent mainContent = new MainContent(context);
-        mainContentPanel.add(mainContent.getComponent());
-        contentPane.setMainContent(mainContentPanel);
+        contentPane.setMainContent(mainContent);
         context.setCurrentPanel(mainContent);
-
-        JPanel bottomPanel=new JPanel(new BorderLayout());
-        bottomPanel.setSize(400, 300);
-        bottomPanel.add(new BottomBar());
-        contentPane.setBottomBar(bottomPanel);
 
         ProjectExplorer projectExplorer = new ProjectExplorer(context);
         contentPane.setProjectExplorer(projectExplorer);
@@ -58,8 +51,7 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
 
     }
 
-    public void setMenu(JMenuBar menuBar)
-    {
+    public void setMenu(JMenuBar menuBar) {
         setJMenuBar(menuBar);
     }
 
@@ -71,25 +63,35 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
         this.currentPanel = currentPanel;
     }
 
+    public void refreshTags(Vector<DatabaseManager.TokenTableRow> tokenTableRows) {
+//        ((TaggerView)getContentPane()).getTaggerBottomBar().
+    }
+
+
     @Override
     public void onRightClickListener() {
 
     }
 
     @Override
-    public void treeNodeDoubleClickListener(String path) {
-        getCurrentPanel().setTextAreaContent(path);
+    public void treeNodeDoubleClickListener(String path, boolean isFromTagger) {
+        if (isFromTagger) {
+            getCurrentPanel().showTaggerTab(path);
+//            if (getCurrentPanel() instanceof EnglishPanel)
+//                ((EnglishPanel) getCurrentPanel()).setTextPaneContent(path, DatabaseManager.ENGLISH);
+//            else if (getCurrentPanel() instanceof PersianPanel)
+//                ((PersianPanel) getCurrentPanel()).setTextPaneContent(path, DatabaseManager.PERSIAN);
+        } else
+            getCurrentPanel().setTextAreaContent(path);
 
     }
 
-    public void addEnglishTag(String source)
-    {
-        ((TaggerView) getContentPane()).getTaggerBottomBar().addEnglishTag(source);
+    public int addEnglishTag(String source) {
+        return ((TaggerView) getContentPane()).getTaggerBottomBar().addEnglishTag(source);
     }
 
-    public void addPersianTag(String source)
-    {
-        ((TaggerView) getContentPane()).getTaggerBottomBar().addPersianTag(source);
+    public int addPersianTag(String source) {
+        return ((TaggerView) getContentPane()).getTaggerBottomBar().addPersianTag(source);
     }
 }
 

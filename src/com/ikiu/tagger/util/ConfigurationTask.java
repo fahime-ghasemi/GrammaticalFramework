@@ -44,4 +44,35 @@ public class ConfigurationTask {
 
         return null;
     }
+    public  String getCore()
+    {
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            XmlPullParser pullParser = factory.newPullParser();
+            pullParser.setInput(new FileReader(configurationFilePath));
+            int eventType = pullParser.getEventType();
+            while (eventType!= XmlPullParser.END_DOCUMENT)
+            {
+                if(eventType == XmlPullParser.START_TAG && pullParser.getName().equals("core"))
+                {
+                    String s= pullParser.nextText();
+                    return s;
+                }
+                eventType = pullParser.next();
+            }
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        catch (FileNotFoundException e)
+        {
+
+        }
+        catch (IOException e)
+        {
+
+        }
+
+        return null;
+    }
 }

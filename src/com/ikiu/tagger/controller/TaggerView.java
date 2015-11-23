@@ -1,37 +1,30 @@
 package com.ikiu.tagger.controller;
 
+import com.ikiu.tagger.model.DatabaseManager;
 import com.ikiu.tagger.util.ConfigurationTask;
 
-import java.awt.BorderLayout;
+import java.awt.*;
+import java.util.Vector;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  * Created by fahime on 9/25/15.
  */
 public class TaggerView extends JSplitPane {
-    private JSplitPane mainContent;
     private TaggerBottomBar taggerBottomBar;
 
     public TaggerView() {
-
-        mainContent = new JSplitPane();
-        mainContent.setOrientation(JSplitPane.VERTICAL_SPLIT);
-        mainContent.setResizeWeight(0.6);
         //----
-        setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+        setOrientation(JSplitPane.VERTICAL_SPLIT);
 
-        setRightComponent(mainContent);
-        setResizeWeight(0.1);
+        setResizeWeight(0.6);
     }
 
     public void setLanguagePanels(JSplitPane languagePanels)
     {
-        mainContent.setTopComponent(languagePanels);
+        setTopComponent(languagePanels);
     }
 
     public TaggerBottomBar getTaggerBottomBar() {
@@ -41,10 +34,21 @@ public class TaggerView extends JSplitPane {
     public void setTaggerBottomBar(TaggerBottomBar taggerBottomBar)
     {
         this.taggerBottomBar = taggerBottomBar;
-        mainContent.setBottomComponent(taggerBottomBar);
+        setBottomComponent(taggerBottomBar);
     }
-    public void setProjectExplorer(ProjectExplorer projectExplorer)
-    {
-        setLeftComponent(projectExplorer);
+    public void refreshEnglishTags(Vector<DatabaseManager.TokenTableRow> tokenTableRows) {
+        getTaggerBottomBar().englishTags.refreshTags(tokenTableRows);
+    }
+
+    public void refreshPersianTags(Vector<DatabaseManager.TokenTableRow> tokenTableRows) {
+        getTaggerBottomBar().persianTags.refreshTags(tokenTableRows);
+
+    }
+
+    public void deSelectEnglishTab() {
+        ((EnglishPanel)((JSplitPane)getTopComponent()).getLeftComponent()).deSelect();
+    }
+    public void deSelectPersianTab() {
+        ((PersianPanel)((JSplitPane)getTopComponent()).getLeftComponent()).deSelect();
     }
 }
