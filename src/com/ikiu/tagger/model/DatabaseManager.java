@@ -47,6 +47,26 @@ public class DatabaseManager {
         }
         System.out.println("Table created successfully");
     }
+    public void deleteTables()
+    {
+        Connection c = null;
+        Statement stmt = null;
+        try {
+            c = createConnection();
+            stmt = c.createStatement();
+            String sql = "DROP TABLE "+englishTokenTable;
+            stmt.executeUpdate(sql);
+            String sql1 = "DROP TABLE "+persianTokenTable;
+            stmt.executeUpdate(sql1);
+
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+
+        }
+        System.out.println("Table delete successfully");
+    }
 
     public void createPersianTokenTable() {
         Connection c = null;
@@ -282,7 +302,6 @@ public class DatabaseManager {
             while (resultSet.next()) {
                 TokenTableRow tokenTableRow = new TokenTableRow();
                 tokenTableRow.setId(resultSet.getInt("ID"));
-                tokenTableRow.setMeaning(resultSet.getInt("MEANING"));
                 tokenTableRow.setWord(resultSet.getString("WORD"));
                 tokenTableRow.setType(resultSet.getString("TYPE"));
                 int generated = resultSet.getInt("ISGENERATED");

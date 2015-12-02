@@ -3,6 +3,8 @@ package com.ikiu.tagger.controller;
 import com.ikiu.tagger.model.DatabaseManager;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +25,18 @@ public class PersianPanel extends JPanel implements MouseListener {
         this.context = context;
         this.jTabbedPane = new JTabbedPane();
         jTabbedPane.addMouseListener(this);
+        jTabbedPane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JTabbedPane source = (JTabbedPane) e.getSource();
+                if (source.getSelectedIndex() == -1)
+                    context.refreshPersianTags(new Vector<DatabaseManager.TokenTableRow>());
+                else {
+                    TaggerContentTab contentTab = (TaggerContentTab) jTabbedPane.getComponentAt(source.getSelectedIndex());
+                    context.refreshPersianTags(contentTab.getTokenList());
+                }
+            }
+        });
         setLayout(new BorderLayout());
         add(jTabbedPane);
     }
@@ -40,16 +54,18 @@ public class PersianPanel extends JPanel implements MouseListener {
         isSelected = true;
 //        context.setCurrentPanel(this);
     }
+
     public void deSelect() {
         jTabbedPane.setBorder(null);
         isSelected = false;
     }
+
     public void setTextAreaContent(String filesystemPath) {
 
         int l = filesystemPath.lastIndexOf("/");
         String fileName = filesystemPath.substring(l + 1);
 
-        jTabbedPane.addTab(fileName, new TaggerContentTab(filesystemPath, DatabaseManager.ENGLISH,null));
+        jTabbedPane.addTab(fileName, new TaggerContentTab(filesystemPath, DatabaseManager.ENGLISH, context));
         jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount() - 1, createTabHead(fileName));
         jTabbedPane.setSelectedIndex(jTabbedPane.getTabCount() - 1);
     }
@@ -73,7 +89,7 @@ public class PersianPanel extends JPanel implements MouseListener {
                     if (st.equals(jTabbedPane.getTitleAt(i)))
                         break;
                 }
-                if ( jTabbedPane.getComponentAt(i) instanceof MainContentTab && ((MainContentTab) jTabbedPane.getComponentAt(i)).isChanged()) {
+                if (jTabbedPane.getComponentAt(i) instanceof MainContentTab && ((MainContentTab) jTabbedPane.getComponentAt(i)).isChanged()) {
                     ((MainContentTab) jTabbedPane.getComponentAt(i)).saveChanges();
                 }
                 jTabbedPane.removeTabAt(i);
@@ -84,20 +100,13 @@ public class PersianPanel extends JPanel implements MouseListener {
         pnlTab.add(btnClose);
         return pnlTab;
     }
+
     public void setTextPaneContent(String filesystemPath, int language) {
         int l = filesystemPath.lastIndexOf("/");
         String fileName = filesystemPath.substring(l + 1);
         int index = getTabIndex(fileName, filesystemPath);
         if (index == -1) {
-            TaggerContentTab mainContentTab = new TaggerContentTab(filesystemPath,DatabaseManager.PERSIAN, new TaggerContentTab.MainContentTabListener() {
-                @Override
-                public void onContentChangeListener(Vector<DatabaseManager.TokenTableRow> tokenTableRows) {
-                    if (language == DatabaseManager.ENGLISH)
-                        context.refreshEnglishTags(tokenTableRows);
-                    else
-                        context.refreshPersianTags(tokenTableRows);
-                }
-            });
+            TaggerContentTab mainContentTab = new TaggerContentTab(filesystemPath, DatabaseManager.PERSIAN, context);
             mainContentTab.setTaggerText(language);
             jTabbedPane.addTab(fileName, mainContentTab);
             jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount() - 1, createTabHead(fileName));
@@ -106,6 +115,7 @@ public class PersianPanel extends JPanel implements MouseListener {
             jTabbedPane.setSelectedIndex(index);
         }
     }
+
     private int getTabIndex(String fileName, String filePath) {
         int i;
         for (i = 0; i <= jTabbedPane.getTabCount() - 1; i++)//To find current index of tab
@@ -119,6 +129,7 @@ public class PersianPanel extends JPanel implements MouseListener {
             return i;
         return -1;
     }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 

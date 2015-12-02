@@ -21,7 +21,6 @@ public class PersianTags extends LanguageTags {
         mTableModel.addColumn("word");
         mTableModel.addColumn("generated");
         mTable.setModel(mTableModel);
-        loadTokens();
     }
 
     @Override

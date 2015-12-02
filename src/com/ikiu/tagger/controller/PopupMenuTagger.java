@@ -43,16 +43,16 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("noun")) {
 
-            Context context = rootInvoker.getContainer().getContainer();
+            TaggerView  taggerView = rootInvoker.getTaggerView();
             if(rootInvoker.getLanguage()== DatabaseManager.ENGLISH) {
-                if(context.addEnglishTag(source.getSelectedText())>0)
+                if(taggerView.addEnglishTag(source.getSelectedText())>0)
                 {
                     updateTextColor();
 
                 }
             }
             else if(rootInvoker.getLanguage()== DatabaseManager.PERSIAN) {
-                if(context.addPersianTag(source.getSelectedText())>0)
+                if(taggerView.addPersianTag(source.getSelectedText())>0)
                 {
                     updateTextColor();
 

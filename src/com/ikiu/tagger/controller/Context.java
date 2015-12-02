@@ -8,10 +8,9 @@ package com.ikiu.tagger.controller;
  * and open the template in the editor.
  */
 
-import com.ikiu.tagger.model.DatabaseManager;
+import com.ikiu.tagger.model.WordsTreeManager;
 
 import java.awt.BorderLayout;
-import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -28,6 +27,10 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
     private ProjectExplorer projectExplorer;
 
     public static void main(String args[]) {
+        WordsTreeManager wordsTreeManager = WordsTreeManager.getInstance();
+        wordsTreeManager.createEnglishTree();
+        wordsTreeManager.createPersianTree();
+
         Context context = new Context();
 
         context.setLayout(new BorderLayout());
@@ -48,6 +51,9 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
         context.setSize(600, 700);
         context.setExtendedState(MAXIMIZED_BOTH);
 
+//        DatabaseManager databaseManager = new DatabaseManager();
+//        databaseManager.deleteTables();
+
 
     }
 
@@ -63,13 +69,10 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
         this.currentPanel = currentPanel;
     }
 
-    public void refreshTags(Vector<DatabaseManager.TokenTableRow> tokenTableRows) {
-//        ((TaggerView)getContentPane()).getTaggerBottomBar().
-    }
-
-
     @Override
-    public void onRightClickListener() {
+    public void onRightClickListener(String action, String path) {
+        if (action.equals("edit"))
+            getCurrentPanel().setTextAreaContent(path);
 
     }
 
@@ -77,21 +80,9 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
     public void treeNodeDoubleClickListener(String path, boolean isFromTagger) {
         if (isFromTagger) {
             getCurrentPanel().showTaggerTab(path);
-//            if (getCurrentPanel() instanceof EnglishPanel)
-//                ((EnglishPanel) getCurrentPanel()).setTextPaneContent(path, DatabaseManager.ENGLISH);
-//            else if (getCurrentPanel() instanceof PersianPanel)
-//                ((PersianPanel) getCurrentPanel()).setTextPaneContent(path, DatabaseManager.PERSIAN);
         } else
             getCurrentPanel().setTextAreaContent(path);
 
-    }
-
-    public int addEnglishTag(String source) {
-        return ((TaggerView) getContentPane()).getTaggerBottomBar().addEnglishTag(source);
-    }
-
-    public int addPersianTag(String source) {
-        return ((TaggerView) getContentPane()).getTaggerBottomBar().addPersianTag(source);
     }
 }
 

@@ -1,11 +1,14 @@
 package com.ikiu.tagger.controller;
 
 import com.ikiu.tagger.model.DatabaseManager;
+import com.ikiu.tagger.model.WordsTreeManager;
+import com.ikiu.tagger.model.WordsTreeNode;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Vector;
 
 import javax.swing.JComponent;
@@ -23,73 +26,89 @@ import javax.swing.text.StyledDocument;
 public class TaggerContentTab extends MainContentTab implements MouseListener {
 
     private JPopupMenu popupMenu;
-    private MainContent container;
+    private TaggerView taggerView;
     int language;
-    MainContentTabListener listener;
-    Vector<DatabaseManager.TokenTableRow> tokenTableRows;
+    WordsTreeNode treeRoot;
+    Vector<DatabaseManager.TokenTableRow> tokenList;
+    char[] wordSplitters = new char[]{' ', '.', ',', '?', '؟', '(', ')', '[', ']', '!', '{', '}', '\'', '\"'};
 
-    public TaggerContentTab(String filesystemPath,int language, MainContentTabListener listener) {
+    public TaggerContentTab(String filesystemPath, int language, TaggerView taggerView) {
         super(filesystemPath);
-        this.listener = listener;
-//        this.container = container;
+        this.taggerView = taggerView;
         this.language = language;
+        tokenList = new Vector<>();
         textPane.addMouseListener(this);
+        if(language == DatabaseManager.PERSIAN)
+        {
+            Locale persianLocale= new Locale("fa","IR");
+            textPane.applyComponentOrientation(ComponentOrientation.getOrientation(persianLocale));
+        }
     }
 
-    public MainContent getContainer()
-    {
-        return container;
+    public TaggerView getTaggerView() {
+        return taggerView;
     }
 
     public int getLanguage() {
         return language;
     }
 
-    private DatabaseManager.TokenTableRow findToken(String word) {
-        Iterator<DatabaseManager.TokenTableRow> iterator = tokenTableRows.iterator();
-        while (iterator.hasNext()) {
-            DatabaseManager.TokenTableRow row = iterator.next();
-            if (row.getWord().equals(word))
-                return row;
-        }
-        return null;
+    public Vector<DatabaseManager.TokenTableRow> getTokenList() {
+        return tokenList;
+    }
+
+    private DatabaseManager.TokenTableRow findToken(int language, String word) {
+        WordsTreeManager wordsTreeManager = WordsTreeManager.getInstance();
+        if (language == DatabaseManager.ENGLISH)
+            return wordsTreeManager.searchEnglishTree(word);
+        return wordsTreeManager.searchPersianTree(word);
     }
 
     public void setTaggerText(int language) {
-        DatabaseManager databaseManager = new DatabaseManager();
-        if (language == DatabaseManager.ENGLISH)
-            tokenTableRows = databaseManager.getEnglishTokens();
-        else
-            tokenTableRows = databaseManager.getPersianTokens();
 
         StyledDocument document = textPane.getStyledDocument();
-        String[] words = olContent.split("\\W+");
+        int cursor = 0;
         Style wordStyle = textPane.getStyle(StyleContext.DEFAULT_STYLE);
 
-        Vector<DatabaseManager.TokenTableRow> tokenList = new Vector<>();
-        for (int i = 0; i < words.length; ++i) {
+        while (cursor < olContent.length()) {
+
+            int index = getFirstSplitterIndex(olContent, cursor);
+            if (index == Integer.MAX_VALUE)
+                index = olContent.length();
+            String word = olContent.substring(cursor, index);
             try {
-                DatabaseManager.TokenTableRow row = findToken(words[i]);
+                DatabaseManager.TokenTableRow row = findToken(language, word);
                 if (row != null) {
                     wordStyle.addAttribute(StyleConstants.Foreground, new ColorUIResource(Color.green));
-                    document.insertString(document.getLength(), words[i], wordStyle);
                     if (tokenList.indexOf(row) == -1)
                         tokenList.add(row);
                 } else {
                     wordStyle.addAttribute(StyleConstants.Foreground, new ColorUIResource(Color.red));
-                    document.insertString(document.getLength(), words[i], wordStyle);
                 }
+                document.insertString(document.getLength(), word, wordStyle);
 
-                if (i != words.length - 1) {
-                    wordStyle.addAttribute(StyleConstants.Foreground, new ColorUIResource(Color.white));
-                    document.insertString(document.getLength(), " ", wordStyle);
+                if (index != olContent.length()) {
+                    if (olContent.charAt(index) == ' ')
+                        wordStyle.addAttribute(StyleConstants.Foreground, new ColorUIResource(Color.white));
+                    else
+                        wordStyle.addAttribute(StyleConstants.Foreground, new ColorUIResource(Color.black));
+                    document.insertString(document.getLength(), String.valueOf(olContent.charAt(index)), wordStyle);
                 }
             } catch (BadLocationException e) {
                 e.printStackTrace();
             }
+            cursor = index + 1;
         }
-        if (listener != null)
-            listener.onContentChangeListener(tokenList);
+    }
+
+    int getFirstSplitterIndex(String content, int fromIndex) {
+        int index = Integer.MAX_VALUE;
+        for (int i = 0; i < wordSplitters.length; ++i) {
+            int find = content.indexOf(wordSplitters[i], fromIndex);
+            if (find != -1 && find < index)
+                index = find;
+        }
+        return index;
     }
 
     @Override
@@ -99,8 +118,7 @@ public class TaggerContentTab extends MainContentTab implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.isPopupTrigger() && textPane.getSelectedText()!=null)
-        {
+        if (e.isPopupTrigger() && textPane.getSelectedText() != null) {
             popupMenu = new PopupMenuTagger(this, textPane);
             popupMenu.show((JComponent) e.getSource(), e.getX(), e.getY());
         }

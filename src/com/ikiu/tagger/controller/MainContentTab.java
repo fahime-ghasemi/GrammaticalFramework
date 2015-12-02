@@ -46,7 +46,6 @@ public class MainContentTab extends JScrollPane {
         getViewport().add(textPane);
         //--
         try {
-
             InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(new File(filesystemPath)), "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             StringBuilder fileContent = new StringBuilder();

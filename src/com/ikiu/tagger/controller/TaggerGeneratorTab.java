@@ -1,13 +1,9 @@
 package com.ikiu.tagger.controller;
 
 import com.ikiu.tagger.model.DatabaseManager;
+import com.ikiu.tagger.util.ConfigurationTask;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.ScrollPane;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -24,16 +20,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Vector;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
@@ -58,8 +45,8 @@ public class TaggerGeneratorTab extends JPanel {
     public String getTemplate() {
         return textAreaTemplate.getText();
     }
-    public JTextArea getFileTextArea ()
-    {
+
+    public JTextArea getFileTextArea() {
         return textAreaFile;
     }
 
@@ -70,45 +57,83 @@ public class TaggerGeneratorTab extends JPanel {
     public int getFilePosition() {
 
         filePosition = textAreaFile.getText().indexOf("@position");
-        textAreaFile.replaceRange("",filePosition,filePosition+8 );
+        textAreaFile.replaceRange("", filePosition, filePosition + 9);
         return filePosition;
     }
 
     private ActionListener btnBrowseActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFileChooser jFileChooser = new JFileChooser();
-            jFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            jFileChooser.setFileFilter(new FileNameExtensionFilter("GF Files", "gf"));
-            jFileChooser.setAcceptAllFileFilterUsed(false);
-            jFileChooser.setMultiSelectionEnabled(false);
-            int returnVal = jFileChooser.showOpenDialog((Component) e.getSource());
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
+            ConfigurationTask configurationTask = ConfigurationTask.getInstance();
+            JDialog dialog = new JDialog();
+            dialog.setLayout(new BorderLayout());
+            JPanel treePanel = new JPanel(new GridBagLayout());
 
-                File file = jFileChooser.getSelectedFile();
+            DefaultMutableTreeNode top = new DefaultMutableTreeNode(new ProjectTree.RootNode("Project Explorer", configurationTask.getWorkspace()), true);
+            TaggerChooser taggerChooser = new TaggerChooser(top);
+            JScrollPane jScrollPane = new JScrollPane((JTree) taggerChooser);
 
-                try {
-                    filePath = file.getPath();
-                    InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(new File(filePath)), "UTF-8");
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    StringBuilder fileContent = new StringBuilder();
-                    String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        fileContent.append(line).append("\r\n");
-                    }
-                    fileContent.toString();
-                    textAreaFile.setText(fileContent.toString());
-                    txtFile.setText(file.getPath());
-                    bufferedReader.close();
-                    inputStreamReader.close();
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.fill = GridBagConstraints.BOTH;
+            constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+            constraints.gridx = 0;
+            constraints.gridy = 0;
+            constraints.weighty = 1.0;
+            treePanel.add(jScrollPane, constraints);
+
+            JPanel toolbar = new JPanel(new FlowLayout());
+            JButton btnCancel = new JButton("Cancel");
+            btnCancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dialog.dispose();
                 }
+            });
+            JButton btnOk = new JButton("Ok");
+            btnOk.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(taggerChooser.getSelectionPath()!=null) {
+                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) taggerChooser.getSelectionPath().getLastPathComponent();
+                        ProjectTree.TreeNode userObject = (ProjectTree.TreeNode) node.getUserObject();
+                        try {
+                            filePath = userObject.getFilesystemPath();
+                            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(new File(filePath)), "UTF-8");
+                            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                            StringBuilder fileContent = new StringBuilder();
+                            String line;
+                            while ((line = bufferedReader.readLine()) != null) {
+                                fileContent.append(line).append("\r\n");
+                            }
+                            fileContent.toString();
+                            textAreaFile.setText(fileContent.toString());
+                            txtFile.setText(filePath);
+                            bufferedReader.close();
+                            inputStreamReader.close();
+                        } catch (FileNotFoundException ex) {
+                            ex.printStackTrace();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
 
+                    dialog.dispose();
+                }
+            });
+            toolbar.add(btnCancel);
+            toolbar.add(btnOk);
+            constraints.gridx = 0;
+            constraints.gridy = 1;
+            constraints.weightx = 1.0;
+            constraints.weighty = 0.1;
+            constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+            treePanel.add(toolbar, constraints);
 
-            }
+            dialog.add(treePanel);
+            dialog.pack();
+            dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
         }
     };
 
@@ -142,17 +167,17 @@ public class TaggerGeneratorTab extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if(e.isPopupTrigger()) {
+                if (e.isPopupTrigger()) {
                     JPopupMenu popupMenu = new JPopupMenu();
                     JMenuItem menuItem = new JMenuItem("Set Position");
                     menuItem.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            textAreaFile.insert("@position",textAreaFile.getCaretPosition());
+                            textAreaFile.insert("@position", textAreaFile.getCaretPosition());
                         }
                     });
                     popupMenu.add(menuItem);
-                    popupMenu.show((JComponent)e.getSource(),e.getX(), e.getY());
+                    popupMenu.show((JComponent) e.getSource(), e.getX(), e.getY());
                 }
             }
 
@@ -202,8 +227,7 @@ public class TaggerGeneratorTab extends JPanel {
 
     }
 
-    public void generate()
-    {
+    public void generate() {
         template = textAreaTemplate.getText();
 
     }

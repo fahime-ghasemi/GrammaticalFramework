@@ -26,13 +26,21 @@ import javax.swing.tree.TreePath;
 /**
  * @author Emotion
  */
-class ProjectTree extends JTree implements MouseListener {
+class ProjectTree extends JTree implements MouseListener, ConfigurationTask.ConfigurationChangeListener {
 
     private TreeNode.TreeNodeListener listener;
+    private ConfigurationTask configurationTask;
+    FolderNode coreNode;
+    DefaultMutableTreeNode coreNodeTree;
+    DefaultMutableTreeNode taggerNodeTree;
+    DefaultMutableTreeNode root;
 
     public ProjectTree(DefaultMutableTreeNode root, TreeNode.TreeNodeListener listener) {
         //Create popup menu
         super(root);
+        this.root = root;
+        configurationTask = ConfigurationTask.getInstance();
+        configurationTask.setListener(this);
         this.listener = listener;
         loadTagger(root);
         //---expand level one
@@ -48,17 +56,17 @@ class ProjectTree extends JTree implements MouseListener {
         }
         addMouseListener(this);
         //--add core to explorer
-        loadCore(root);
-    }
-
-    private void loadCore(DefaultMutableTreeNode root) {
-        FolderNode coreNode = new FolderNode("Core", "");
+        coreNode = new FolderNode("Core", "");
         coreNode.setListener(this.listener);
         coreNode.setIsCore(true);
-        DefaultMutableTreeNode coreNodeTree = new DefaultMutableTreeNode(coreNode, true);
+        coreNodeTree = new DefaultMutableTreeNode(coreNode, true);
         ((DefaultTreeModel) getModel()).insertNodeInto(coreNodeTree, root, 0);
+        loadCore();
+    }
 
-        File file = new File((new ConfigurationTask()).getCore());
+    private void loadCore() {
+
+        File file = new File(configurationTask.getCore());
         File[] allFiles = file.listFiles();
 
         for (int i = 0; allFiles != null && i < allFiles.length; ++i) {
@@ -77,7 +85,7 @@ class ProjectTree extends JTree implements MouseListener {
     }
 
     private void loadTagger(DefaultMutableTreeNode root) {
-        File file = new File((new ConfigurationTask()).getWorkspace());
+        File file = new File(configurationTask.getWorkspace());
         File[] allFiles = file.listFiles();
 
         for (int i = 0; allFiles != null && i < allFiles.length; ++i) {
@@ -87,28 +95,28 @@ class ProjectTree extends JTree implements MouseListener {
                     if (allContent[j].isDirectory() && allContent[j].getName().equals("_gf")) {
                         TreeNode treeNode = new FolderNode(allFiles[i].getName(), allFiles[i].getPath());
                         treeNode.setListener(this.listener);
-                        DefaultMutableTreeNode node = new DefaultMutableTreeNode(treeNode, true);
-                        ((DefaultTreeModel) getModel()).insertNodeInto(node, root, 0);
-                        addNodes(allContent, node, false);
+                        taggerNodeTree = new DefaultMutableTreeNode(treeNode, true);
+                        ((DefaultTreeModel) getModel()).insertNodeInto(taggerNodeTree, root, 0);
+                        addNodes(allContent, taggerNodeTree, false);
                     }
                 }
                 return;
             }
         }
         //---
-        File newsubFolder = new File((new ConfigurationTask()).getWorkspace() + "/Tagger/_gf");
+        File newsubFolder = new File(configurationTask.getWorkspace() + "/Tagger/_gf");
         newsubFolder.setWritable(true);
         newsubFolder.setReadable(true);
-        File newFolder = new File((new ConfigurationTask()).getWorkspace() + "/Tagger");
+        File newFolder = new File(configurationTask.getWorkspace() + "/Tagger");
         newFolder.setWritable(true);
         newFolder.setReadable(true);
 
         if (newFolder.mkdir() && newsubFolder.mkdir()) {
 
-            TreeNode treeNode = new FolderNode("Tagger", (new ConfigurationTask()).getWorkspace() + "/Tagger");
+            TreeNode treeNode = new FolderNode("Tagger", configurationTask.getWorkspace() + "/Tagger");
             treeNode.setListener(this.listener);
-            DefaultMutableTreeNode node1 = new DefaultMutableTreeNode(treeNode, true);
-            ((DefaultTreeModel) getModel()).insertNodeInto(node1, root, 0);
+            taggerNodeTree = new DefaultMutableTreeNode(treeNode, true);
+            ((DefaultTreeModel) getModel()).insertNodeInto(taggerNodeTree, root, 0);
         }
 
     }
@@ -164,14 +172,12 @@ class ProjectTree extends JTree implements MouseListener {
 
     private void doDoubleClick() {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.getSelectionPath().getLastPathComponent();
-        if (( (node.getUserObject())) instanceof FileNode && ((TreeNode)node.getUserObject()).isCore()) {
+        if (((node.getUserObject())) instanceof FileNode && ((TreeNode) node.getUserObject()).isCore()) {
             if (((TreeNode) (node.getUserObject())).getListener() != null)
                 ((TreeNode) (node.getUserObject())).getListener().treeNodeDoubleClickListener(((FileNode) node.getUserObject()).getFilesystemPath(), false);
-        }
-        else if (( (node.getUserObject())) instanceof FileNode && !((TreeNode)node.getUserObject()).isCore())
-        {
+        } else if (((node.getUserObject())) instanceof FileNode && !((TreeNode) node.getUserObject()).isCore()) {
             if (((TreeNode) (node.getUserObject())).getListener() != null)
-                ((TreeNode) (node.getUserObject())).getListener().treeNodeDoubleClickListener(((FileNode) node.getUserObject()).getFilesystemPath(),true);
+                ((TreeNode) (node.getUserObject())).getListener().treeNodeDoubleClickListener(((FileNode) node.getUserObject()).getFilesystemPath(), true);
         }
 
     }
@@ -215,6 +221,19 @@ class ProjectTree extends JTree implements MouseListener {
 
     }
 
+    @Override
+    public void onCoreChangeListener() {
+
+        ((DefaultTreeModel)getModel()).removeNodeFromParent(coreNodeTree);
+        loadCore();
+    }
+
+    @Override
+    public void onWorkspaceChangeListener() {
+        ((DefaultTreeModel)getModel()).removeNodeFromParent(taggerNodeTree);
+        loadTagger(root);
+    }
+
     public static class TreeNode {
         protected String name;
         protected String filesystemPath;
@@ -230,7 +249,7 @@ class ProjectTree extends JTree implements MouseListener {
         }
 
         public interface TreeNodeListener {
-            public void onRightClickListener();
+            public void onRightClickListener(String action, String path);
 
             public void treeNodeDoubleClickListener(String path, boolean isFromTagger);
         }

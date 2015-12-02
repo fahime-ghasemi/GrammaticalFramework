@@ -35,6 +35,7 @@ public class TaggerGenerator extends JDialog {
     private JButton btnCancel;
     private TaggerGeneratorTab mEnglishTab;
     private TaggerGeneratorTab mPersianTab;
+    private TaggerGeneratorTab abstractTab;
     private EnglishTags mEnglishTags;
     private PersianTags mPersianTags;
     public interface TaggerGeneratorListener
@@ -63,6 +64,8 @@ public class TaggerGenerator extends JDialog {
         tabbedPane = new JTabbedPane();
         mEnglishTab = new TaggerGeneratorTab();
         mPersianTab = new TaggerGeneratorTab();
+        abstractTab = new TaggerGeneratorTab();
+        tabbedPane.addTab("Abstract", abstractTab);
         tabbedPane.addTab("English",mEnglishTab);
         tabbedPane.addTab("Persian", mPersianTab);
         constraints.fill = GridBagConstraints.BOTH;
@@ -85,6 +88,10 @@ public class TaggerGenerator extends JDialog {
         public void actionPerformed(ActionEvent e) {
             Iterator<DatabaseManager.TokenTableRow> iterator = mEnglishTags.tokenTableRows.iterator();
             int index=-1;
+            int engPosition=mEnglishTab.getFilePosition();
+            int pesPosition=mPersianTab.getFilePosition();
+            int abstractPosition=abstractTab.getFilePosition();
+
             while (iterator.hasNext())
             {
                 index++;
@@ -104,8 +111,8 @@ public class TaggerGenerator extends JDialog {
                                 .replace("$word$", persianRow.getWord());
                         perTemplate.concat("\r\n");
                         String old = mEnglishTab.getFileTextArea().getText();
-                        mEnglishTab.getFileTextArea().insert(engTemplate, mEnglishTab.getFilePosition());
-                        mPersianTab.getFileTextArea().insert(perTemplate, mPersianTab.getFilePosition());
+                        mEnglishTab.getFileTextArea().insert(engTemplate, engPosition);
+                        mPersianTab.getFileTextArea().insert(perTemplate, pesPosition);
                         //write to file
                         try {
                             File file = new File(mEnglishTab.getFilePath());

@@ -53,27 +53,27 @@ public class PopupMenuRoot extends JPopupMenu implements ActionListener {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    File newFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText());
-                    File newsubFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText()+"/_gf");
-                    newFolder.setWritable(true);
-                    newFolder.setReadable(true);
-                    newsubFolder.setWritable(true);
-                    newsubFolder.setReadable(true);
-                    if(newFolder.mkdir() && newsubFolder.mkdir())
-                    {
-                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
-
-                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new ProjectTree.FolderNode(txtProjectName.getText(), newFolder.getPath()), true);
-                        //node.add(nodeFolder);
-                        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
-                        model.insertNodeInto(nodeFolder, (MutableTreeNode) model.getRoot(),((DefaultMutableTreeNode)model.getRoot()).getChildCount());
-                        TreePath path = new TreePath(((DefaultTreeModel)tree.getModel()).getPathToRoot(nodeFolder));
-                        //((DefaultTreeModel)tree.getModel()).nodeStructureChanged(nodeFolder);
-                        tree.scrollPathToVisible(path);
-                        tree.setSelectionPath(path);
-
-                    }
-                    fileFrame.dispose();
+//                    File newFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText());
+//                    File newsubFolder=new File((new ConfigurationTask()).getWorkspace()+txtProjectName.getText()+"/_gf");
+//                    newFolder.setWritable(true);
+//                    newFolder.setReadable(true);
+//                    newsubFolder.setWritable(true);
+//                    newsubFolder.setReadable(true);
+//                    if(newFolder.mkdir() && newsubFolder.mkdir())
+//                    {
+//                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+//
+//                        DefaultMutableTreeNode nodeFolder = new DefaultMutableTreeNode(new ProjectTree.FolderNode(txtProjectName.getText(), newFolder.getPath()), true);
+//                        //node.add(nodeFolder);
+//                        DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
+//                        model.insertNodeInto(nodeFolder, (MutableTreeNode) model.getRoot(),((DefaultMutableTreeNode)model.getRoot()).getChildCount());
+//                        TreePath path = new TreePath(((DefaultTreeModel)tree.getModel()).getPathToRoot(nodeFolder));
+//                        //((DefaultTreeModel)tree.getModel()).nodeStructureChanged(nodeFolder);
+//                        tree.scrollPathToVisible(path);
+//                        tree.setSelectionPath(path);
+//
+//                    }
+//                    fileFrame.dispose();
 
 
                 }

@@ -14,7 +14,6 @@ public class EnglishTags extends LanguageTags {
 
     public EnglishTags(DatabaseManager databaseManager, JTable table) {
         super(databaseManager, table);
-//        tokenTableRows = databaseManager.getEnglishTokens();
         mTableModel = new EnglishTableModel();
         mTableModel.addColumn("");
         mTableModel.addColumn("id");
@@ -24,7 +23,6 @@ public class EnglishTags extends LanguageTags {
         mTableModel.addColumn("generated");
         mTable.setModel(mTableModel);
         //----
-        loadTokens();
     }
 
     public static class EnglishTable extends JTable {

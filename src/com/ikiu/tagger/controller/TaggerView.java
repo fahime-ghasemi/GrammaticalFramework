@@ -44,11 +44,17 @@ public class TaggerView extends JSplitPane {
         getTaggerBottomBar().persianTags.refreshTags(tokenTableRows);
 
     }
+    public int addEnglishTag(String source) {
+        return getTaggerBottomBar().addEnglishTag(source);
+    }
 
+    public int addPersianTag(String source) {
+        return getTaggerBottomBar().addPersianTag(source);
+    }
     public void deSelectEnglishTab() {
         ((EnglishPanel)((JSplitPane)getTopComponent()).getLeftComponent()).deSelect();
     }
     public void deSelectPersianTab() {
-        ((PersianPanel)((JSplitPane)getTopComponent()).getLeftComponent()).deSelect();
+        ((PersianPanel)((JSplitPane)getTopComponent()).getRightComponent()).deSelect();
     }
 }

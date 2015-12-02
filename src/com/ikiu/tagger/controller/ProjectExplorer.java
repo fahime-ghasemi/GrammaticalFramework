@@ -17,7 +17,8 @@ public class ProjectExplorer extends JPanel{
 
     public ProjectExplorer(Context context) {
         setLayout(new BorderLayout());
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode(new ProjectTree.RootNode("Project Explorer",(new ConfigurationTask()).getWorkspace()), true);
+        ConfigurationTask configurationTask = ConfigurationTask.getInstance();
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode(new ProjectTree.RootNode("Project Explorer",configurationTask.getWorkspace()), true);
          projectTree =new ProjectTree(top,context);
         JScrollPane jScrollPane = new JScrollPane((JTree) projectTree);
         add(jScrollPane);
