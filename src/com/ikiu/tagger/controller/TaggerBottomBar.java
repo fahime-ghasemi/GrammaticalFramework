@@ -27,8 +27,6 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
 
     public TaggerBottomBar() {
         databaseManager = new DatabaseManager();
-        databaseManager.createEnglishTokenTable();
-        databaseManager.createPersianTokenTable();
         //----
         this.toolbar = new JPanel(new FlowLayout());
         btnSaveChanges = new JButton("Save Changes");
@@ -131,12 +129,12 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
         }
     };
 
-    public int addEnglishTag(String word) {
-       return englishTags.addToken(word);
+    public DatabaseManager.TokenTableRow addEnglishTag(DatabaseManager.TokenTableRow tokenTableRow) {
+       return englishTags.addToken(tokenTableRow);
     }
 
-    public int addPersianTag(String word) {
-        return persianTags.addToken(word);
+    public DatabaseManager.TokenTableRow addPersianTag(DatabaseManager.TokenTableRow  tokenTableRow) {
+        return persianTags.addToken(tokenTableRow);
     }
 
     @Override

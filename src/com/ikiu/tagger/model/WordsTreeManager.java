@@ -59,6 +59,46 @@ public class WordsTreeManager {
 
     }
 
+    public void addEnglishTag(DatabaseManager.TokenTableRow token) {
+        WordsTreeNode cursor = englishTreeRoot;
+        char[] letters = token.getWord().toLowerCase().toCharArray();
+        for (int j = 0; j < (letters.length - 1); ++j) {
+            WordsTreeNode temp = cursor.getLetters().get(letters[j]);
+            if (temp == null) {
+                temp = new WordsTreeNode();
+                cursor.getLetters().put(letters[j], temp);
+            }
+            cursor = temp;
+        }
+        WordsTreeNode contentNode = cursor.getLetters().get(letters[letters.length - 1]);
+        if (contentNode == null) {
+            contentNode = new WordsTreeNode();
+            cursor.getLetters().put(letters[letters.length - 1], contentNode);
+        }
+        contentNode.setIsTemporary(false);
+        contentNode.setContent(token);
+    }
+
+    public void addPersianTag(DatabaseManager.TokenTableRow token) {
+        WordsTreeNode cursor = persianTreeRoot;
+        char[] letters = token.getWord().toLowerCase().toCharArray();
+        for (int j = 0; j < (letters.length - 1); ++j) {
+            WordsTreeNode temp = cursor.getLetters().get(letters[j]);
+            if (temp == null) {
+                temp = new WordsTreeNode();
+                cursor.getLetters().put(letters[j], temp);
+            }
+            cursor = temp;
+        }
+        WordsTreeNode contentNode = cursor.getLetters().get(letters[letters.length - 1]);
+        if (contentNode == null) {
+            contentNode = new WordsTreeNode();
+            cursor.getLetters().put(letters[letters.length - 1], contentNode);
+        }
+        contentNode.setIsTemporary(false);
+        contentNode.setContent(token);
+    }
+
     public void createPersianTree() {
         WordsTreeNode cursor = persianTreeRoot;
         Vector<DatabaseManager.TokenTableRow> tokens = databaseManager.getPersianTokens();
@@ -92,6 +132,8 @@ public class WordsTreeManager {
             cursor = cursor.getLetters().get(letters[i]);
             if (cursor == null)
                 return null;
+            if (cursor.getContent() != null)
+                return cursor.getContent();
         }
         return cursor.getContent();
     }
@@ -103,6 +145,8 @@ public class WordsTreeManager {
             cursor = cursor.getLetters().get(letters[i]);
             if (cursor == null)
                 return null;
+            if (cursor.getContent() != null)
+                return cursor.getContent();
         }
         return cursor.getContent();
     }

@@ -11,9 +11,14 @@ package com.ikiu.tagger.controller;
 
 import com.ikiu.tagger.util.ConfigurationTask;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.text.CollationKey;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
@@ -59,7 +64,7 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
         coreNode = new FolderNode("Core", "");
         coreNode.setListener(this.listener);
         coreNode.setIsCore(true);
-        coreNodeTree = new DefaultMutableTreeNode(coreNode, true);
+        coreNodeTree = new DefaultMutableTreeNode(coreNode);
         ((DefaultTreeModel) getModel()).insertNodeInto(coreNodeTree, root, 0);
         loadCore();
     }
@@ -68,7 +73,7 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
 
         File file = new File(configurationTask.getCore());
         File[] allFiles = file.listFiles();
-
+        mergeSort(allFiles);
         for (int i = 0; allFiles != null && i < allFiles.length; ++i) {
 
             FolderNode fileNode = new FolderNode(allFiles[i].getName(), allFiles[i].getPath());
@@ -84,18 +89,61 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
         }
     }
 
+    public  void mergeSort(Comparable [ ] a)
+    {
+        Comparable[] tmp = new Comparable[a.length];
+        mergeSort(a, tmp,  0,  a.length - 1);
+    }
+
+
+    private  void mergeSort(Comparable [ ] a, Comparable [ ] tmp, int left, int right)
+    {
+        if( left < right )
+        {
+            int center = (left + right) / 2;
+            mergeSort(a, tmp, left, center);
+            mergeSort(a, tmp, center + 1, right);
+            merge(a, tmp, left, center + 1, right);
+        }
+    }
+
+
+    private  void merge(Comparable[ ] a, Comparable[ ] tmp, int left, int right, int rightEnd )
+    {
+        int leftEnd = right - 1;
+        int k = left;
+        int num = rightEnd - left + 1;
+
+        while(left <= leftEnd && right <= rightEnd)
+            if(a[left].compareTo(a[right]) > 0)
+                tmp[k++] = a[left++];
+            else
+                tmp[k++] = a[right++];
+
+        while(left <= leftEnd)    // Copy rest of first half
+            tmp[k++] = a[left++];
+
+        while(right <= rightEnd)  // Copy rest of right half
+            tmp[k++] = a[right++];
+
+        // Copy tmp back
+        for(int i = 0; i < num; i++, rightEnd--)
+            a[rightEnd] = tmp[rightEnd];
+    }
+
     private void loadTagger(DefaultMutableTreeNode root) {
         File file = new File(configurationTask.getWorkspace());
         File[] allFiles = file.listFiles();
-
+        mergeSort(allFiles);
         for (int i = 0; allFiles != null && i < allFiles.length; ++i) {
             if (allFiles[i].isDirectory() && allFiles[i].getName().equals("Tagger")) {
                 File[] allContent = allFiles[i].listFiles();
+                mergeSort(allContent);
                 for (int j = 0; allContent != null && j < allContent.length; ++j) {
                     if (allContent[j].isDirectory() && allContent[j].getName().equals("_gf")) {
                         TreeNode treeNode = new FolderNode(allFiles[i].getName(), allFiles[i].getPath());
                         treeNode.setListener(this.listener);
-                        taggerNodeTree = new DefaultMutableTreeNode(treeNode, true);
+                        taggerNodeTree = new DefaultMutableTreeNode(treeNode);
                         ((DefaultTreeModel) getModel()).insertNodeInto(taggerNodeTree, root, 0);
                         addNodes(allContent, taggerNodeTree, false);
                     }
@@ -115,7 +163,8 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
 
             TreeNode treeNode = new FolderNode("Tagger", configurationTask.getWorkspace() + "/Tagger");
             treeNode.setListener(this.listener);
-            taggerNodeTree = new DefaultMutableTreeNode(treeNode, true);
+            taggerNodeTree = new DefaultMutableTreeNode(treeNode);
+//            taggerNodeTree.setAllowsChildrendren(true);
             ((DefaultTreeModel) getModel()).insertNodeInto(taggerNodeTree, root, 0);
         }
 
@@ -126,6 +175,7 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
     }
 
     private void addNodes(File[] content, DefaultMutableTreeNode node, boolean isCore) {
+        mergeSort(content);
         for (int i = 0; content != null && i < content.length; ++i) {
             if (!content[i].getName().equals("_gf")) {
                 TreeNode treeNode = null;
@@ -138,7 +188,8 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
                     treeNode.setIsCore(true);
 
                 treeNode.setListener(this.listener);
-                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(treeNode, true);
+                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(treeNode);
+//                newNode.setAllowsChildren(true);
                 if (content[i].listFiles() != null)
                     addNodes(content[i].listFiles(), newNode, isCore);
                 ((DefaultTreeModel) getModel()).insertNodeInto(newNode, node, 0);
@@ -161,13 +212,7 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
     @Override
     public void mousePressed(MouseEvent e) {
 
-        if (e.isPopupTrigger()) {
 
-            setSelectionPath(getPathForLocation(e.getX(), e.getY()));
-            showPopup(e);
-
-        } else if (e.getClickCount() == 2)
-            doDoubleClick();
     }
 
     private void doDoubleClick() {
@@ -186,15 +231,15 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
         JPopupMenu popupMenu = null;
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) this.getSelectionPath().getLastPathComponent();
         TreeNode treeNode = (TreeNode) node.getUserObject();
-        if (treeNode instanceof FolderNode && !treeNode.isCore()) {
-            if (treeNode.getName().equals("Tagger"))
+        if (treeNode instanceof FolderNode /*&& !treeNode.isCore()*/) {
+            if (treeNode.getName().equals("Tagger") || treeNode.getName().equals("Core"))
                 popupMenu = new PopupMenuTaggerFolder(this);
             else
                 popupMenu = new PopupMenuFolder(this);
         } else if (((TreeNode) (node.getUserObject())) instanceof RootNode) {
 //            popupMenu = new PopupMenuRoot(this);
         } else {
-            if (!treeNode.isCore())
+//            if (!treeNode.isCore())
                 popupMenu = new PopupMenuFile(this);
         }
         //----
@@ -204,7 +249,13 @@ class ProjectTree extends JTree implements MouseListener, ConfigurationTask.Conf
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (e.getButton()==MouseEvent.BUTTON3) {
 
+            setSelectionPath(getPathForLocation(e.getX(), e.getY()));
+            showPopup(e);
+
+        } else if (e.getClickCount() == 2)
+            doDoubleClick();
     }
 
     @Override

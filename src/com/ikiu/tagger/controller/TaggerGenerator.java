@@ -38,15 +38,17 @@ public class TaggerGenerator extends JDialog {
     private TaggerGeneratorTab abstractTab;
     private EnglishTags mEnglishTags;
     private PersianTags mPersianTags;
-    public interface TaggerGeneratorListener
-    {
+
+    public interface TaggerGeneratorListener {
         public void onGenerateComplete();
     }
+
     private TaggerGeneratorListener listener;
+
     public TaggerGenerator(EnglishTags englishTags, PersianTags persianTags) throws HeadlessException {
         mEnglishTags = englishTags;
         mPersianTags = persianTags;
-        panel=new JPanel(new GridBagLayout());
+        panel = new JPanel(new GridBagLayout());
         toolbar = new JPanel(new FlowLayout());
         btnCancel = new JButton("Cancel");
         btnOk = new JButton("Ok");
@@ -59,14 +61,14 @@ public class TaggerGenerator extends JDialog {
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         constraints.weightx = 1.0;
-        panel.add(toolbar,constraints);
+        panel.add(toolbar, constraints);
 
         tabbedPane = new JTabbedPane();
         mEnglishTab = new TaggerGeneratorTab();
         mPersianTab = new TaggerGeneratorTab();
         abstractTab = new TaggerGeneratorTab();
         tabbedPane.addTab("Abstract", abstractTab);
-        tabbedPane.addTab("English",mEnglishTab);
+        tabbedPane.addTab("English", mEnglishTab);
         tabbedPane.addTab("Persian", mPersianTab);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -79,42 +81,56 @@ public class TaggerGenerator extends JDialog {
         setContentPane(panel);
 
     }
-    public void setListener(TaggerGeneratorListener listener)
-    {
+
+    public void setListener(TaggerGeneratorListener listener) {
         this.listener = listener;
     }
+
     private ActionListener btnSaveActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             Iterator<DatabaseManager.TokenTableRow> iterator = mEnglishTags.tokenTableRows.iterator();
-            int index=-1;
-            int engPosition=mEnglishTab.getFilePosition();
-            int pesPosition=mPersianTab.getFilePosition();
-            int abstractPosition=abstractTab.getFilePosition();
+            int index = -1;
+            int engPosition = mEnglishTab.getFilePosition();
+            int pesPosition = mPersianTab.getFilePosition();
+            int abstractPosition = abstractTab.getFilePosition();
+            String old = mEnglishTab.getFileTextArea().getText();
 
-            while (iterator.hasNext())
-            {
+            while (iterator.hasNext()) {
                 index++;
                 DatabaseManager.TokenTableRow row = iterator.next();
-                if(row.isReadyForGenerate())
-                {
-                    String engTemplate=mEnglishTab.getTemplate();
-                    engTemplate = engTemplate.replace("$engword$",row.getWord().toLowerCase())
-                               .replace("$word$",row.getWord());
-                    engTemplate.concat("\r\n");
+                if (row.isReadyForGenerate()) {
+                    int meaningID = row.getMeaning();
+                    DatabaseManager.TokenTableRow persianRow = getPersianTableRow(meaningID);
+                    if (persianRow != null) {
 
-                    int meaningID=row.getMeaning();
-                    DatabaseManager.TokenTableRow persianRow=getPersianTableRow(meaningID);
-                    if(persianRow!=null) {
+                        String engTemplate = mEnglishTab.getTemplate();
+                        engTemplate = engTemplate.replace("$engword$", row.getWord().toLowerCase())
+                                .replace("$word$", row.getWord());
+                        engTemplate.concat("\r\n");
+
                         String perTemplate = mPersianTab.getTemplate();
                         perTemplate = perTemplate.replace("$engword$", row.getWord().toLowerCase())
                                 .replace("$word$", persianRow.getWord());
                         perTemplate.concat("\r\n");
-                        String old = mEnglishTab.getFileTextArea().getText();
+
+                        String abstractTemplate = abstractTab.getTemplate();
+                        abstractTemplate = abstractTemplate.replace("$engword$", row.getWord().toLowerCase());
+                        abstractTemplate.concat("\r\n");
+
                         mEnglishTab.getFileTextArea().insert(engTemplate, engPosition);
                         mPersianTab.getFileTextArea().insert(perTemplate, pesPosition);
+                        abstractTab.getFileTextArea().insert(abstractTemplate, abstractPosition);
                         //write to file
                         try {
+                            File absFile = new File(abstractTab.getFilePath());
+                            FileWriter absFileWriter = new FileWriter(absFile);
+                            BufferedWriter absBufferedWriter = new BufferedWriter(absFileWriter);
+                            absBufferedWriter.write(abstractTab.getFileTextArea().getText());
+                            absBufferedWriter.close();
+                            absFileWriter.close();
+
+                            //---
                             File file = new File(mEnglishTab.getFilePath());
                             FileWriter fileWriter = new FileWriter(file);
                             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -122,11 +138,11 @@ public class TaggerGenerator extends JDialog {
                             bufferedWriter.close();
                             fileWriter.close();
                             row.setIsGenerated(true);
-                            mEnglishTags.mTableModel.setValueAt(true,index, 5);
+                            mEnglishTags.mTableModel.setValueAt(true, index, 5);
                             //---
                             file = new File(mPersianTab.getFilePath());
-                            FileWriter  perFileWriter = new FileWriter(file);
-                            BufferedWriter  perBufferedWriter = new BufferedWriter(perFileWriter);
+                            FileWriter perFileWriter = new FileWriter(file);
+                            BufferedWriter perBufferedWriter = new BufferedWriter(perFileWriter);
                             perBufferedWriter.write(mPersianTab.getFileTextArea().getText());
                             perBufferedWriter.close();
                             perFileWriter.close();
@@ -144,7 +160,7 @@ public class TaggerGenerator extends JDialog {
                             try {
                                 FileWriter fileWriter = new FileWriter(file);
                                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                                bufferedWriter.write(mEnglishTab.getFileTextArea().getText());
+                                bufferedWriter.write(old);
                                 bufferedWriter.close();
                                 fileWriter.close();
                                 row.setIsGenerated(false);
@@ -155,41 +171,40 @@ public class TaggerGenerator extends JDialog {
                     }
                 }
             }
-            if(listener!=null)
+
+            if (listener != null)
                 listener.onGenerateComplete();
             dispose();
 
         }
     };
 
-    private int getRowIndex(int id)
-    {
-        for (int i=0;i<mPersianTags.mTableModel.getRowCount();++i) {
-            if(Integer.valueOf(mPersianTags.mTableModel.getValueAt(i,0).toString())==id)
+    private int getRowIndex(int id) {
+        for (int i = 0; i < mPersianTags.mTableModel.getRowCount(); ++i) {
+            if (Integer.valueOf(mPersianTags.mTableModel.getValueAt(i, 0).toString()) == id)
                 return i;
         }
         return -1;
     }
-    private DatabaseManager.TokenTableRow getPersianTableRow (int id)
-    {
-        Iterator<DatabaseManager.TokenTableRow > iterator = mPersianTags.tokenTableRows.iterator();
-        while (iterator.hasNext())
-        {
+
+    private DatabaseManager.TokenTableRow getPersianTableRow(int id) {
+        Iterator<DatabaseManager.TokenTableRow> iterator = mPersianTags.tokenTableRows.iterator();
+        while (iterator.hasNext()) {
             DatabaseManager.TokenTableRow row = iterator.next();
-            if(row.getId() ==id)
+            if (row.getId() == id)
                 return row;
         }
         return null;
     }
-    public void display()
-    {
+
+    public void display() {
         pack();
         setModalityType(ModalityType.APPLICATION_MODAL);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
-    class TableRowCode
-    {
+
+    class TableRowCode {
         private String englishCode;
         private int englishIndex;
         private String persianCode;

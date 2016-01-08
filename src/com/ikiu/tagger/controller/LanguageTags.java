@@ -71,11 +71,9 @@ public class LanguageTags implements MouseListener {
         return scrollPane;
     }
 
-    public int addToken(String word) {
-        DatabaseManager.TokenTableRow tokenTableRow = new DatabaseManager.TokenTableRow();
+    public DatabaseManager.TokenTableRow addToken(DatabaseManager.TokenTableRow tokenTableRow) {
         int insertedId = 0;
-        tokenTableRow.setWord(word);
-        tokenTableRow.setType("noun");
+        tokenTableRow.setId(insertedId);
         if (this.getClass().getSimpleName().equals("EnglishTags"))
             insertedId = databaseManager.insertLanguageToken(DatabaseManager.ENGLISH, tokenTableRow);
         else
@@ -88,7 +86,7 @@ public class LanguageTags implements MouseListener {
             mTableModel.addRow(newRow);
             tokenTableRows.add(tokenTableRow);
         }
-        return insertedId;
+        return tokenTableRow;
     }
 
     public void loadTokens() {
@@ -110,7 +108,7 @@ public class LanguageTags implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.isPopupTrigger()) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
             Point p = e.getPoint();
             int rowNumber = mTable.rowAtPoint(p);
             mTable.setRowSelectionInterval(rowNumber, rowNumber);

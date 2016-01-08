@@ -24,12 +24,9 @@ public class PersianTags extends LanguageTags {
     }
 
     @Override
-    public int addToken(String word) {
-        DatabaseManager.TokenTableRow tokenTableRow = new DatabaseManager.TokenTableRow();
+    public DatabaseManager.TokenTableRow addToken(DatabaseManager.TokenTableRow  tokenTableRow) {
         int insertedId = 0;
-        tokenTableRow.setWord(word);
-        tokenTableRow.setType("noun");
-
+        tokenTableRow.setId(insertedId);
         insertedId = databaseManager.insertLanguageToken(DatabaseManager.PERSIAN, tokenTableRow);
         if (insertedId > 0) {
 
@@ -39,7 +36,7 @@ public class PersianTags extends LanguageTags {
             mTableModel.addRow(newRow);
             tokenTableRows.add(tokenTableRow);
         }
-        return insertedId;
+        return tokenTableRow;
     }
 
     @Override

@@ -14,29 +14,56 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
+
 import org.w3c.dom.Document;
+
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by fahime on 9/10/15.
  */
 public class ConfigurationTask {
-    public static final String configurationFilePath = "src/com/ikiu/tagger/configuration.xml";
+    private String configurationFilePath;
     private String corePath;
     private String workspacePath;
     private static ConfigurationTask mInstance;
     private ConfigurationChangeListener listener;
-    public interface ConfigurationChangeListener
-    {
+
+    public interface ConfigurationChangeListener {
         public void onCoreChangeListener();
+
         public void onWorkspaceChangeListener();
     }
 
+    public void writeLog(String log) {
+        try {
+
+            File file = new File("");
+
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(log);
+            bw.close();
+
+            System.out.println("Done");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private ConfigurationTask() {
+        String path = new File("").getAbsolutePath() + File.separatorChar + "resources" + File.separatorChar + "configuration.xml";
+        this.configurationFilePath = path;
+//        writeLog(configurationFilePath);
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -45,10 +72,10 @@ public class ConfigurationTask {
             int eventType = pullParser.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 if (eventType == XmlPullParser.START_TAG && pullParser.getName().equals("workspace")) {
-                    workspacePath = pullParser.nextText();
+                    this.workspacePath = pullParser.nextText();
                 }
                 if (eventType == XmlPullParser.START_TAG && pullParser.getName().equals("core")) {
-                    corePath = pullParser.nextText();
+                    this.corePath = pullParser.nextText();
                 }
                 eventType = pullParser.next();
             }
@@ -71,16 +98,15 @@ public class ConfigurationTask {
         this.listener = listener;
     }
 
-    public void setWorkspace(String workspacePath)
-    {
-        if(this.workspacePath.equals(workspacePath))
+    public void setWorkspace(String workspacePath) {
+        if (this.workspacePath != null && this.workspacePath.equals(workspacePath))
             return;
 
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = factory.newDocumentBuilder();
             Document document = documentBuilder.parse(configurationFilePath);
-            Node node =  document.getElementsByTagName("workspace").item(0);
+            Node node = document.getElementsByTagName("workspace").item(0);
             node.setTextContent(workspacePath);
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -90,7 +116,8 @@ public class ConfigurationTask {
             transformer.transform(source, result);
 
             this.workspacePath = workspacePath;
-            this.listener.onWorkspaceChangeListener();
+            if (this.listener != null)
+                this.listener.onWorkspaceChangeListener();
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -104,22 +131,23 @@ public class ConfigurationTask {
             e.printStackTrace();
         }
     }
+
     public String getWorkspace() {
-        return workspacePath;
+        return this.workspacePath;
     }
 
     public String getCore() {
-        return corePath;
+        return this.corePath;
     }
-    public void setCore(String corePath)
-    {
-        if(this.corePath.equals(corePath))
+
+    public void setCore(String corePath) {
+        if (this.corePath != null && this.corePath.equals(corePath))
             return;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = factory.newDocumentBuilder();
             Document document = documentBuilder.parse(configurationFilePath);
-            Node node =  document.getElementsByTagName("core").item(0);
+            Node node = document.getElementsByTagName("core").item(0);
             node.setTextContent(corePath);
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -129,7 +157,8 @@ public class ConfigurationTask {
             transformer.transform(source, result);
 
             this.corePath = corePath;
-            this.listener.onCoreChangeListener();
+            if (this.listener != null)
+                this.listener.onCoreChangeListener();
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();

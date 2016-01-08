@@ -167,7 +167,7 @@ public class TaggerGeneratorTab extends JPanel {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if (e.isPopupTrigger()) {
+                if (e.getButton() == MouseEvent.BUTTON3) {
                     JPopupMenu popupMenu = new JPopupMenu();
                     JMenuItem menuItem = new JMenuItem("Set Position");
                     menuItem.addActionListener(new ActionListener() {

@@ -258,6 +258,7 @@ public class DatabaseManager {
     }
 
     public Vector<TokenTableRow> getEnglishTokens() {
+        createEnglishTokenTable();
         Connection c = null;
         Statement stmt = null;
         Vector<TokenTableRow> tokenTableRows = new Vector<TokenTableRow>();
@@ -291,6 +292,7 @@ public class DatabaseManager {
     }
 
     public Vector<TokenTableRow> getPersianTokens() {
+        createPersianTokenTable();
         Connection c = null;
         Statement stmt = null;
         Vector<TokenTableRow> tokenTableRows = new Vector<TokenTableRow>();

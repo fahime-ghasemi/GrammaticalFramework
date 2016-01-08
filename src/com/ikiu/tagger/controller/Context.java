@@ -9,6 +9,7 @@ package com.ikiu.tagger.controller;
  */
 
 import com.ikiu.tagger.model.WordsTreeManager;
+import com.ikiu.tagger.util.ConfigurationTask;
 
 import java.awt.BorderLayout;
 
@@ -31,6 +32,24 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
         wordsTreeManager.createEnglishTree();
         wordsTreeManager.createPersianTree();
 
+        ConfigurationTask configurationTask = ConfigurationTask.getInstance();
+        if (configurationTask.getCore()==null || configurationTask.getCore().equals("") || configurationTask.getWorkspace()==null || configurationTask.getWorkspace().equals("")) {
+            SettingDialog settingDialog = new SettingDialog();
+            settingDialog.addCancelButton();
+            settingDialog.addNextButton();
+            settingDialog.show();
+        } else {
+            showGUI();
+        }
+
+//        DatabaseManager databaseManager = new DatabaseManager();
+//        databaseManager.deleteTables();
+
+
+    }
+
+    public static void showGUI() {
+
         Context context = new Context();
 
         context.setLayout(new BorderLayout());
@@ -50,11 +69,6 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
         context.setVisible(true);
         context.setSize(600, 700);
         context.setExtendedState(MAXIMIZED_BOTH);
-
-//        DatabaseManager databaseManager = new DatabaseManager();
-//        databaseManager.deleteTables();
-
-
     }
 
     public void setMenu(JMenuBar menuBar) {

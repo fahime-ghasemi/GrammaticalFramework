@@ -30,7 +30,8 @@ public class TaggerContentTab extends MainContentTab implements MouseListener {
     int language;
     WordsTreeNode treeRoot;
     Vector<DatabaseManager.TokenTableRow> tokenList;
-    char[] wordSplitters = new char[]{' ', '.', ',', '?', '؟', '(', ')', '[', ']', '!', '{', '}', '\'', '\"'};
+    public WordsTreeManager wordsTreeManager;
+    char[] wordSplitters = new char[]{' ', '.', ',', '?', '؟', '(', ')', '[', ']', '!', '{', '}', '\'', '\"','\r','\n','\uFEFF'};
 
     public TaggerContentTab(String filesystemPath, int language, TaggerView taggerView) {
         super(filesystemPath);
@@ -58,7 +59,7 @@ public class TaggerContentTab extends MainContentTab implements MouseListener {
     }
 
     private DatabaseManager.TokenTableRow findToken(int language, String word) {
-        WordsTreeManager wordsTreeManager = WordsTreeManager.getInstance();
+        wordsTreeManager = WordsTreeManager.getInstance();
         if (language == DatabaseManager.ENGLISH)
             return wordsTreeManager.searchEnglishTree(word);
         return wordsTreeManager.searchPersianTree(word);
@@ -118,7 +119,7 @@ public class TaggerContentTab extends MainContentTab implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.isPopupTrigger() && textPane.getSelectedText() != null) {
+        if (e.getButton() == MouseEvent.BUTTON3 && textPane.getSelectedText() != null) {
             popupMenu = new PopupMenuTagger(this, textPane);
             popupMenu.show((JComponent) e.getSource(), e.getX(), e.getY());
         }

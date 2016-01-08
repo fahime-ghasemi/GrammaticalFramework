@@ -147,7 +147,7 @@ public class MainContent extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (!e.isPopupTrigger()) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
             if (context.getCurrentPanel() != null) {
                 context.getCurrentPanel().deSelect();
             }
