@@ -19,6 +19,7 @@ import javax.swing.text.StyledDocument;
  */
 public class PopupMenuTagger extends JPopupMenu implements ActionListener {
     private JMenuItem menuItemNoun;
+    private JMenuItem menuItemV2;
     private JMenuItem menuItemAdjective;
     private JMenuItem menuItemTag;
     private JTextPane source;
@@ -36,8 +37,14 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
         menuItemAdjective.addActionListener(this);
         menuItemAdjective.setActionCommand("adjective");
 
+        menuItemV2 = new JMenuItem("V2");
+        menuItemV2.addActionListener(this);
+        menuItemV2.setActionCommand("v2");
+
+
         menuItemTag.add(menuItemNoun);
         menuItemTag.add(menuItemAdjective);
+        menuItemTag.add(menuItemV2);
         add(menuItemTag);
         setOpaque(true);
         setLightWeightPopupEnabled(true);

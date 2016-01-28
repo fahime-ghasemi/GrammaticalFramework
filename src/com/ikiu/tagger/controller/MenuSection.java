@@ -15,6 +15,7 @@ import javax.swing.*;
 class MenuSection extends JMenuBar implements ActionListener {
     private JMenu File;
     private JMenuItem Setting;
+    private JMenuItem save;
     private Context context;
 
     public MenuSection(Context context) {
@@ -22,8 +23,11 @@ class MenuSection extends JMenuBar implements ActionListener {
         this.context = context;
         File = new JMenu("File");
         Setting = new JMenuItem("Setting");
+        save = new JMenuItem("Save");
+        File.add(save);
         File.add(Setting);
         Setting.addActionListener(this);
+        save.addActionListener(this);
         //----
         add(File);
         //----
@@ -34,10 +38,12 @@ class MenuSection extends JMenuBar implements ActionListener {
 
 
         if (e.getSource() == Setting) {
-            SettingDialog settingDialog = new SettingDialog() ;
+            SettingDialog settingDialog = new SettingDialog();
             settingDialog.addCancelButton();
             settingDialog.addSaveButton();
             settingDialog.show();
+        } else if (e.getSource() == save) {
+            context.getCurrentPanel().saveCurrentTabChanges();
         }
     }
 

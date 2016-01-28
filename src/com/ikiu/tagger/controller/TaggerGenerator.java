@@ -174,7 +174,7 @@ public class TaggerGenerator extends JDialog {
 
             if (listener != null)
                 listener.onGenerateComplete();
-            dispose();
+//            dispose();
 
         }
     };

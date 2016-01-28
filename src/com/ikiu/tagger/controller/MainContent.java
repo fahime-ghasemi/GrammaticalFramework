@@ -131,7 +131,7 @@ public class MainContent extends JPanel implements MouseListener {
                     if (st.equals(jTabbedPane.getTitleAt(i)))
                         break;
                 }
-                if (jTabbedPane.getComponentAt(i) instanceof MainContentTab && ((MainContentTab) jTabbedPane.getComponentAt(i)).isChanged()) {
+                if (/*jTabbedPane.getComponentAt(i) instanceof MainContentTab && */((MainContentTab) jTabbedPane.getComponentAt(i)).isChanged()) {
                     ((MainContentTab) jTabbedPane.getComponentAt(i)).saveChanges();
                 }
                 if (jTabbedPane.getComponentAt(i) instanceof TaggerView)
@@ -143,6 +143,14 @@ public class MainContent extends JPanel implements MouseListener {
         pnlTab.add(lblTitle);
         pnlTab.add(btnClose);
         return pnlTab;
+    }
+
+    public void saveCurrentTabChanges() {
+        int currentTabIndex = jTabbedPane.getSelectedIndex();
+        MainContentTab componentAt = (MainContentTab) jTabbedPane.getComponentAt(currentTabIndex);
+        if (componentAt.isChanged())
+            componentAt.saveChanges();
+
     }
 
     @Override

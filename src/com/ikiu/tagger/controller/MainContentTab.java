@@ -34,6 +34,7 @@ public class MainContentTab extends JScrollPane {
     protected JTextPane textPane;
     String filesystemPath;
     String olContent;
+    boolean isChanged;
 
     public MainContentTab(String filesystemPath) {
         super();
@@ -76,8 +77,8 @@ public class MainContentTab extends JScrollPane {
     public boolean isChanged() {
 
         if (!olContent.equals(textPane.getText()))
-            return true;
-        return false;
+            isChanged = true;
+        return isChanged;
     }
 
     public void saveChanges() {
@@ -87,6 +88,8 @@ public class MainContentTab extends JScrollPane {
                 BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filesystemPath));
                 bufferedWriter.write(textPane.getText());
                 bufferedWriter.close();
+                olContent = textPane.getText();
+                isChanged = false;
             } catch (IOException e) {
                 e.printStackTrace();
             }
