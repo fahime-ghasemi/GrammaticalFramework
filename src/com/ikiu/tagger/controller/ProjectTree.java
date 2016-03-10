@@ -9,16 +9,14 @@ package com.ikiu.tagger.controller;
  */
 
 
+import com.ikiu.tagger.controller.popupmenu.PopupMenuFile;
+import com.ikiu.tagger.controller.popupmenu.PopupMenuFolder;
+import com.ikiu.tagger.controller.popupmenu.PopupMenuTaggerFolder;
 import com.ikiu.tagger.util.ConfigurationTask;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.text.CollationKey;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
@@ -31,7 +29,7 @@ import javax.swing.tree.TreePath;
 /**
  * @author Emotion
  */
-class ProjectTree extends JTree implements MouseListener, ConfigurationTask.ConfigurationChangeListener {
+public class ProjectTree extends JTree implements MouseListener, ConfigurationTask.ConfigurationChangeListener {
 
     private TreeNode.TreeNodeListener listener;
     private ConfigurationTask configurationTask;

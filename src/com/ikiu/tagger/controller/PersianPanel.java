@@ -33,12 +33,16 @@ public class PersianPanel extends JPanel implements MouseListener {
                     context.refreshPersianTags(new Vector<DatabaseManager.TokenTableRow>());
                 else {
                     TaggerContentTab contentTab = (TaggerContentTab) jTabbedPane.getComponentAt(source.getSelectedIndex());
-                    context.refreshPersianTags(contentTab.getTokenList());
+                    context.refreshPersianTags(contentTab.getTokenList(""));
                 }
             }
         });
         setLayout(new BorderLayout());
         add(jTabbedPane);
+    }
+
+    public TaggerContentTab getCurrentTab() {
+        return (TaggerContentTab) jTabbedPane.getComponentAt(jTabbedPane.getSelectedIndex());
     }
 
     public boolean isSelected() {

@@ -1,5 +1,7 @@
-package com.ikiu.tagger.controller;
+package com.ikiu.tagger.controller.popupmenu;
 
+import com.ikiu.tagger.controller.TaggerContentTab;
+import com.ikiu.tagger.controller.TaggerView;
 import com.ikiu.tagger.model.DatabaseManager;
 
 import java.awt.Color;

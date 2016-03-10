@@ -22,8 +22,7 @@ public class TaggerView extends JSplitPane {
         setResizeWeight(0.6);
     }
 
-    public void setLanguagePanels(JSplitPane languagePanels)
-    {
+    public void setLanguagePanels(JSplitPane languagePanels) {
         setTopComponent(languagePanels);
     }
 
@@ -31,11 +30,11 @@ public class TaggerView extends JSplitPane {
         return taggerBottomBar;
     }
 
-    public void setTaggerBottomBar(TaggerBottomBar taggerBottomBar)
-    {
+    public void setTaggerBottomBar(TaggerBottomBar taggerBottomBar) {
         this.taggerBottomBar = taggerBottomBar;
         setBottomComponent(taggerBottomBar);
     }
+
     public void refreshEnglishTags(Vector<DatabaseManager.TokenTableRow> tokenTableRows) {
         getTaggerBottomBar().englishTags.refreshTags(tokenTableRows);
     }
@@ -44,6 +43,7 @@ public class TaggerView extends JSplitPane {
         getTaggerBottomBar().persianTags.refreshTags(tokenTableRows);
 
     }
+
     public DatabaseManager.TokenTableRow addEnglishTag(DatabaseManager.TokenTableRow tokenTableRow) {
         return getTaggerBottomBar().addEnglishTag(tokenTableRow);
     }
@@ -51,10 +51,19 @@ public class TaggerView extends JSplitPane {
     public DatabaseManager.TokenTableRow addPersianTag(DatabaseManager.TokenTableRow tokenTableRow) {
         return getTaggerBottomBar().addPersianTag(tokenTableRow);
     }
+
     public void deSelectEnglishTab() {
-        ((EnglishPanel)((JSplitPane)getTopComponent()).getLeftComponent()).deSelect();
+        ((EnglishPanel) ((JSplitPane) getTopComponent()).getLeftComponent()).deSelect();
     }
+
     public void deSelectPersianTab() {
-        ((PersianPanel)((JSplitPane)getTopComponent()).getRightComponent()).deSelect();
+        ((PersianPanel) ((JSplitPane) getTopComponent()).getRightComponent()).deSelect();
+    }
+
+    public EnglishPanel getEnglishPanel() {
+        return ((EnglishPanel) ((JSplitPane) getTopComponent()).getLeftComponent());
+    }
+    public PersianPanel getPersianPanel() {
+        return ((PersianPanel) ((JSplitPane) getTopComponent()).getRightComponent());
     }
 }

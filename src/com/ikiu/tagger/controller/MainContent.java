@@ -66,7 +66,7 @@ public class MainContent extends JPanel implements MouseListener {
     public void showTaggerTab(String path) {
         if (taggerView == null) {
             taggerView = new TaggerView();
-            taggerView.setTaggerBottomBar(new TaggerBottomBar());
+            taggerView.setTaggerBottomBar(new TaggerBottomBar(taggerView));
             english = new EnglishPanel(taggerView);
             english.setTextPaneContent(path, DatabaseManager.ENGLISH);
 

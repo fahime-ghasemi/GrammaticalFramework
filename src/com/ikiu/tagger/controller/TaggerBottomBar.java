@@ -24,10 +24,12 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
     JButton btnSaveChanges;
     JButton btnGenerator;
     JButton btnSetMeaning;
+    TaggerView taggerView;
 
-    public TaggerBottomBar() {
+    public TaggerBottomBar(TaggerView taggerView) {
         databaseManager = new DatabaseManager();
         //----
+        this.taggerView = taggerView;
         this.toolbar = new JPanel(new FlowLayout());
         btnSetMeaning = new JButton("Set Meaning");
         btnSetMeaning.addActionListener(btnSetMeaningActionListener);
@@ -92,11 +94,11 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
             String selectedType = (String) combo.getSelectedItem();
 
             if (selectedType.equals("Noun")) {
-                englishTags.refreshTags(databaseManager.getEnglishTokens("noun"));
+                taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList("noun"));
             } else if (selectedType.equals("Adjective")) {
-                englishTags.refreshTags(databaseManager.getEnglishTokens("adjective"));
+                taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList("adjective"));
             } else if (selectedType.equals("All"))
-                englishTags.refreshTags(databaseManager.getEnglishTokens(""));
+                taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList(""));
 
         }
     };
@@ -107,11 +109,11 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
             String selectedType = (String) combo.getSelectedItem();
 
             if (selectedType.equals("Noun")) {
-                persianTags.refreshTags(databaseManager.getPersianTokens("noun"));
+                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList("noun"));
             } else if (selectedType.equals("Adjective")) {
-                persianTags.refreshTags(databaseManager.getPersianTokens("adjective"));
+                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList("adjective"));
             } else if (selectedType.equals("All"))
-                persianTags.refreshTags(databaseManager.getPersianTokens(""));
+                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList(""));
         }
     };
     private ActionListener btnGeneratorActionListener = new ActionListener() {

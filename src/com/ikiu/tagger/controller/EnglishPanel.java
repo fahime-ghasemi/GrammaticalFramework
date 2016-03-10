@@ -31,12 +31,16 @@ public class EnglishPanel extends JPanel implements MouseListener {
                     context.refreshEnglishTags(new Vector<DatabaseManager.TokenTableRow>());
                 else {
                     TaggerContentTab contentTab = (TaggerContentTab) jTabbedPane.getComponentAt(source.getModel().getSelectedIndex());
-                    context.refreshEnglishTags(contentTab.getTokenList());
+                    context.refreshEnglishTags(contentTab.getTokenList(""));
                 }
             }
         });
         setLayout(new BorderLayout());
         add(jTabbedPane);
+    }
+
+    public TaggerContentTab getCurrentTab() {
+        return (TaggerContentTab) jTabbedPane.getComponentAt(jTabbedPane.getSelectedIndex());
     }
 
     public boolean isSelected() {

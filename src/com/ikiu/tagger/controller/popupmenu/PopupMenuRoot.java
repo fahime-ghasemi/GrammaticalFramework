@@ -1,4 +1,4 @@
-package com.ikiu.tagger.controller;
+package com.ikiu.tagger.controller.popupmenu;
 
 import com.ikiu.tagger.util.ConfigurationTask;
 

@@ -1,8 +1,10 @@
 package com.ikiu.tagger.controller;
 
+import com.ikiu.tagger.controller.popupmenu.PopupMenuTagger;
 import com.ikiu.tagger.model.DatabaseManager;
 import com.ikiu.tagger.model.WordsTreeManager;
 import com.ikiu.tagger.model.WordsTreeNode;
+import com.sun.javafx.fxml.expression.Expression;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -31,7 +33,7 @@ public class TaggerContentTab extends MainContentTab implements MouseListener {
     WordsTreeNode treeRoot;
     Vector<DatabaseManager.TokenTableRow> tokenList;
     public WordsTreeManager wordsTreeManager;
-    char[] wordSplitters = new char[]{' ', '.', ',', '?', '؟', '(', ')', '[', ']', '!', '{', '}', '\'', '\"','\r','\n','\uFEFF'};
+    char[] wordSplitters = new char[]{' ', '.', ',', '?', '؟', '(', ')', '[', ']', '!', '{', '}', '\'', '\"', '\r', '\n', '\uFEFF'};
 
     public TaggerContentTab(String filesystemPath, int language, TaggerView taggerView) {
         super(filesystemPath);
@@ -39,9 +41,8 @@ public class TaggerContentTab extends MainContentTab implements MouseListener {
         this.language = language;
         tokenList = new Vector<>();
         textPane.addMouseListener(this);
-        if(language == DatabaseManager.PERSIAN)
-        {
-            Locale persianLocale= new Locale("fa","IR");
+        if (language == DatabaseManager.PERSIAN) {
+            Locale persianLocale = new Locale("fa", "IR");
             textPane.applyComponentOrientation(ComponentOrientation.getOrientation(persianLocale));
         }
     }
@@ -54,8 +55,19 @@ public class TaggerContentTab extends MainContentTab implements MouseListener {
         return language;
     }
 
-    public Vector<DatabaseManager.TokenTableRow> getTokenList() {
-        return tokenList;
+    public Vector<DatabaseManager.TokenTableRow> getTokenList(String filter) {
+        Vector<DatabaseManager.TokenTableRow> list = new Vector<>();
+        if (filter.equals(""))
+            return tokenList;
+        else {
+            Iterator<DatabaseManager.TokenTableRow> iterator = tokenList.iterator();
+            while (iterator.hasNext()) {
+                DatabaseManager.TokenTableRow row = iterator.next();
+                if (row.getType().toLowerCase().equals(filter))
+                    list.add(row);
+            }
+        }
+        return list;
     }
 
     private DatabaseManager.TokenTableRow findToken(int language, String word) {
