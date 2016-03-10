@@ -46,7 +46,7 @@ public class LanguageTags implements MouseListener {
         loadTokens();
     }
 
-    public LanguageTags(DatabaseManager databaseManager,JTable table) {
+    public LanguageTags(DatabaseManager databaseManager, JTable table) {
         scrollPane = new JScrollPane();
         this.databaseManager = databaseManager;
         mTable = table;
@@ -63,6 +63,22 @@ public class LanguageTags implements MouseListener {
         return listener;
     }
 
+    public boolean isTagSelected() {
+        return mTable.getSelectedRowCount() > 0;
+    }
+
+    public int getIdOfSelectedToken() {
+        if (!isTagSelected())
+            return 0;
+        DatabaseManager.TokenTableRow row = tokenTableRows.get(mTable.getSelectedRow());
+        return row.getId();
+
+    }
+
+    public int getSelectedToken()
+    {
+        return mTable.getSelectedRow();
+    }
     public void setListener(LanguageTagListener listener) {
         this.listener = listener;
     }
@@ -90,7 +106,7 @@ public class LanguageTags implements MouseListener {
     }
 
     public void loadTokens() {
-        if(tokenTableRows==null)
+        if (tokenTableRows == null)
             return;
         Iterator<DatabaseManager.TokenTableRow> iterator = tokenTableRows.iterator();
         while (iterator.hasNext()) {
@@ -169,6 +185,7 @@ public class LanguageTags implements MouseListener {
             }
         }
     }
+
     public void updateTableBackground() {
         mTable.setDefaultRenderer(Object.class, new TableCellRenderer() {
             @Override

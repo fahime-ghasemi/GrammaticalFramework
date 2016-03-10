@@ -35,7 +35,7 @@ public class WordsTreeManager {
 
     public void createEnglishTree() {
         WordsTreeNode cursor = englishTreeRoot;
-        Vector<DatabaseManager.TokenTableRow> tokens = databaseManager.getEnglishTokens();
+        Vector<DatabaseManager.TokenTableRow> tokens = databaseManager.getEnglishTokens("");
         for (int i = 0; i < tokens.size(); ++i) {
             char[] letters = tokens.get(i).getWord().toLowerCase().toCharArray();
             for (int j = 0; j < (letters.length - 1); ++j) {
@@ -101,7 +101,7 @@ public class WordsTreeManager {
 
     public void createPersianTree() {
         WordsTreeNode cursor = persianTreeRoot;
-        Vector<DatabaseManager.TokenTableRow> tokens = databaseManager.getPersianTokens();
+        Vector<DatabaseManager.TokenTableRow> tokens = databaseManager.getPersianTokens("");
         for (int i = 0; i < tokens.size(); ++i) {
             char[] letters = tokens.get(i).getWord().toLowerCase().toCharArray();
             for (int j = 0; j < (letters.length - 1); ++j) {

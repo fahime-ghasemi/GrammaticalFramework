@@ -47,16 +47,16 @@ public class DatabaseManager {
         }
         System.out.println("Table created successfully");
     }
-    public void deleteTables()
-    {
+
+    public void deleteTables() {
         Connection c = null;
         Statement stmt = null;
         try {
             c = createConnection();
             stmt = c.createStatement();
-            String sql = "DROP TABLE "+englishTokenTable;
+            String sql = "DROP TABLE " + englishTokenTable;
             stmt.executeUpdate(sql);
-            String sql1 = "DROP TABLE "+persianTokenTable;
+            String sql1 = "DROP TABLE " + persianTokenTable;
             stmt.executeUpdate(sql1);
 
             stmt.close();
@@ -106,11 +106,9 @@ public class DatabaseManager {
             stmt = c.createStatement();
             String sql = "INSERT INTO " + persianTokenTable +
                     " (TYPE,WORD) VALUES('" + tokenTableRow.type + "','" + tokenTableRow.word + "')";
-            if(stmt.executeUpdate(sql)>0)
-            {
+            if (stmt.executeUpdate(sql) > 0) {
                 ResultSet resultSet = stmt.executeQuery("SELECT MAX(id) as id FROM " + persianTokenTable + "");
-                while (resultSet.next())
-                {
+                while (resultSet.next()) {
                     result = resultSet.getInt("id");
                     System.out.println(result);
                 }
@@ -133,11 +131,9 @@ public class DatabaseManager {
             stmt = c.createStatement();
             String sql = "INSERT INTO " + englishTokenTable +
                     " (TYPE,WORD) VALUES('" + tokenTableRow.type + "','" + tokenTableRow.word + "')";
-            if(stmt.executeUpdate(sql)>0)
-            {
+            if (stmt.executeUpdate(sql) > 0) {
                 ResultSet resultSet = stmt.executeQuery("SELECT MAX(id) as id FROM " + englishTokenTable + "");
-                while (resultSet.next())
-                {
+                while (resultSet.next()) {
                     result = resultSet.getInt("id");
                     System.out.println(result);
                 }
@@ -152,27 +148,26 @@ public class DatabaseManager {
         return result;
     }
 
-    public int updateLanguageToken(TokenTableRow tokenTableRow, int language)
-    {
-        if(language ==ENGLISH )
+    public int updateLanguageToken(TokenTableRow tokenTableRow, int language) {
+        if (language == ENGLISH)
             return updateEnglishToken(tokenTableRow);
         return updatePersianToken(tokenTableRow);
     }
-    private int updateEnglishToken(TokenTableRow tokenTableRow)
-    {
+
+    private int updateEnglishToken(TokenTableRow tokenTableRow) {
         Connection c = null;
         Statement stmt = null;
         int result = 0;
         try {
             c = createConnection();
             stmt = c.createStatement();
-            int isGenerated=0;
-            if(tokenTableRow.isGenerated())
+            int isGenerated = 0;
+            if (tokenTableRow.isGenerated())
                 isGenerated = 1;
             String sql = "UPDATE " + englishTokenTable +
-                    " SET WORD='"+tokenTableRow.getWord()+"',TYPE='"+tokenTableRow.getType()+"',MEANING="+tokenTableRow.getMeaning()
-                    +",ISGENERATED="+isGenerated
-                    +" WHERE ID="+tokenTableRow.getId();
+                    " SET WORD='" + tokenTableRow.getWord() + "',TYPE='" + tokenTableRow.getType() + "',MEANING=" + tokenTableRow.getMeaning()
+                    + ",ISGENERATED=" + isGenerated
+                    + " WHERE ID=" + tokenTableRow.getId();
             result = stmt.executeUpdate(sql);
 
             stmt.close();
@@ -183,21 +178,21 @@ public class DatabaseManager {
         }
         return result;
     }
-    private int updatePersianToken(TokenTableRow tokenTableRow)
-    {
+
+    private int updatePersianToken(TokenTableRow tokenTableRow) {
         Connection c = null;
         Statement stmt = null;
         int result = 0;
         try {
             c = createConnection();
             stmt = c.createStatement();
-            int isGenerated=0;
-            if(tokenTableRow.isGenerated())
+            int isGenerated = 0;
+            if (tokenTableRow.isGenerated())
                 isGenerated = 1;
             String sql = "UPDATE " + persianTokenTable +
-                    " SET WORD='"+tokenTableRow.getWord()+"',TYPE='"+tokenTableRow.getType()
-                    +"',ISGENERATED="+isGenerated
-                    +" WHERE ID="+tokenTableRow.getId();
+                    " SET WORD='" + tokenTableRow.getWord() + "',TYPE='" + tokenTableRow.getType()
+                    + "',ISGENERATED=" + isGenerated
+                    + " WHERE ID=" + tokenTableRow.getId();
             result = stmt.executeUpdate(sql);
 
             stmt.close();
@@ -208,8 +203,8 @@ public class DatabaseManager {
         }
         return result;
     }
-    private int deleteEnglishToken(int id)
-    {
+
+    private int deleteEnglishToken(int id) {
         Connection c = null;
         Statement stmt = null;
         int result = 0;
@@ -217,7 +212,7 @@ public class DatabaseManager {
             c = createConnection();
             stmt = c.createStatement();
             String sql = "DELETE FROM " + englishTokenTable +
-                    " WHERE ID=" +String.valueOf(id);
+                    " WHERE ID=" + String.valueOf(id);
             result = stmt.executeUpdate(sql);
             stmt.close();
             c.close();
@@ -225,20 +220,18 @@ public class DatabaseManager {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        System.out.println("result="+result);
+        System.out.println("result=" + result);
         return result;
     }
 
-    public int deleteLanguageToken(int language,int id)
-    {
-        if(language ==ENGLISH)
+    public int deleteLanguageToken(int language, int id) {
+        if (language == ENGLISH)
             return deleteEnglishToken(id);
         else
             return deletePersianToken(id);
     }
 
-    private int deletePersianToken(int id)
-    {
+    private int deletePersianToken(int id) {
         Connection c = null;
         Statement stmt = null;
         int result = 0;
@@ -246,7 +239,7 @@ public class DatabaseManager {
             c = createConnection();
             stmt = c.createStatement();
             String sql = "DELETE FROM " + persianTokenTable +
-                    " WHERE ID=" +String.valueOf(id);
+                    " WHERE ID=" + String.valueOf(id);
             result = stmt.executeUpdate(sql);
             stmt.close();
             c.close();
@@ -257,7 +250,7 @@ public class DatabaseManager {
         return result;
     }
 
-    public Vector<TokenTableRow> getEnglishTokens() {
+    public Vector<TokenTableRow> getEnglishTokens(String typeFilter) {
         createEnglishTokenTable();
         Connection c = null;
         Statement stmt = null;
@@ -266,6 +259,8 @@ public class DatabaseManager {
             c = createConnection();
             stmt = c.createStatement();
             String sql = "SELECT * FROM " + englishTokenTable;
+            if (!typeFilter.equals(""))
+                sql += " WHERE TYPE='" + typeFilter + "'";
             ResultSet resultSet = stmt.executeQuery(sql);
             while (resultSet.next()) {
                 TokenTableRow tokenTableRow = new TokenTableRow();
@@ -291,7 +286,7 @@ public class DatabaseManager {
         return tokenTableRows;
     }
 
-    public Vector<TokenTableRow> getPersianTokens() {
+    public Vector<TokenTableRow> getPersianTokens(String typeFilter) {
         createPersianTokenTable();
         Connection c = null;
         Statement stmt = null;
@@ -300,6 +295,8 @@ public class DatabaseManager {
             c = createConnection();
             stmt = c.createStatement();
             String sql = "SELECT * FROM " + persianTokenTable;
+            if (!typeFilter.equals(""))
+                sql += " WHERE TYPE='" + typeFilter + "'";
             ResultSet resultSet = stmt.executeQuery(sql);
             while (resultSet.next()) {
                 TokenTableRow tokenTableRow = new TokenTableRow();

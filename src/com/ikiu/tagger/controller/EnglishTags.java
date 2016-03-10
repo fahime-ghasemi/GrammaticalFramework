@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  * Created by fahime on 9/24/15.
@@ -25,6 +26,13 @@ public class EnglishTags extends LanguageTags {
         //----
     }
 
+    public void setMeaning(int index,int meaning)
+    {
+        DatabaseManager.TokenTableRow row = tokenTableRows.get(index);
+        row.setMeaning(meaning);
+        mTable.getModel().setValueAt(meaning,index, 4);
+        ((DefaultTableModel)mTable.getModel()).fireTableDataChanged();
+    }
     public static class EnglishTable extends JTable {
         public int selectedCount;
 

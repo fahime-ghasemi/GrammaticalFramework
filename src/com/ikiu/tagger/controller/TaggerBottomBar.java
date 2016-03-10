@@ -10,8 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,11 +23,16 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
     DatabaseManager databaseManager;
     JButton btnSaveChanges;
     JButton btnGenerator;
+    JButton btnSetMeaning;
 
     public TaggerBottomBar() {
         databaseManager = new DatabaseManager();
         //----
         this.toolbar = new JPanel(new FlowLayout());
+        btnSetMeaning = new JButton("Set Meaning");
+        btnSetMeaning.addActionListener(btnSetMeaningActionListener);
+        toolbar.add(btnSetMeaning);
+        addCombo(actionListenerEnglish);
         btnSaveChanges = new JButton("Save Changes");
         btnSaveChanges.addActionListener(btnSaveChangeActionListener);
         btnSaveChanges.setEnabled(false);
@@ -38,6 +42,8 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
         btnGenerator.setEnabled(false);
         btnGenerator.addActionListener(btnGeneratorActionListener);
         toolbar.add(btnGenerator);
+        addCombo(actionListenerPersian);
+
 //        //---
         englishTags = new EnglishTags(databaseManager, new EnglishTags.EnglishTable());
         englishTags.setListener(this);
@@ -68,6 +74,46 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
 
     }
 
+    public void addCombo(ActionListener actionListener) {
+        toolbar.add(new JLabel("Type:"));
+        JComboBox<String> combo = new JComboBox<>();
+        combo.addItem("All");
+        combo.addItem("Noun");
+        combo.addItem("Adjective");
+        combo.addActionListener(actionListener);
+
+        toolbar.add(combo);
+    }
+
+    ActionListener actionListenerEnglish = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JComboBox<String> combo = (JComboBox<String>) e.getSource();
+            String selectedType = (String) combo.getSelectedItem();
+
+            if (selectedType.equals("Noun")) {
+                englishTags.refreshTags(databaseManager.getEnglishTokens("noun"));
+            } else if (selectedType.equals("Adjective")) {
+                englishTags.refreshTags(databaseManager.getEnglishTokens("adjective"));
+            } else if (selectedType.equals("All"))
+                englishTags.refreshTags(databaseManager.getEnglishTokens(""));
+
+        }
+    };
+    ActionListener actionListenerPersian = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JComboBox<String> combo = (JComboBox<String>) e.getSource();
+            String selectedType = (String) combo.getSelectedItem();
+
+            if (selectedType.equals("Noun")) {
+                persianTags.refreshTags(databaseManager.getPersianTokens("noun"));
+            } else if (selectedType.equals("Adjective")) {
+                persianTags.refreshTags(databaseManager.getPersianTokens("adjective"));
+            } else if (selectedType.equals("All"))
+                persianTags.refreshTags(databaseManager.getPersianTokens(""));
+        }
+    };
     private ActionListener btnGeneratorActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -128,12 +174,24 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
                 btnSaveChanges.setEnabled(true);
         }
     };
+    private ActionListener btnSetMeaningActionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!englishTags.isTagSelected() || !persianTags.isTagSelected()) {
+                JOptionPane.showMessageDialog(toolbar, "Select rows first");
+                return;
+            }
+            int persianId = persianTags.getIdOfSelectedToken();
+            englishTags.setMeaning(englishTags.getSelectedToken(), persianId);
+
+        }
+    };
 
     public DatabaseManager.TokenTableRow addEnglishTag(DatabaseManager.TokenTableRow tokenTableRow) {
-       return englishTags.addToken(tokenTableRow);
+        return englishTags.addToken(tokenTableRow);
     }
 
-    public DatabaseManager.TokenTableRow addPersianTag(DatabaseManager.TokenTableRow  tokenTableRow) {
+    public DatabaseManager.TokenTableRow addPersianTag(DatabaseManager.TokenTableRow tokenTableRow) {
         return persianTags.addToken(tokenTableRow);
     }
 
@@ -148,4 +206,5 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
             btnGenerator.setEnabled(true);
         else btnGenerator.setEnabled(false);
     }
+
 }

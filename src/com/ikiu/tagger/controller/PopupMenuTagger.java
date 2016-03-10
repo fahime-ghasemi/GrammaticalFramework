@@ -21,6 +21,8 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
     private JMenuItem menuItemNoun;
     private JMenuItem menuItemV2;
     private JMenuItem menuItemAdjective;
+    private JMenuItem menuItemN2;
+
     private JMenuItem menuItemTag;
     private JTextPane source;
     private TaggerContentTab rootInvoker;
@@ -37,6 +39,10 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
         menuItemAdjective.addActionListener(this);
         menuItemAdjective.setActionCommand("adjective");
 
+        menuItemN2 = new JMenuItem("N2");
+        menuItemN2.addActionListener(this);
+        menuItemN2.setActionCommand("n2");
+
         menuItemV2 = new JMenuItem("V2");
         menuItemV2.addActionListener(this);
         menuItemV2.setActionCommand("v2");
@@ -45,6 +51,7 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
         menuItemTag.add(menuItemNoun);
         menuItemTag.add(menuItemAdjective);
         menuItemTag.add(menuItemV2);
+        menuItemTag.add(menuItemN2);
         add(menuItemTag);
         setOpaque(true);
         setLightWeightPopupEnabled(true);
