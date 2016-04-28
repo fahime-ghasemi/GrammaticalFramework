@@ -2,71 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f09fdb5-5335-410a-8d3d-98245cea347b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/json-simple-1.1.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/AbstractLexiconTab.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/Context.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/GFShell.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/httpconnection/HttpConnection.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/httpconnection/HttpResponse.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/LanguagePanel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdaterTab.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/Main.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/MainContentTab.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/PersianLexiconTab.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/PersianPanel.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$3$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$4.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$5.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/util/ConfigurationTask.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/util/ConfigurationTask.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/Context.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/Context.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishPanel$1.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishPanel$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishPanel$2.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishPanel$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishPanel.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishTags$EnglishTable.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishTags$EnglishTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishTags$EnglishTableModel.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishTags$EnglishTableModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishTags.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishTags.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/LanguageTags$1.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/LanguageTags$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/LanguageTags$PopupMenuTaggerTable.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/LanguageTags$PopupMenuTaggerTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/LanguageTags.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/LanguageTags.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MainContent$1.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MainContent$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MainContent.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MainContent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MainContentTab.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MainContentTab.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MenuSection.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MenuSection.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianPanel$2.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianPanel$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianPanel.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianTags$PersianTable.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianTags$PersianTable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianTags$PersianTableModel.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianTags$PersianTableModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianTags.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/PersianTags.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$1.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$2.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$3.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerBottomBar.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerContentTab.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerContentTab.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerGenerator$1.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerGenerator$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerGenerator$TableRowCode.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerGenerator$TableRowCode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerGenerator.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/TaggerGenerator.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.db" afterPath="$PROJECT_DIR$/test.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/util/ConfigurationTask.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/util/ConfigurationTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/Context.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/Context.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishPanel.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishTags.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishTags.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/GrammaticalFramework.xml" afterPath="$PROJECT_DIR$/.idea/libraries/GrammaticalFramework.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdater.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdater.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainContent.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainContent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainContentTab.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainContentTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MenuSection.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MenuSection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PersianPanel.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PersianPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PersianTags.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/PersianTags.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerBottomBar.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerBottomBar.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerContentTab.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerContentTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerGenerator.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerGenerator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeManager.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/configuration.xml" afterPath="$PROJECT_DIR$/resources/configuration.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GrammaticalFramework.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -108,35 +46,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WordsTreeManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WordsTreeManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43448275">
-              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
               <folding>
                 <element signature="docComment;class#WordsTreeManager#0" expanded="false" />
                 <element signature="method#WordsTreeManager#0;class#WordsTreeManager#0" expanded="false" />
                 <element signature="method#getInstance#0;class#WordsTreeManager#0" expanded="false" />
-                <element signature="method#createEnglishTree#0;class#WordsTreeManager#0" expanded="false" />
-                <element signature="e#1971#1972#0" expanded="true" />
-                <element signature="e#2009#2010#0" expanded="true" />
+                <element signature="e#2059#2060#0" expanded="true" />
+                <element signature="e#2097#2098#0" expanded="true" />
                 <element signature="method#addEnglishTag#0;class#WordsTreeManager#0" expanded="false" />
                 <element signature="method#addPersianTag#0;class#WordsTreeManager#0" expanded="false" />
-                <element signature="method#createPersianTree#0;class#WordsTreeManager#0" expanded="false" />
-                <element signature="e#4840#4841#0" expanded="true" />
-                <element signature="e#4878#4879#0" expanded="true" />
-                <element signature="method#searchEnglishTree#0;class#WordsTreeManager#0" expanded="false" />
+                <element signature="e#5054#5055#0" expanded="true" />
                 <element signature="method#searchPersianTree#0;class#WordsTreeManager#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WordsTreeNode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeNode.java">
+      <file leaf-file-name="LexiconUpdaterTab.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdaterTab.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+              <caret line="61" column="70" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TaggerBottomBar.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerBottomBar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="117" column="29" selection-start-line="117" selection-start-column="29" selection-end-line="117" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LexiconUpdater.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdater.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.481482">
+              <caret line="59" column="38" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EnglishLexiconTab.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.28965518">
+              <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -145,8 +109,8 @@
       <file leaf-file-name="LanguageTags.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="323" column="17" selection-start-line="323" selection-start-column="17" selection-end-line="323" selection-end-column="17" />
+            <state vertical-scroll-proportion="-11.925926">
+              <caret line="328" column="52" selection-start-line="328" selection-start-column="52" selection-end-line="328" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -170,6 +134,7 @@
         <option value="$PROJECT_DIR$/src/com/ikiu/translator/Context.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishPanel.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java" />
+        <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeManager.java" />
       </list>
     </option>
@@ -532,18 +497,18 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934928" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6334661" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38911024" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934928" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18671875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.10546875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48339975" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -560,7 +525,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java</url>
-          <line>312</line>
+          <line>314</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -682,15 +647,11 @@
             <element signature="docComment;class#WordsTreeManager#0" expanded="false" />
             <element signature="method#WordsTreeManager#0;class#WordsTreeManager#0" expanded="false" />
             <element signature="method#getInstance#0;class#WordsTreeManager#0" expanded="false" />
-            <element signature="method#createEnglishTree#0;class#WordsTreeManager#0" expanded="false" />
-            <element signature="e#1971#1972#0" expanded="true" />
-            <element signature="e#2009#2010#0" expanded="true" />
+            <element signature="e#2059#2060#0" expanded="true" />
+            <element signature="e#2097#2098#0" expanded="true" />
             <element signature="method#addEnglishTag#0;class#WordsTreeManager#0" expanded="false" />
             <element signature="method#addPersianTag#0;class#WordsTreeManager#0" expanded="false" />
-            <element signature="method#createPersianTree#0;class#WordsTreeManager#0" expanded="false" />
-            <element signature="e#4840#4841#0" expanded="true" />
-            <element signature="e#4878#4879#0" expanded="true" />
-            <element signature="method#searchEnglishTree#0;class#WordsTreeManager#0" expanded="false" />
+            <element signature="e#5054#5055#0" expanded="true" />
             <element signature="method#searchPersianTree#0;class#WordsTreeManager#0" expanded="false" />
           </folding>
         </state>
@@ -896,26 +857,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="323" column="17" selection-start-line="323" selection-start-column="17" selection-end-line="323" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="179" column="53" selection-start-line="179" selection-start-column="53" selection-end-line="179" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -928,25 +873,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51724136">
+          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.925926">
+          <caret line="328" column="52" selection-start-line="328" selection-start-column="52" selection-end-line="328" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43448275">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
           <folding>
             <element signature="docComment;class#WordsTreeManager#0" expanded="false" />
             <element signature="method#WordsTreeManager#0;class#WordsTreeManager#0" expanded="false" />
             <element signature="method#getInstance#0;class#WordsTreeManager#0" expanded="false" />
-            <element signature="method#createEnglishTree#0;class#WordsTreeManager#0" expanded="false" />
-            <element signature="e#1971#1972#0" expanded="true" />
-            <element signature="e#2009#2010#0" expanded="true" />
+            <element signature="e#2059#2060#0" expanded="true" />
+            <element signature="e#2097#2098#0" expanded="true" />
             <element signature="method#addEnglishTag#0;class#WordsTreeManager#0" expanded="false" />
             <element signature="method#addPersianTag#0;class#WordsTreeManager#0" expanded="false" />
-            <element signature="method#createPersianTree#0;class#WordsTreeManager#0" expanded="false" />
-            <element signature="e#4840#4841#0" expanded="true" />
-            <element signature="e#4878#4879#0" expanded="true" />
-            <element signature="method#searchEnglishTree#0;class#WordsTreeManager#0" expanded="false" />
+            <element signature="e#5054#5055#0" expanded="true" />
             <element signature="method#searchPersianTree#0;class#WordsTreeManager#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdaterTab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="70" selection-start-line="61" selection-start-column="70" selection-end-line="61" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerBottomBar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="117" column="29" selection-start-line="117" selection-start-column="29" selection-end-line="117" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.481482">
+          <caret line="59" column="38" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28965518">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -1,6 +1,7 @@
 package com.ikiu.tagger.controller;
 
 import com.ikiu.tagger.model.DatabaseManager;
+import com.ikiu.tagger.model.WordsTreeManager;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -309,17 +310,23 @@ public class LanguageTags implements MouseListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("delete")) {
+                WordsTreeManager wordsTreeManager = WordsTreeManager.getInstance();
 
                 String name = LanguageTags.this.getClass().getSimpleName();
                 if (LanguageTags.this.getClass().getSimpleName().equals("EnglishTags")) {
                     if (databaseManager.deleteLanguageToken(DatabaseManager.ENGLISH, tokenTableRows.get(rowNumber).getId()) > 0) {
                         ((DefaultTableModel) mTable.getModel()).removeRow(rowNumber);
                         tokenTableRows.remove(rowNumber);
+                        wordsTreeManager.deleteEnglishTree();
+                        wordsTreeManager.createEnglishTree();
+
                     }
                 } else {
                     if (databaseManager.deleteLanguageToken(DatabaseManager.PERSIAN, tokenTableRows.get(rowNumber).getId()) > 0) {
                         ((DefaultTableModel) mTable.getModel()).removeRow(rowNumber);
                         tokenTableRows.remove(rowNumber);
+                        wordsTreeManager.deletePersianTree();
+                        wordsTreeManager.createPersianTree();
                     }
                 }
 
