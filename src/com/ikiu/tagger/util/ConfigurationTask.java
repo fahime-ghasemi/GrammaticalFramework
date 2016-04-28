@@ -29,6 +29,7 @@ public class ConfigurationTask {
     private String configurationFilePath;
     private String corePath;
     private String workspacePath;
+    private String temp;
     private static ConfigurationTask mInstance;
     private ConfigurationChangeListener listener;
 
@@ -76,6 +77,9 @@ public class ConfigurationTask {
                 }
                 if (eventType == XmlPullParser.START_TAG && pullParser.getName().equals("core")) {
                     this.corePath = pullParser.nextText();
+                }
+                if (eventType == XmlPullParser.START_TAG && pullParser.getName().equals("temp")) {
+                    this.temp = pullParser.nextText();
                 }
                 eventType = pullParser.next();
             }
@@ -134,6 +138,44 @@ public class ConfigurationTask {
 
     public String getWorkspace() {
         return this.workspacePath;
+    }
+
+    public void setTemp(String temp) {
+        if (this.temp != null && this.temp.equals(temp))
+            return;
+
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+            Document document = documentBuilder.parse(configurationFilePath);
+            Node node = document.getElementsByTagName("temp").item(0);
+            node.setTextContent(temp);
+            // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File(configurationFilePath));
+            transformer.transform(source, result);
+
+            this.temp = temp;
+            if (this.listener != null)
+                this.listener.onWorkspaceChangeListener();
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+
+        } catch (IOException e) {
+
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getTemp() {
+        return temp;
     }
 
     public String getCore() {

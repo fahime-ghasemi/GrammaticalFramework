@@ -2,9 +2,11 @@ package com.ikiu.tagger.controller;
 
 import com.ikiu.tagger.model.DatabaseManager;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PersianTags extends LanguageTags {
 
-    public PersianTags(DatabaseManager databaseManager, JTable table) {
-        super(databaseManager, table);
+    public PersianTags(DatabaseManager databaseManager, JTable table, TaggerView taggerView) {
+        super(databaseManager, table, taggerView);
         tokenTableRows = databaseManager.getPersianTokens("");
         mTableModel = new PersianTableModel();
         mTableModel.addColumn("id");
@@ -24,7 +26,7 @@ public class PersianTags extends LanguageTags {
     }
 
     @Override
-    public DatabaseManager.TokenTableRow addToken(DatabaseManager.TokenTableRow  tokenTableRow) {
+    public DatabaseManager.TokenTableRow addToken(DatabaseManager.TokenTableRow tokenTableRow) {
         int insertedId = 0;
         tokenTableRow.setId(insertedId);
         insertedId = databaseManager.insertLanguageToken(DatabaseManager.PERSIAN, tokenTableRow);
@@ -44,7 +46,7 @@ public class PersianTags extends LanguageTags {
         Iterator<DatabaseManager.TokenTableRow> iterator = tokenTableRows.iterator();
         while (iterator.hasNext()) {
             DatabaseManager.TokenTableRow tokenTableRow = iterator.next();
-            Object[] newRow = { String.valueOf(tokenTableRow.getId()), tokenTableRow.getType(), tokenTableRow.getWord(),
+            Object[] newRow = {String.valueOf(tokenTableRow.getId()), tokenTableRow.getType(), tokenTableRow.getWord(),
                     String.valueOf(tokenTableRow.isGenerated())};
             mTableModel.addRow(newRow);
         }
@@ -90,7 +92,7 @@ public class PersianTags extends LanguageTags {
                     break;
                 }
             }
-            if (!mTableModel.getValueAt(rowEdited, column).toString().equals(value)) {
+            if (column != 3 && !mTableModel.getValueAt(rowEdited, column).toString().equals(value)) {
                 tableRow.setEditedCells(tableRow.getEditedCells() + 1);
 
             }

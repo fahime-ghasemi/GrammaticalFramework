@@ -70,6 +70,28 @@ public class TaggerContentTab extends MainContentTab implements MouseListener {
         return list;
     }
 
+    public Vector<DatabaseManager.TokenTableRow> getTokens(String word) {
+        Vector<DatabaseManager.TokenTableRow> list = new Vector<>();
+        Iterator<DatabaseManager.TokenTableRow> iterator = tokenList.iterator();
+        while (iterator.hasNext()) {
+            DatabaseManager.TokenTableRow row = iterator.next();
+            if (row.getWord().toLowerCase().contains(word))
+                list.add(row);
+        }
+        return list;
+    }
+
+    public Vector<DatabaseManager.TokenTableRow> getToken(int id) {
+        Vector<DatabaseManager.TokenTableRow> list = new Vector<>();
+        Iterator<DatabaseManager.TokenTableRow> iterator = tokenList.iterator();
+        while (iterator.hasNext()) {
+            DatabaseManager.TokenTableRow row = iterator.next();
+            if (row.getId() == id)
+                list.add(row);
+        }
+        return list;
+    }
+
     private DatabaseManager.TokenTableRow findToken(int language, String word) {
         wordsTreeManager = WordsTreeManager.getInstance();
         if (language == DatabaseManager.ENGLISH)

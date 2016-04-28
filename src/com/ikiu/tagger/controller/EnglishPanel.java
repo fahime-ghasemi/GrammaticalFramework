@@ -1,5 +1,6 @@
 package com.ikiu.tagger.controller;
 
+import com.ikiu.tagger.controller.popupmenu.PopupMenuTagger;
 import com.ikiu.tagger.model.DatabaseManager;
 
 import javax.swing.*;
@@ -35,12 +36,47 @@ public class EnglishPanel extends JPanel implements MouseListener {
                 }
             }
         });
-        setLayout(new BorderLayout());
-        add(jTabbedPane);
+        setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 0.5;
+        constraints.weighty = 1;
+        add(jTabbedPane, constraints);
+
+        constraints.fill = GridBagConstraints.NONE;
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.weightx = 0.0;
+
+        JButton setMeaning = new JButton("<>");
+        setMeaning.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                PopupMenuTagger popupMenu = new PopupMenuTagger(this, textPane);
+//                popupMenu.show((JComponent) e.getSource(), e.getX(), e.getY());
+                if (context.getEnglishPanel().getCurrentTab() == null || context.getPersianPanel().getCurrentTab() == null) {
+                    JOptionPane.showMessageDialog(setMeaning, "Language panel(s) aren't open");
+                    return;
+                }
+                if (context.getEnglishPanel().getCurrentTab().getTextPane().getSelectedText() == null ||
+                        context.getPersianPanel().getCurrentTab().getTextPane().getSelectedText() == null) {
+                    JOptionPane.showMessageDialog(setMeaning, "Select each token first");
+                    return;
+                }
+                PopupMenuTagger popupMenu = new PopupMenuTagger(context.getEnglishPanel().getCurrentTab(), context.getEnglishPanel().getCurrentTab().getTextPane(), context.getPersianPanel().getCurrentTab().getTextPane());
+                popupMenu.show(setMeaning, 0, setMeaning.getBounds().height);
+
+            }
+        });
+        add(setMeaning, constraints);
     }
 
     public TaggerContentTab getCurrentTab() {
-        return (TaggerContentTab) jTabbedPane.getComponentAt(jTabbedPane.getSelectedIndex());
+        if (jTabbedPane.getSelectedIndex() != -1)
+            return (TaggerContentTab) jTabbedPane.getComponentAt(jTabbedPane.getSelectedIndex());
+        return null;
     }
 
     public boolean isSelected() {

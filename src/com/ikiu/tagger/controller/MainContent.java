@@ -37,6 +37,10 @@ public class MainContent extends JPanel implements MouseListener {
         return jTabbedPane;
     }
 
+    public TaggerView getTaggerView() {
+        return taggerView;
+    }
+
     public void select() {
         jTabbedPane.setBorder(BorderFactory.createLineBorder(Color.blue));
         context.setCurrentPanel(this);
@@ -61,6 +65,27 @@ public class MainContent extends JPanel implements MouseListener {
         } else {
             jTabbedPane.setSelectedIndex(index);
         }
+    }
+
+    public void openTranslator() {
+        int index = -1;
+        int i;
+        for (i = 0; i <= jTabbedPane.getTabCount() - 1; i++)//To find current index of tab
+        {
+            if (jTabbedPane.getTitleAt(i).equals("Translator"))
+                break;
+        }
+        if (i != jTabbedPane.getTabCount())
+            index = i;
+        if (index == -1) {
+            com.ikiu.translator.Context contentPane = new com.ikiu.translator.Context();
+
+            jTabbedPane.addTab("Translator", contentPane);
+            jTabbedPane.setTabComponentAt(jTabbedPane.getTabCount() - 1, createTabHead("Translator"));
+            jTabbedPane.setSelectedIndex(jTabbedPane.getTabCount() - 1);
+        } else
+            jTabbedPane.setSelectedIndex(index);
+
     }
 
     public void showTaggerTab(String path) {
@@ -131,7 +156,7 @@ public class MainContent extends JPanel implements MouseListener {
                     if (st.equals(jTabbedPane.getTitleAt(i)))
                         break;
                 }
-                if (/*jTabbedPane.getComponentAt(i) instanceof MainContentTab && */((MainContentTab) jTabbedPane.getComponentAt(i)).isChanged()) {
+                if (jTabbedPane.getComponentAt(i) instanceof MainContentTab && ((MainContentTab) jTabbedPane.getComponentAt(i)).isChanged()) {
                     ((MainContentTab) jTabbedPane.getComponentAt(i)).saveChanges();
                 }
                 if (jTabbedPane.getComponentAt(i) instanceof TaggerView)

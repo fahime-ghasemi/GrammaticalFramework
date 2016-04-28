@@ -59,6 +59,10 @@ public class WordsTreeManager {
 
     }
 
+    public void deleteEnglishTree() {
+        englishTreeRoot = null;
+    }
+
     public void addEnglishTag(DatabaseManager.TokenTableRow token) {
         WordsTreeNode cursor = englishTreeRoot;
         char[] letters = token.getWord().toLowerCase().toCharArray();
@@ -123,6 +127,10 @@ public class WordsTreeManager {
             cursor = persianTreeRoot;
         }
 
+    }
+
+    public void deletePersianTree() {
+        persianTreeRoot = null;
     }
 
     public DatabaseManager.TokenTableRow searchEnglishTree(String word) {

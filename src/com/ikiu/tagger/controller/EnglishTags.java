@@ -2,9 +2,11 @@ package com.ikiu.tagger.controller;
 
 import com.ikiu.tagger.model.DatabaseManager;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -13,8 +15,8 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class EnglishTags extends LanguageTags {
 
-    public EnglishTags(DatabaseManager databaseManager, JTable table) {
-        super(databaseManager, table);
+    public EnglishTags(DatabaseManager databaseManager, JTable table,TaggerView taggerView) {
+        super(databaseManager, table,taggerView);
         mTableModel = new EnglishTableModel();
         mTableModel.addColumn("");
         mTableModel.addColumn("id");
@@ -26,13 +28,13 @@ public class EnglishTags extends LanguageTags {
         //----
     }
 
-    public void setMeaning(int index,int meaning)
-    {
+    public void setMeaning(int index, int meaning) {
         DatabaseManager.TokenTableRow row = tokenTableRows.get(index);
         row.setMeaning(meaning);
-        mTable.getModel().setValueAt(meaning,index, 4);
-        ((DefaultTableModel)mTable.getModel()).fireTableDataChanged();
+        mTable.getModel().setValueAt(meaning, index, 4);
+        ((DefaultTableModel) mTable.getModel()).fireTableDataChanged();
     }
+
     public static class EnglishTable extends JTable {
         public int selectedCount;
 
@@ -100,7 +102,7 @@ public class EnglishTags extends LanguageTags {
                     tableRow.setMeaning(Integer.valueOf(mTableModel.getValueAt(rowEdited, column).toString()));
                 }
             }
-            if (column != 0 && !mTableModel.getValueAt(rowEdited, column).toString().equals(value)) {
+            if (column != 0 && column != 5 && !mTableModel.getValueAt(rowEdited, column).toString().equals(value)) {
                 tableRow.setEditedCells(tableRow.getEditedCells() + 1);
 
             }

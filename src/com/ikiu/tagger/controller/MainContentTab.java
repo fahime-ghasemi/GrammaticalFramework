@@ -66,6 +66,10 @@ public class MainContentTab extends JScrollPane {
         }
     }
 
+    public JTextPane getTextPane() {
+        return textPane;
+    }
+
     public String getFilesystemPath() {
         return filesystemPath;
     }

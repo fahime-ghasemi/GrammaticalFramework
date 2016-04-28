@@ -23,6 +23,7 @@ import javax.swing.JSplitPane;
 public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeListener {
 
     private MainContent currentPanel;
+    private MainContent mainPanel;
     private JSplitPane mainContent;
     private JSplitPane splitPane;
     private ProjectExplorer projectExplorer;
@@ -57,6 +58,7 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
 
         MainContent mainContent = new MainContent(context);
         contentPane.setMainContent(mainContent);
+        context.mainPanel = mainContent;
         context.setCurrentPanel(mainContent);
 
         ProjectExplorer projectExplorer = new ProjectExplorer(context);
@@ -73,6 +75,10 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
 
     public void setMenu(JMenuBar menuBar) {
         setJMenuBar(menuBar);
+    }
+
+    public MainContent getMainPanel() {
+        return mainPanel;
     }
 
     public MainContent getCurrentPanel() {

@@ -31,10 +31,10 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
         //----
         this.taggerView = taggerView;
         this.toolbar = new JPanel(new FlowLayout());
+
         btnSetMeaning = new JButton("Set Meaning");
         btnSetMeaning.addActionListener(btnSetMeaningActionListener);
         toolbar.add(btnSetMeaning);
-        addCombo(actionListenerEnglish);
         btnSaveChanges = new JButton("Save Changes");
         btnSaveChanges.addActionListener(btnSaveChangeActionListener);
         btnSaveChanges.setEnabled(false);
@@ -44,12 +44,10 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
         btnGenerator.setEnabled(false);
         btnGenerator.addActionListener(btnGeneratorActionListener);
         toolbar.add(btnGenerator);
-        addCombo(actionListenerPersian);
-
 //        //---
-        englishTags = new EnglishTags(databaseManager, new EnglishTags.EnglishTable());
+        englishTags = new EnglishTags(databaseManager, new EnglishTags.EnglishTable(),taggerView);
         englishTags.setListener(this);
-        persianTags = new PersianTags(databaseManager, new PersianTags.PersianTable());
+        persianTags = new PersianTags(databaseManager, new PersianTags.PersianTable(),taggerView);
         persianTags.setListener(this);
 //        //----
         setLayout(new GridBagLayout());
@@ -76,71 +74,48 @@ public class TaggerBottomBar extends JPanel implements LanguageTags.LanguageTagL
 
     }
 
-    public void addCombo(ActionListener actionListener) {
-        toolbar.add(new JLabel("Type:"));
-        JComboBox<String> combo = new JComboBox<>();
-        combo.addItem("All");
-        combo.addItem("Noun");
-        combo.addItem("Adjective");
-        combo.addActionListener(actionListener);
-
-        toolbar.add(combo);
-    }
-
-    ActionListener actionListenerEnglish = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JComboBox<String> combo = (JComboBox<String>) e.getSource();
-            String selectedType = (String) combo.getSelectedItem();
-
-            if (selectedType.equals("Noun")) {
-                taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList("noun"));
-            } else if (selectedType.equals("Adjective")) {
-                taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList("adjective"));
-            } else if (selectedType.equals("All"))
-                taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList(""));
-
-        }
-    };
-    ActionListener actionListenerPersian = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JComboBox<String> combo = (JComboBox<String>) e.getSource();
-            String selectedType = (String) combo.getSelectedItem();
-
-            if (selectedType.equals("Noun")) {
-                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList("noun"));
-            } else if (selectedType.equals("Adjective")) {
-                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList("adjective"));
-            } else if (selectedType.equals("All"))
-                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList(""));
-        }
-    };
     private ActionListener btnGeneratorActionListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            TaggerGenerator generator = new TaggerGenerator(englishTags, persianTags);
-            generator.setListener(new TaggerGenerator.TaggerGeneratorListener() {
+//            Iterator<DatabaseManager.TokenTableRow> rowIterator = englishTags.tokenTableRows.iterator();
+//            while (rowIterator.hasNext())
+//            {
+//                DatabaseManager.TokenTableRow row = rowIterator.next();
+//                row.setIsGenerated(false);
+//                databaseManager.updateLanguageToken(row, DatabaseManager.ENGLISH);
+//            }
+//            rowIterator = persianTags.tokenTableRows.iterator();
+//            while (rowIterator.hasNext())
+//            {
+//                DatabaseManager.TokenTableRow row = rowIterator.next();
+//                row.setIsGenerated(false);
+//                databaseManager.updateLanguageToken(row, DatabaseManager.PERSIAN);
+//            }
+
+            com.ikiu.tagger.controller.lexicon.LexiconUpdater lexiconUpdater = new com.ikiu.tagger.controller.lexicon.LexiconUpdater(englishTags, persianTags);
+            lexiconUpdater.setListener(new com.ikiu.tagger.controller.lexicon.LexiconUpdater.LexiconUpdaterListener() {
                 @Override
                 public void onGenerateComplete() {
 
-                    ((DefaultTableModel) englishTags.mTable.getModel()).fireTableDataChanged();
                     Iterator<DatabaseManager.TokenTableRow> iterator = englishTags.tokenTableRows.iterator();
                     while (iterator.hasNext()) {
                         DatabaseManager.TokenTableRow row = iterator.next();
                         if (row.isReadyForGenerate())
                             databaseManager.updateLanguageToken(row, DatabaseManager.ENGLISH);
                     }
-                    ((DefaultTableModel) persianTags.mTable.getModel()).fireTableDataChanged();
+                    ((DefaultTableModel) englishTags.mTable.getModel()).fireTableDataChanged();
+
                     iterator = persianTags.tokenTableRows.iterator();
                     while (iterator.hasNext()) {
                         DatabaseManager.TokenTableRow row = iterator.next();
                         if (row.isReadyForGenerate())
                             databaseManager.updateLanguageToken(row, DatabaseManager.PERSIAN);
                     }
+                    ((DefaultTableModel) persianTags.mTable.getModel()).fireTableDataChanged();
+
                 }
             });
-            generator.display();
+            lexiconUpdater.display();
         }
     };
     private ActionListener btnSaveChangeActionListener = new ActionListener() {

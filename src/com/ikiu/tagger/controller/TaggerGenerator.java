@@ -1,5 +1,6 @@
 package com.ikiu.tagger.controller;
 
+import com.ikiu.tagger.controller.lexicon.LexiconUpdaterTab;
 import com.ikiu.tagger.model.DatabaseManager;
 
 import java.awt.FlowLayout;
@@ -8,21 +9,12 @@ import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
 
 /**
  * Created by fahime on 10/9/15.
@@ -33,9 +25,9 @@ public class TaggerGenerator extends JDialog {
     private JPanel toolbar;
     private JButton btnOk;
     private JButton btnCancel;
-    private TaggerGeneratorTab mEnglishTab;
-    private TaggerGeneratorTab mPersianTab;
-    private TaggerGeneratorTab abstractTab;
+    private LexiconUpdaterTab mEnglishTab;
+    private LexiconUpdaterTab mPersianTab;
+    private LexiconUpdaterTab abstractTab;
     private EnglishTags mEnglishTags;
     private PersianTags mPersianTags;
 
@@ -64,9 +56,9 @@ public class TaggerGenerator extends JDialog {
         panel.add(toolbar, constraints);
 
         tabbedPane = new JTabbedPane();
-        mEnglishTab = new TaggerGeneratorTab();
-        mPersianTab = new TaggerGeneratorTab();
-        abstractTab = new TaggerGeneratorTab();
+        mEnglishTab = new LexiconUpdaterTab(mEnglishTags.getTokenTableRows());
+        mPersianTab = new LexiconUpdaterTab(mEnglishTags.getTokenTableRows());
+        abstractTab = new LexiconUpdaterTab(mEnglishTags.getTokenTableRows());
         tabbedPane.addTab("Abstract", abstractTab);
         tabbedPane.addTab("English", mEnglishTab);
         tabbedPane.addTab("Persian", mPersianTab);
@@ -91,86 +83,86 @@ public class TaggerGenerator extends JDialog {
         public void actionPerformed(ActionEvent e) {
             Iterator<DatabaseManager.TokenTableRow> iterator = mEnglishTags.tokenTableRows.iterator();
             int index = -1;
-            int engPosition = mEnglishTab.getFilePosition();
-            int pesPosition = mPersianTab.getFilePosition();
-            int abstractPosition = abstractTab.getFilePosition();
-            String old = mEnglishTab.getFileTextArea().getText();
-
-            while (iterator.hasNext()) {
-                index++;
-                DatabaseManager.TokenTableRow row = iterator.next();
-                if (row.isReadyForGenerate()) {
-                    int meaningID = row.getMeaning();
-                    DatabaseManager.TokenTableRow persianRow = getPersianTableRow(meaningID);
-                    if (persianRow != null) {
-
-                        String engTemplate = mEnglishTab.getTemplate();
-                        engTemplate = engTemplate.replace("$engword$", row.getWord().toLowerCase())
-                                .replace("$word$", row.getWord());
-                        engTemplate.concat("\r\n");
-
-                        String perTemplate = mPersianTab.getTemplate();
-                        perTemplate = perTemplate.replace("$engword$", row.getWord().toLowerCase())
-                                .replace("$word$", persianRow.getWord());
-                        perTemplate.concat("\r\n");
-
-                        String abstractTemplate = abstractTab.getTemplate();
-                        abstractTemplate = abstractTemplate.replace("$engword$", row.getWord().toLowerCase());
-                        abstractTemplate.concat("\r\n");
-
-                        mEnglishTab.getFileTextArea().insert(engTemplate, engPosition);
-                        mPersianTab.getFileTextArea().insert(perTemplate, pesPosition);
-                        abstractTab.getFileTextArea().insert(abstractTemplate, abstractPosition);
-                        //write to file
-                        try {
-                            File absFile = new File(abstractTab.getFilePath());
-                            FileWriter absFileWriter = new FileWriter(absFile);
-                            BufferedWriter absBufferedWriter = new BufferedWriter(absFileWriter);
-                            absBufferedWriter.write(abstractTab.getFileTextArea().getText());
-                            absBufferedWriter.close();
-                            absFileWriter.close();
-
-                            //---
-                            File file = new File(mEnglishTab.getFilePath());
-                            FileWriter fileWriter = new FileWriter(file);
-                            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                            bufferedWriter.write(mEnglishTab.getFileTextArea().getText());
-                            bufferedWriter.close();
-                            fileWriter.close();
-                            row.setIsGenerated(true);
-                            mEnglishTags.mTableModel.setValueAt(true, index, 5);
-                            //---
-                            file = new File(mPersianTab.getFilePath());
-                            FileWriter perFileWriter = new FileWriter(file);
-                            BufferedWriter perBufferedWriter = new BufferedWriter(perFileWriter);
-                            perBufferedWriter.write(mPersianTab.getFileTextArea().getText());
-                            perBufferedWriter.close();
-                            perFileWriter.close();
-                            persianRow.setIsGenerated(true);
-                            mPersianTags.mTableModel.setValueAt(true, getRowIndex(persianRow.getId()), 3);
-                            //---
-
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                            row.setReadyForGenerate(false);
-                        }
-                        if (row.isGenerated() && !persianRow.isGenerated()) {
-                            row.setReadyForGenerate(false);
-                            File file = new File(mEnglishTab.getFilePath());
-                            try {
-                                FileWriter fileWriter = new FileWriter(file);
-                                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-                                bufferedWriter.write(old);
-                                bufferedWriter.close();
-                                fileWriter.close();
-                                row.setIsGenerated(false);
-                            } catch (IOException e2) {
-                                e2.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            }
+//            int engPosition = mEnglishTab.getFilePosition();
+//            int pesPosition = mPersianTab.getFilePosition();
+//            int abstractPosition = abstractTab.getFilePosition();
+//            String old = mEnglishTab.getFileTextArea().getText();
+//
+//            while (iterator.hasNext()) {
+//                index++;
+//                DatabaseManager.TokenTableRow row = iterator.next();
+//                if (row.isReadyForGenerate()) {
+//                    int meaningID = row.getMeaning();
+//                    DatabaseManager.TokenTableRow persianRow = getPersianTableRow(meaningID);
+//                    if (persianRow != null) {
+//
+//                        String engTemplate = mEnglishTab.getTemplate();
+//                        engTemplate = engTemplate.replace("$engword$", row.getWord().toLowerCase())
+//                                .replace("$word$", row.getWord());
+//                        engTemplate.concat("\r\n");
+//
+//                        String perTemplate = mPersianTab.getTemplate();
+//                        perTemplate = perTemplate.replace("$engword$", row.getWord().toLowerCase())
+//                                .replace("$word$", persianRow.getWord());
+//                        perTemplate.concat("\r\n");
+//
+//                        String abstractTemplate = abstractTab.getTemplate();
+//                        abstractTemplate = abstractTemplate.replace("$engword$", row.getWord().toLowerCase());
+//                        abstractTemplate.concat("\r\n");
+//
+//                        mEnglishTab.getFileTextArea().insert(engTemplate, engPosition);
+//                        mPersianTab.getFileTextArea().insert(perTemplate, pesPosition);
+//                        abstractTab.getFileTextArea().insert(abstractTemplate, abstractPosition);
+//                        //write to file
+//                        try {
+//                            File absFile = new File(abstractTab.getFilePath());
+//                            FileWriter absFileWriter = new FileWriter(absFile);
+//                            BufferedWriter absBufferedWriter = new BufferedWriter(absFileWriter);
+//                            absBufferedWriter.write(abstractTab.getFileTextArea().getText());
+//                            absBufferedWriter.close();
+//                            absFileWriter.close();
+//
+//                            //---
+//                            File file = new File(mEnglishTab.getFilePath());
+//                            FileWriter fileWriter = new FileWriter(file);
+//                            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//                            bufferedWriter.write(mEnglishTab.getFileTextArea().getText());
+//                            bufferedWriter.close();
+//                            fileWriter.close();
+//                            row.setIsGenerated(true);
+//                            mEnglishTags.mTableModel.setValueAt(true, index, 5);
+//                            //---
+//                            file = new File(mPersianTab.getFilePath());
+//                            FileWriter perFileWriter = new FileWriter(file);
+//                            BufferedWriter perBufferedWriter = new BufferedWriter(perFileWriter);
+//                            perBufferedWriter.write(mPersianTab.getFileTextArea().getText());
+//                            perBufferedWriter.close();
+//                            perFileWriter.close();
+//                            persianRow.setIsGenerated(true);
+//                            mPersianTags.mTableModel.setValueAt(true, getRowIndex(persianRow.getId()), 3);
+//                            //---
+//
+//                        } catch (IOException e1) {
+//                            e1.printStackTrace();
+//                            row.setReadyForGenerate(false);
+//                        }
+//                        if (row.isGenerated() && !persianRow.isGenerated()) {
+//                            row.setReadyForGenerate(false);
+//                            File file = new File(mEnglishTab.getFilePath());
+//                            try {
+//                                FileWriter fileWriter = new FileWriter(file);
+//                                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//                                bufferedWriter.write(old);
+//                                bufferedWriter.close();
+//                                fileWriter.close();
+//                                row.setIsGenerated(false);
+//                            } catch (IOException e2) {
+//                                e2.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 
             if (listener != null)
                 listener.onGenerateComplete();

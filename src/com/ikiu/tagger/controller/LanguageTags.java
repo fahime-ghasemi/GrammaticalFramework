@@ -2,22 +2,12 @@ package com.ikiu.tagger.controller;
 
 import com.ikiu.tagger.model.DatabaseManager;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.Iterator;
 import java.util.Vector;
 
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -26,17 +16,58 @@ import javax.swing.table.TableCellRenderer;
  * Created by fahime on 9/25/15.
  */
 public class LanguageTags implements MouseListener {
+    protected JPanel jPanel;
+    protected JPanel toolbar;
     protected JScrollPane scrollPane;
     protected JTable mTable;
-    protected DefaultTableModel mTableModel;
+    public DefaultTableModel mTableModel;
     protected DatabaseManager databaseManager;
     protected Vector<DatabaseManager.TokenTableRow> tokenTableRows;
     protected LanguageTagListener listener;
+    JTextField searchTextField;
+    protected TaggerView taggerView;
+    String search = "Id";
+    ActionListener actionListenerPersian = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JComboBox<String> combo = (JComboBox<String>) e.getSource();
+            String selectedType = (String) combo.getSelectedItem();
+
+            if (selectedType.equals("Noun")) {
+                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList("noun"));
+            } else if (selectedType.equals("Adjective")) {
+                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList("adjective"));
+            } else if (selectedType.equals("All"))
+                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList(""));
+        }
+    };
+    ActionListener actionListenerEnglish = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JComboBox<String> combo = (JComboBox<String>) e.getSource();
+            String selectedType = (String) combo.getSelectedItem();
+
+            try {
+                if (selectedType.equals("Noun")) {
+                    taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList("noun"));
+                } else if (selectedType.equals("Adjective")) {
+                    taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList("adjective"));
+                } else if (selectedType.equals("All"))
+                    taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList(""));
+            } catch (Exception ignore) {
+            }
+
+        }
+    };
 
     public interface LanguageTagListener {
         public void onTokenRowChange();
 
         public void onTableSelectedCountChange(int selectedCount);
+    }
+
+    public Vector<DatabaseManager.TokenTableRow> getTokenTableRows() {
+        return tokenTableRows;
     }
 
     public void refreshTags(Vector<DatabaseManager.TokenTableRow> rows) {
@@ -46,7 +77,73 @@ public class LanguageTags implements MouseListener {
         loadTokens();
     }
 
-    public LanguageTags(DatabaseManager databaseManager, JTable table) {
+    public LanguageTags(DatabaseManager databaseManager, JTable table, TaggerView taggerView) {
+        this.taggerView = taggerView;
+        jPanel = new JPanel(new GridBagLayout());
+        this.toolbar = new JPanel(new FlowLayout());
+        addSearchCombo();
+        searchTextField = new JTextField(8);
+        searchTextField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == 8 && searchTextField.getText().equals("")) {
+                    if (LanguageTags.this instanceof EnglishTags)
+                        taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokenList(""));
+                    else if (LanguageTags.this instanceof PersianTags)
+                        taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokenList(""));
+
+                }
+            }
+        });
+        searchTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String input = searchTextField.getText();
+                if (input.equals(""))
+                    return;
+                try {
+                    if (search.equals("Id")) {
+                        try {
+                            if (LanguageTags.this instanceof EnglishTags)
+                                taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getToken(Integer.valueOf(input)));
+                            else if (LanguageTags.this instanceof PersianTags)
+                                taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getToken(Integer.valueOf(input)));
+                        } catch (Exception ignore) {
+
+                        }
+
+                    } else if (search.equals("Word")) {
+                        if (LanguageTags.this instanceof EnglishTags)
+                            taggerView.refreshEnglishTags(taggerView.getEnglishPanel().getCurrentTab().getTokens(input));
+                        else if (LanguageTags.this instanceof PersianTags)
+                            taggerView.refreshPersianTags(taggerView.getPersianPanel().getCurrentTab().getTokens(input));
+
+                    }
+                } catch (Exception ignore) {
+
+                }
+            }
+        });
+        toolbar.add(searchTextField);
+        addCombo();
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridwidth = 2;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        jPanel.add(toolbar, constraints);
+
         scrollPane = new JScrollPane();
         this.databaseManager = databaseManager;
         mTable = table;
@@ -57,6 +154,45 @@ public class LanguageTags implements MouseListener {
         mTable.setPreferredScrollableViewportSize(mTable.getPreferredSize());
         mTable.addMouseListener(this);
 
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.weightx = 0.5;
+        constraints.weighty = 1.0;
+
+        jPanel.add(scrollPane, constraints);
+
+    }
+
+    public void addCombo() {
+        toolbar.add(new JLabel("Type:"));
+        JComboBox<String> combo = new JComboBox<>();
+        combo.addItem("All");
+        combo.addItem("Noun");
+        combo.addItem("Adjective");
+        if (this instanceof PersianTags)
+            combo.addActionListener(actionListenerPersian);
+        else if (this instanceof EnglishTags)
+            combo.addActionListener(actionListenerEnglish);
+
+        toolbar.add(combo);
+    }
+
+    public void addSearchCombo() {
+        toolbar.add(new JLabel("Search:"));
+        JComboBox<String> combo = new JComboBox<>();
+        combo.addItem("Id");
+        combo.addItem("Word");
+        combo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox<String> combo = (JComboBox<String>) e.getSource();
+                search = (String) combo.getSelectedItem();
+            }
+        });
+
+        toolbar.add(combo);
     }
 
     public LanguageTagListener getListener() {
@@ -75,16 +211,21 @@ public class LanguageTags implements MouseListener {
 
     }
 
-    public int getSelectedToken()
-    {
+    public void deselectAll() {
+
+//        mTableModel.setValueAt();
+    }
+
+    public int getSelectedToken() {
         return mTable.getSelectedRow();
     }
+
     public void setListener(LanguageTagListener listener) {
         this.listener = listener;
     }
 
     public JComponent getComponent() {
-        return scrollPane;
+        return jPanel;
     }
 
     public DatabaseManager.TokenTableRow addToken(DatabaseManager.TokenTableRow tokenTableRow) {

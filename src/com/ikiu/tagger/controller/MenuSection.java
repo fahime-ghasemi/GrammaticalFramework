@@ -16,6 +16,7 @@ class MenuSection extends JMenuBar implements ActionListener {
     private JMenu File;
     private JMenuItem Setting;
     private JMenuItem save;
+    private JMenuItem translator;
     private Context context;
 
     public MenuSection(Context context) {
@@ -24,8 +25,11 @@ class MenuSection extends JMenuBar implements ActionListener {
         File = new JMenu("File");
         Setting = new JMenuItem("Setting");
         save = new JMenuItem("Save");
+        translator = new JMenuItem("Open translator");
         File.add(save);
         File.add(Setting);
+        File.add(translator);
+        translator.addActionListener(this);
         Setting.addActionListener(this);
         save.addActionListener(this);
         //----
@@ -44,6 +48,8 @@ class MenuSection extends JMenuBar implements ActionListener {
             settingDialog.show();
         } else if (e.getSource() == save) {
             context.getCurrentPanel().saveCurrentTabChanges();
+        } else if (e.getSource() == translator) {
+            context.getMainPanel().openTranslator();
         }
     }
 

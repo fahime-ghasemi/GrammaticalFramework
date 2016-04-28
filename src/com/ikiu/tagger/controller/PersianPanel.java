@@ -42,7 +42,9 @@ public class PersianPanel extends JPanel implements MouseListener {
     }
 
     public TaggerContentTab getCurrentTab() {
-        return (TaggerContentTab) jTabbedPane.getComponentAt(jTabbedPane.getSelectedIndex());
+        if (jTabbedPane.getSelectedIndex() != -1)
+            return (TaggerContentTab) jTabbedPane.getComponentAt(jTabbedPane.getSelectedIndex());
+        return null;
     }
 
     public boolean isSelected() {
