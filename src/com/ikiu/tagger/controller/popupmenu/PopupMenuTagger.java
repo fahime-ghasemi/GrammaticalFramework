@@ -2,6 +2,7 @@ package com.ikiu.tagger.controller.popupmenu;
 
 import com.ikiu.tagger.controller.TaggerContentTab;
 import com.ikiu.tagger.controller.TaggerView;
+import com.ikiu.tagger.controller.lexicon.CustomTag;
 import com.ikiu.tagger.model.DatabaseManager;
 
 import java.awt.Color;
@@ -33,7 +34,8 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
     private JMenuItem menuItemA2V;
     private JMenuItem menuItemVS;
     private JMenuItem menuItemAV;
-    private JMenuItem menuItemV;
+    private JMenuItem menuItemRegV;
+    private JMenuItem menuItemIrregV;
     private JMenuItem menuItemPN;
     private JMenuItem menuItemV3;
     private JMenuItem menuItemVQ;
@@ -107,9 +109,13 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
         menuItemAV.addActionListener(this);
         menuItemAV.setActionCommand("av");
 
-        menuItemV = new JMenuItem("V");
-        menuItemV.addActionListener(this);
-        menuItemV.setActionCommand("v");
+        menuItemRegV = new JMenuItem("Regular Verb");
+        menuItemRegV.addActionListener(this);
+        menuItemRegV.setActionCommand("regular verb");
+
+        menuItemIrregV = new JMenuItem("Irregular Verb");
+        menuItemIrregV.addActionListener(this);
+        menuItemIrregV.setActionCommand("irregular verb");
 
         menuItemPN = new JMenuItem("PN");
         menuItemPN.addActionListener(this);
@@ -145,7 +151,8 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
         menuItemTag.add(menuItemA2V);
         menuItemTag.add(menuItemVS);
         menuItemTag.add(menuItemAV);
-        menuItemTag.add(menuItemV);
+        menuItemTag.add(menuItemRegV);
+        menuItemTag.add(menuItemIrregV);
         menuItemTag.add(menuItemPN);
         menuItemTag.add(menuItemV3);
         menuItemTag.add(menuItemVQ);
@@ -161,6 +168,16 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
         this.englishSource = englishSource;
         this.persianSource = persianSource;
         preparePopup();
+    }
+
+    private void openCustomDialog(String trimedString) {
+        CustomTag customTag = new CustomTag(trimedString);
+        customTag.display(new CustomTag.CustomListener() {
+            @Override
+            public void onOkListener(String type, String word) {
+                addToken(type, word);
+            }
+        });
     }
 
     @Override
@@ -195,30 +212,39 @@ public class PopupMenuTagger extends JPopupMenu implements ActionListener {
 
 
         } else {
-            DatabaseManager.TokenTableRow insertToken = new DatabaseManager.TokenTableRow();
-            insertToken.setType(e.getActionCommand());
             String trimedString = generalSource.getSelectedText().trim();
             trimedString = trimedString.replaceAll("\uFEFF", "");
 
-            insertToken.setWord(trimedString);
-            TaggerView taggerView = rootInvoker.getTaggerView();
-            if (rootInvoker.getLanguage() == DatabaseManager.ENGLISH) {
-                DatabaseManager.TokenTableRow row = taggerView.addEnglishTag(insertToken);
-                if (row.getId() > 0) {
-                    updateTextColor();
-                    rootInvoker.wordsTreeManager.addEnglishTag(row);
+            if(e.getActionCommand().equals("custom"))
+                openCustomDialog(trimedString);
+            else {
 
-                }
-            } else if (rootInvoker.getLanguage() == DatabaseManager.PERSIAN) {
-                DatabaseManager.TokenTableRow row = taggerView.addPersianTag(insertToken);
-                if (row.getId() > 0) {
-                    updateTextColor();
-                    rootInvoker.wordsTreeManager.addPersianTag(row);
-
-                }
+                addToken(e.getActionCommand(), trimedString);
             }
         }
 
+    }
+
+    private void addToken(String type, String word) {
+        DatabaseManager.TokenTableRow insertToken = new DatabaseManager.TokenTableRow();
+        insertToken.setType(type);
+        insertToken.setWord(word);
+        TaggerView taggerView = rootInvoker.getTaggerView();
+        if (rootInvoker.getLanguage() == DatabaseManager.ENGLISH) {
+            DatabaseManager.TokenTableRow row = taggerView.addEnglishTag(insertToken);
+            if (row.getId() > 0) {
+                updateTextColor();
+                rootInvoker.wordsTreeManager.addEnglishTag(row);
+
+            }
+        } else if (rootInvoker.getLanguage() == DatabaseManager.PERSIAN) {
+            DatabaseManager.TokenTableRow row = taggerView.addPersianTag(insertToken);
+            if (row.getId() > 0) {
+                updateTextColor();
+                rootInvoker.wordsTreeManager.addPersianTag(row);
+
+            }
+        }
     }
 
     private void updateTextColor() {

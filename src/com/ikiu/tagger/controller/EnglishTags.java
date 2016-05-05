@@ -15,8 +15,8 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class EnglishTags extends LanguageTags {
 
-    public EnglishTags(DatabaseManager databaseManager, JTable table,TaggerView taggerView) {
-        super(databaseManager, table,taggerView);
+    public EnglishTags(DatabaseManager databaseManager, JTable table, TaggerView taggerView) {
+        super(databaseManager, table, taggerView);
         mTableModel = new EnglishTableModel();
         mTableModel.addColumn("");
         mTableModel.addColumn("id");
@@ -61,11 +61,11 @@ public class EnglishTags extends LanguageTags {
     public class EnglishTableModel extends DefaultTableModel {
         @Override
         public boolean isCellEditable(int row, int column) {
-            if (tokenTableRows.get(row).isGenerated())
-                return false;
-            if (column == 2 || column == 3 || column == 4)
+//            if (tokenTableRows.get(row).isGenerated())
+//                return false;
+            if (column == 2 || column == 3 || column == 4 || column == 5)
                 return true;
-            if (column == 0 && tokenTableRows.get(row).getMeaning() != 0 && tokenTableRows.get(row).getEditedCells() == 0)
+            if (column == 0 && tokenTableRows.get(row).getMeaning() != 0 && tokenTableRows.get(row).getEditedCells() == 0 && !tokenTableRows.get(row).isGenerated())
                 return true;
             return false;
         }
@@ -100,9 +100,18 @@ public class EnglishTags extends LanguageTags {
                 case 4: {
                     value = String.valueOf(tableRow.getMeaning());
                     tableRow.setMeaning(Integer.valueOf(mTableModel.getValueAt(rowEdited, column).toString()));
+                    break;
+                }
+                case 5: {
+                    value = String.valueOf(tableRow.isGenerated());
+                    try {
+                        tableRow.setIsGenerated(Boolean.valueOf(mTableModel.getValueAt(rowEdited, column).toString()));
+                    } catch (Exception e) {
+
+                    }
                 }
             }
-            if (column != 0 && column != 5 && !mTableModel.getValueAt(rowEdited, column).toString().equals(value)) {
+            if (column != 0 && !mTableModel.getValueAt(rowEdited, column).toString().equals(value)) {
                 tableRow.setEditedCells(tableRow.getEditedCells() + 1);
 
             }
