@@ -2,17 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f09fdb5-5335-410a-8d3d-98245cea347b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/lexicon/AbstractLexiconTab.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/lexicon/AbstractLexiconTab.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishTags$EnglishTableModel.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/EnglishTags$EnglishTableModel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/lexicon/PersianLexiconTab.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/lexicon/PersianLexiconTab.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/util/ConfigurationTask.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/util/ConfigurationTask.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/translator/Context$1.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/translator/Context$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/translator/GFShell.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/translator/GFShell.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MainContent.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/MainContent.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$1.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$2.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$3.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$4.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$4.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$5.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog.class" afterPath="$PROJECT_DIR$/out/production/GrammaticalFramework/com/ikiu/tagger/controller/SettingDialog.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.db" afterPath="$PROJECT_DIR$/test.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/AbstractLexiconTab.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/AbstractLexiconTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishTags.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishTags.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/PersianLexiconTab.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/PersianLexiconTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/util/ConfigurationTask.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/util/ConfigurationTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/translator/Context.java" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/Context.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/translator/GFShell.java" afterPath="$PROJECT_DIR$/src/com/ikiu/translator/GFShell.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainContent.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainContent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/SettingDialog.java" afterPath="$PROJECT_DIR$/src/com/ikiu/tagger/controller/SettingDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/configuration.xml" afterPath="$PROJECT_DIR$/resources/configuration.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GrammaticalFramework.iws" />
@@ -34,85 +40,7 @@
     <favorites_list name="GrammaticalFramework" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="CustomTag.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/CustomTag.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9183673">
-              <caret line="70" column="23" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LanguageTags.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EnglishLexiconTab.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LexiconUpdaterTab.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdaterTab.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SettingDialog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/SettingDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PopupMenuTagger.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="174" column="38" selection-start-line="174" selection-start-column="38" selection-end-line="174" selection-end-column="38" />
-              <folding>
-                <element signature="e#5981#5982#0" expanded="true" />
-                <element signature="e#6033#6034#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EnglishPanel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishPanel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="120" column="20" selection-start-line="120" selection-start-column="20" selection-end-line="120" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -134,7 +62,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/ikiu/translator/MainContentTab.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/translator/LanguagePanel.java" />
-        <option value="$PROJECT_DIR$/src/com/ikiu/translator/Context.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishPanel.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/model/WordsTreeManager.java" />
@@ -145,6 +72,13 @@
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java" />
         <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/CustomTag.java" />
+        <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainContent.java" />
+        <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/SettingDialog.java" />
+        <option value="$PROJECT_DIR$/src/com/ikiu/translator/GFShell.java" />
+        <option value="$PROJECT_DIR$/src/com/ikiu/tagger/util/ConfigurationTask.java" />
+        <option value="$PROJECT_DIR$/src/com/ikiu/tagger/controller/ProjectTree.java" />
+        <option value="$PROJECT_DIR$/resources/configuration.xml" />
+        <option value="$PROJECT_DIR$/src/com/ikiu/translator/Context.java" />
       </list>
     </option>
   </component>
@@ -185,8 +119,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -295,42 +227,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ikiu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tagger" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lexicon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GrammaticalFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GrammaticalFramework" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -535,7 +439,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -543,23 +447,23 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38911024" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934928" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17578125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24701196" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24921875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4116866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38911024" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934928" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40903056" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -619,8 +523,14 @@
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/ikiu/translator/GFShell.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -633,72 +543,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/EnglishLexiconTab.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/LexiconUpdaterTab.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/SettingDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuTagger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="174" column="38" selection-start-line="174" selection-start-column="38" selection-end-line="174" selection-end-column="38" />
-          <folding>
-            <element signature="e#5981#5982#0" expanded="true" />
-            <element signature="e#6033#6034#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/EnglishPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="120" column="20" selection-start-line="120" selection-start-column="20" selection-end-line="120" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="25" selection-start-line="155" selection-start-column="25" selection-end-line="155" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/GFShell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/LanguagePanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -731,6 +575,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="99" column="49" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -738,7 +583,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="21" selection-start-line="39" selection-start-column="20" selection-end-line="46" selection-end-column="21" />
-          <folding />
+          <folding>
+            <element signature="docComment;class#SettingDialog#0" expanded="false" />
+            <element signature="method#SettingDialog#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#1725:2381" expanded="false" />
+            <element signature="method#actionPerformed#0;class#1725:2381" expanded="false" />
+            <element signature="class#2422:3068" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2422:3068" expanded="false" />
+            <element signature="class#3117:3289" expanded="false" />
+            <element signature="class#3338:3510" expanded="false" />
+            <element signature="method#setTranslatorFilePath#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#5070:5225" expanded="false" />
+            <element signature="class#5307:5994" expanded="false" />
+            <element signature="method#actionPerformed#0;class#5307:5994" expanded="false" />
+            <element signature="method#show#0;class#SettingDialog#0" expanded="false" />
+            <element signature="method#addCancelButton#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#6971:7134" expanded="false" />
+            <element signature="method#actionPerformed#0;class#6971:7134" expanded="false" />
+            <element signature="method#addNextButton#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#7951:8488" expanded="false" />
+            <element signature="method#actionPerformed#0;class#7951:8488" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -746,7 +611,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -761,6 +625,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -768,6 +633,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -803,6 +669,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="99" column="49" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -810,7 +677,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="21" selection-start-line="39" selection-start-column="20" selection-end-line="46" selection-end-column="21" />
-          <folding />
+          <folding>
+            <element signature="docComment;class#SettingDialog#0" expanded="false" />
+            <element signature="method#SettingDialog#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#1725:2381" expanded="false" />
+            <element signature="method#actionPerformed#0;class#1725:2381" expanded="false" />
+            <element signature="class#2422:3068" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2422:3068" expanded="false" />
+            <element signature="class#3117:3289" expanded="false" />
+            <element signature="class#3338:3510" expanded="false" />
+            <element signature="method#setTranslatorFilePath#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#5070:5225" expanded="false" />
+            <element signature="class#5307:5994" expanded="false" />
+            <element signature="method#actionPerformed#0;class#5307:5994" expanded="false" />
+            <element signature="method#show#0;class#SettingDialog#0" expanded="false" />
+            <element signature="method#addCancelButton#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#6971:7134" expanded="false" />
+            <element signature="method#actionPerformed#0;class#6971:7134" expanded="false" />
+            <element signature="method#addNextButton#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#7951:8488" expanded="false" />
+            <element signature="method#actionPerformed#0;class#7951:8488" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -818,7 +705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -836,13 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerGeneratorTab.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="49" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/MainContentTab.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -857,39 +736,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="155" column="25" selection-start-line="155" selection-start-column="25" selection-end-line="155" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/configuration.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09174312">
-          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/GFShell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="48" selection-start-line="57" selection-start-column="48" selection-end-line="57" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/src.zip!/javax/swing/JComponent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="3001" column="27" selection-start-line="3001" selection-start-column="27" selection-end-line="3001" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -961,15 +811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -977,7 +818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="120" column="20" selection-start-line="120" selection-start-column="20" selection-end-line="120" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -985,17 +825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/SettingDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1004,19 +833,156 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="174" column="38" selection-start-line="174" selection-start-column="38" selection-end-line="174" selection-end-column="38" />
           <folding>
-            <element signature="e#5981#5982#0" expanded="true" />
-            <element signature="e#6033#6034#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/lexicon/CustomTag.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9183673">
+        <state vertical-scroll-proportion="0.0">
           <caret line="70" column="23" selection-start-line="70" selection-start-column="23" selection-end-line="70" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/jre/lib/ext/jaccess.jar!/com/sun/java/accessibility/util/Translator.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34383956">
+          <caret line="41" column="54" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/MainContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="207" column="5" selection-start-line="207" selection-start-column="5" selection-end-line="207" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/LanguageTags.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39310345">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerChooser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.4578314">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/TaggerGeneratorTab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="132" column="26" selection-start-line="132" selection-start-column="26" selection-end-line="132" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/Context.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="54" selection-start-line="37" selection-start-column="54" selection-end-line="37" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/httpconnection/HttpConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="54" selection-start-line="37" selection-start-column="54" selection-end-line="37" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/ProjectTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="303" column="9" selection-start-line="303" selection-start-column="9" selection-end-line="303" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/popupmenu/PopupMenuFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2689655">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/configuration.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12413793">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/controller/SettingDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="203" column="45" selection-start-line="203" selection-start-column="45" selection-end-line="203" selection-end-column="45" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#SettingDialog#0" expanded="false" />
+            <element signature="method#SettingDialog#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#1725:2381" expanded="false" />
+            <element signature="method#actionPerformed#0;class#1725:2381" expanded="false" />
+            <element signature="class#2422:3068" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2422:3068" expanded="false" />
+            <element signature="class#3117:3289" expanded="false" />
+            <element signature="class#3338:3510" expanded="false" />
+            <element signature="method#setTranslatorFilePath#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#5070:5225" expanded="false" />
+            <element signature="class#5307:5994" expanded="false" />
+            <element signature="method#actionPerformed#0;class#5307:5994" expanded="false" />
+            <element signature="method#show#0;class#SettingDialog#0" expanded="false" />
+            <element signature="method#addCancelButton#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#6971:7134" expanded="false" />
+            <element signature="method#actionPerformed#0;class#6971:7134" expanded="false" />
+            <element signature="method#addNextButton#0;class#SettingDialog#0" expanded="false" />
+            <element signature="class#7951:8488" expanded="false" />
+            <element signature="method#actionPerformed#0;class#7951:8488" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/tagger/util/ConfigurationTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="172" column="32" selection-start-line="172" selection-start-column="32" selection-end-line="172" selection-end-column="32" />
+          <folding>
+            <element signature="method#writeLog#0;class#ConfigurationTask#0" expanded="false" />
+            <element signature="method#getInstance#0;class#ConfigurationTask#0" expanded="false" />
+            <element signature="method#setTemp#0;class#ConfigurationTask#0" expanded="false" />
+            <element signature="method#setCore#0;class#ConfigurationTask#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/GFShell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="31" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ikiu/translator/Context.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="54" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>

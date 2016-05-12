@@ -23,7 +23,8 @@ public class GFShell {
 //        runServer();
         URL = "http://localhost:41296";
         temp = getTemp();
-        importGrammars("/Users/fahime/Documents/Thesis/GF/lib/src/english/LangEng.gf", "/Users/fahime/Documents/Thesis/GF/lib/src/persian/LangPes.gf");
+        ConfigurationTask configurationTask = ConfigurationTask.getInstance();
+        importGrammars(configurationTask.getEnglishFile(), configurationTask.getPersianFile());
     }
 
     static public void runServer() {
@@ -31,6 +32,11 @@ public class GFShell {
             isServerRunning = true;
     }
 
+    static public void changeLanguageFiles()
+    {
+        ConfigurationTask configurationTask = ConfigurationTask.getInstance();
+        importGrammars(configurationTask.getEnglishFile(), configurationTask.getPersianFile());
+    }
     static private void importGrammars(String englishGrammar, String persianGrammar) {
         String engParam = "";
         try {

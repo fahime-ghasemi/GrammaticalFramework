@@ -28,7 +28,7 @@ public class Context extends JPanel {
             String requests[] = leftPanel.getText().split("\n");
             StringBuilder responses = new StringBuilder();
             for (int i = 0; i < requests.length; ++i) {
-                String response = GFShell.parseAndLinearize(leftLang, requests[i].trim(), rightLang);
+                String response = GFShell.parseAndLinearize(leftLang, requests[i].toLowerCase().trim(), rightLang);
                 if (response.equals("\r\n"))
                     responses.append("unsupported\n");
                 else {

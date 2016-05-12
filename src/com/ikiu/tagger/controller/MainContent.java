@@ -171,10 +171,14 @@ public class MainContent extends JPanel implements MouseListener {
     }
 
     public void saveCurrentTabChanges() {
-        int currentTabIndex = jTabbedPane.getSelectedIndex();
-        MainContentTab componentAt = (MainContentTab) jTabbedPane.getComponentAt(currentTabIndex);
-        if (componentAt.isChanged())
-            componentAt.saveChanges();
+        try {
+            int currentTabIndex = jTabbedPane.getSelectedIndex();
+            MainContentTab componentAt = (MainContentTab) jTabbedPane.getComponentAt(currentTabIndex);
+            if (componentAt.isChanged())
+                componentAt.saveChanges();
+        } catch (Exception ignore) {
+
+        }
 
     }
 

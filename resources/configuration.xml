@@ -2,4 +2,6 @@
     <workspace>/Users/fahime/Documents/Thesis/Application</workspace>
     <core>/Users/fahime/Documents/Thesis/GF/lib/src</core>
     <temp>/tmp/gfse.770451041163946729</temp>
+    <englishFile>/Users/fahime/Documents/Thesis/GF/lib/src/english/LangEng.gf</englishFile>
+    <persianFile>/Users/fahime/Documents/Thesis/GF/lib/src/persian/LangPes.gf</persianFile>
 </config>

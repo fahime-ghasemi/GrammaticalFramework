@@ -1,5 +1,6 @@
 package com.ikiu.tagger.util;
 
+import com.ikiu.translator.GFShell;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
@@ -29,9 +30,19 @@ public class ConfigurationTask {
     private String configurationFilePath;
     private String corePath;
     private String workspacePath;
+    private String englishFilePath;
+    private String persianFilePath;
     private String temp;
     private static ConfigurationTask mInstance;
     private ConfigurationChangeListener listener;
+
+    public String getEnglishFile() {
+        return this.englishFilePath;
+    }
+
+    public String getPersianFile() {
+        return this.persianFilePath;
+    }
 
     public interface ConfigurationChangeListener {
         public void onCoreChangeListener();
@@ -81,6 +92,12 @@ public class ConfigurationTask {
                 if (eventType == XmlPullParser.START_TAG && pullParser.getName().equals("temp")) {
                     this.temp = pullParser.nextText();
                 }
+                if (eventType == XmlPullParser.START_TAG && pullParser.getName().equals("englishFile")) {
+                    this.englishFilePath = pullParser.nextText();
+                }
+                if (eventType == XmlPullParser.START_TAG && pullParser.getName().equals("persianFile")) {
+                    this.persianFilePath = pullParser.nextText();
+                }
                 eventType = pullParser.next();
             }
         } catch (XmlPullParserException e) {
@@ -122,6 +139,71 @@ public class ConfigurationTask {
             this.workspacePath = workspacePath;
             if (this.listener != null)
                 this.listener.onWorkspaceChangeListener();
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+
+        } catch (IOException e) {
+
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setEnglishFile(String englishFilePath) {
+        if (this.englishFilePath != null && this.englishFilePath.equals(englishFilePath))
+            return;
+
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+            Document document = documentBuilder.parse(configurationFilePath);
+            Node node = document.getElementsByTagName("englishFile").item(0);
+            node.setTextContent(englishFilePath);
+            // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File(configurationFilePath));
+            transformer.transform(source, result);
+
+            this.englishFilePath = englishFilePath;
+           GFShell.changeLanguageFiles();
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+
+        } catch (IOException e) {
+
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setPersianFile(String persianFilePath) {
+        if (this.persianFilePath != null && this.persianFilePath.equals(persianFilePath))
+            return;
+
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = factory.newDocumentBuilder();
+            Document document = documentBuilder.parse(configurationFilePath);
+            Node node = document.getElementsByTagName("persianFile").item(0);
+            node.setTextContent(persianFilePath);
+            // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File(configurationFilePath));
+            transformer.transform(source, result);
+
+            this.persianFilePath = persianFilePath;
+            GFShell.changeLanguageFiles();
+
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
