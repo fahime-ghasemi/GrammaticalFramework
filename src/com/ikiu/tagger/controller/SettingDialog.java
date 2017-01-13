@@ -19,8 +19,10 @@ public class SettingDialog {
     JTextField txtCore;
     JTextField txtEnglish;
     JTextField txtPersian;
+    Boolean isFromSettingMenu;
 
-    public SettingDialog() {
+    public SettingDialog(Boolean isFromSettingMenu) {
+        this.isFromSettingMenu = isFromSettingMenu;
         configurationTask = ConfigurationTask.getInstance();
         txtCore = new JTextField(50);
         txtWorkspace = new JTextField(50);
@@ -101,14 +103,15 @@ public class SettingDialog {
         settingDialog.add(coreLabel);
         settingDialog.add(txtCore);
         settingDialog.add(btnCore);
+        if (isFromSettingMenu) {
+            settingDialog.add(englishFileLabel);
+            settingDialog.add(txtEnglish);
+            settingDialog.add(btnEnglishFile);
 
-        settingDialog.add(englishFileLabel);
-        settingDialog.add(txtEnglish);
-        settingDialog.add(btnEnglishFile);
-
-        settingDialog.add(persianFileLabel);
-        settingDialog.add(txtPersian);
-        settingDialog.add(btnPersianFile);
+            settingDialog.add(persianFileLabel);
+            settingDialog.add(txtPersian);
+            settingDialog.add(btnPersianFile);
+        }
     }
 
     private void setTranslatorFilePath(JTextField translatorField) {
@@ -141,12 +144,12 @@ public class SettingDialog {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(taggerChooser.getSelectionPath()!=null) {
+                if (taggerChooser.getSelectionPath() != null) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) taggerChooser.getSelectionPath().getLastPathComponent();
                     ProjectTree.TreeNode userObject = (ProjectTree.TreeNode) node.getUserObject();
                     try {
                         translatorField.setText(userObject.getFilesystemPath());
-                    }  catch (Exception ex) {
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                 }
@@ -176,7 +179,10 @@ public class SettingDialog {
 //            settingDialog.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
         settingDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         settingDialog.setVisible(true);
+        if(isFromSettingMenu)
         settingDialog.setSize(910, 220);
+        else
+            settingDialog.setSize(910,150);
     }
 
     public void addCancelButton() {

@@ -179,18 +179,20 @@ public class ProjectTree extends JTree implements MouseListener, ConfigurationTa
                 TreeNode treeNode = null;
                 if (content[i].getName().contains(".gf") || content[i].getName().contains(".txt"))
                     treeNode = new FileNode(content[i].getName(), content[i].getPath());
-                else {
+                else if(!content[i].isHidden()){
                     treeNode = new FolderNode(content[i].getName(), content[i].getPath());
                 }
-                if (isCore)
-                    treeNode.setIsCore(true);
+                if(treeNode!=null) {
+                    if (isCore)
+                        treeNode.setIsCore(true);
 
-                treeNode.setListener(this.listener);
-                DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(treeNode);
+                    treeNode.setListener(this.listener);
+                    DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(treeNode);
 //                newNode.setAllowsChildren(true);
-                if (content[i].listFiles() != null)
-                    addNodes(content[i].listFiles(), newNode, isCore);
-                ((DefaultTreeModel) getModel()).insertNodeInto(newNode, node, 0);
+                    if (content[i].listFiles() != null)
+                        addNodes(content[i].listFiles(), newNode, isCore);
+                    ((DefaultTreeModel) getModel()).insertNodeInto(newNode, node, 0);
+                }
             }
         }
     }

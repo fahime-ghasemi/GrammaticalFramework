@@ -1,5 +1,7 @@
 package com.ikiu.translator;
 
+import com.ikiu.tagger.util.ConfigurationTask;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -92,6 +94,12 @@ public class Context extends JPanel {
     };
 
     public Context() {
+//        ConfigurationTask configurationTask = ConfigurationTask.getInstance();
+//        String engFile = configurationTask.getEnglishFile();
+//        int index = engFile.lastIndexOf("/");
+//        String fileNameWithExt=engFile.substring(index + 1);
+//        String fileNameWithoutExt=fileNameWithExt.substring(0,fileNameWithExt.lastIndexOf("."));
+
         this.leftLang = "Eng";
         this.rightLang = "Pes";
         this.toolbar = new JPanel(new FlowLayout());

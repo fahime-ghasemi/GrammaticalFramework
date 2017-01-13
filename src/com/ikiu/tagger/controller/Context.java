@@ -8,6 +8,7 @@ package com.ikiu.tagger.controller;
  * and open the template in the editor.
  */
 
+import com.ikiu.tagger.model.DatabaseManager;
 import com.ikiu.tagger.model.WordsTreeManager;
 import com.ikiu.tagger.util.ConfigurationTask;
 
@@ -35,7 +36,7 @@ public class Context extends JFrame implements ProjectTree.TreeNode.TreeNodeList
 
         ConfigurationTask configurationTask = ConfigurationTask.getInstance();
         if (configurationTask.getCore()==null || configurationTask.getCore().equals("") || configurationTask.getWorkspace()==null || configurationTask.getWorkspace().equals("")) {
-            SettingDialog settingDialog = new SettingDialog();
+            SettingDialog settingDialog = new SettingDialog(false);
             settingDialog.addCancelButton();
             settingDialog.addNextButton();
             settingDialog.show();

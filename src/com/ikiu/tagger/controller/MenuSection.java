@@ -25,6 +25,20 @@ class MenuSection extends JMenuBar implements ActionListener {
         File = new JMenu("File");
         Setting = new JMenuItem("Setting");
         save = new JMenuItem("Save");
+        if (context.getCurrentPanel() != null && context.getCurrentPanel() instanceof MainContent && !context.getCurrentPanel().hasOpenedTab())
+            save.setEnabled(false);
+        if (context.getCurrentPanel() != null && context.getCurrentPanel() instanceof MainContent)
+            context.getCurrentPanel().setListener(new MainContent.MainContentOpenTabListener() {
+                @Override
+                public void onTabAdd() {
+                    save.setEnabled(true);
+                }
+
+                @Override
+                public void onTabRemove() {
+                    save.setEnabled(false);
+                }
+            });
         translator = new JMenuItem("Open translator");
         File.add(save);
         File.add(Setting);
@@ -42,7 +56,7 @@ class MenuSection extends JMenuBar implements ActionListener {
 
 
         if (e.getSource() == Setting) {
-            SettingDialog settingDialog = new SettingDialog();
+            SettingDialog settingDialog = new SettingDialog(true);
             settingDialog.addCancelButton();
             settingDialog.addSaveButton();
             settingDialog.show();

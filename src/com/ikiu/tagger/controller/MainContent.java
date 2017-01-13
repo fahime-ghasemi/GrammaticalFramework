@@ -9,6 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.StyledEditorKit;
 
 /**
  * Created by fahime on 9/4/15.
@@ -20,11 +23,39 @@ public class MainContent extends JPanel implements MouseListener {
     TaggerView taggerView;
     EnglishPanel english;
     PersianPanel persian;
+    boolean hasOpenedTab = false;
+    private MainContentOpenTabListener listener;
+
+    public interface MainContentOpenTabListener {
+        public void onTabAdd();
+        public void onTabRemove();
+    }
+
+    public void setListener(MainContentOpenTabListener listener) {
+        this.listener = listener;
+    }
 
     public MainContent(Context context) {
         setLayout(new BorderLayout());
         this.jTabbedPane = new JTabbedPane();
         jTabbedPane.addMouseListener(this);
+        jTabbedPane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (jTabbedPane.getTabCount() > 0) {
+                    hasOpenedTab = true;
+                    if (listener != null)
+                        listener.onTabAdd();
+                }
+                else
+                {
+                    hasOpenedTab = false;
+                    if (listener != null)
+                        listener.onTabRemove();
+                }
+
+            }
+        });
         this.context = context;
         add(this.jTabbedPane);
     }
@@ -181,6 +212,11 @@ public class MainContent extends JPanel implements MouseListener {
         }
 
     }
+
+    public boolean hasOpenedTab() {
+        return hasOpenedTab;
+    }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
